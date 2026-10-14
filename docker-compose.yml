@@ -12,9 +12,9 @@ services:
       - traefik.enable=true
       - traefik.docker.network=dokploy-network
       - traefik.http.routers.softwaretest-web.rule=Host(`testing.mercantec.tech`)
-      - traefik.http.routers.softwaretest-web.entrypoints=websecure
-      - traefik.http.routers.softwaretest-web.tls=true
+      - traefik.http.routers.softwaretest-web.entrypoints=web
       - traefik.http.services.softwaretest-web.loadbalancer.server.port=3000
+
 
 networks:
   dokploy-network:
