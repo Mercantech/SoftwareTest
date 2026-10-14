@@ -1,25 +1,26 @@
 import { Link } from 'react-router-dom'
 import LinkTrio from '../components/LinkTrio'
 import ObjectiveBadge from '../components/ObjectiveBadge'
-import { objectives } from '../data/objectives'
+import { objectiveTitle, objectives } from '../data/objectives'
+import { useLanguage } from '../i18n/LanguageContext'
+import { t } from '../i18n/ui'
 
 export default function Hub() {
+  const { lang } = useLanguage()
+
   return (
     <div>
       <header className="hub-intro lesson">
-        <h1>Målpinde</h1>
-        <p>
-          Alle 15 målpinde for faget softwaretest og sikkerhed (16484). Brug linkene
-          til at hoppe mellem site, Notion og eksempel-repo.
-        </p>
+        <h1>{t(lang, 'hubTitle')}</h1>
+        <p>{t(lang, 'hubLead')}</p>
       </header>
       <div className="prose">
         <table className="hub-table">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Målpinde</th>
-              <th scope="col">Links</th>
+              <th scope="col">{t(lang, 'hubColId')}</th>
+              <th scope="col">{t(lang, 'hubColObjective')}</th>
+              <th scope="col">{t(lang, 'hubColLinks')}</th>
             </tr>
           </thead>
           <tbody>
@@ -29,7 +30,7 @@ export default function Hub() {
                 <td>
                   <div className="hub-title">
                     <ObjectiveBadge level={obj.level} />{' '}
-                    <Link to={obj.sitePath}>{obj.title}</Link>
+                    <Link to={obj.sitePath}>{objectiveTitle(obj, lang)}</Link>
                   </div>
                 </td>
                 <td>

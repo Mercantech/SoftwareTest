@@ -1,49 +1,83 @@
+import type { Lang } from '../i18n/LanguageContext'
+
 export type LessonModule = 'test' | 'sikkerhed'
 
 export type LessonNavItem = {
   slug: string
-  label: string
+  label: Record<Lang, string>
   path: string
 }
 
 export type LessonModuleNav = {
   module: LessonModule
-  title: string
+  title: Record<Lang, string>
   items: LessonNavItem[]
 }
 
 export const lessonModules: LessonModuleNav[] = [
   {
     module: 'test',
-    title: 'Test',
+    title: { da: 'Test', en: 'Testing' },
     items: [
-      { slug: 'oversigt', label: 'Oversigt', path: '/test/oversigt' },
-      { slug: 'unit', label: 'Unit testing', path: '/test/unit' },
-      { slug: 'integration', label: 'Integrationstest', path: '/test/integration' },
-      { slug: 'testplan', label: 'Testplan', path: '/test/testplan' },
-      { slug: 'metodikker', label: 'Testmetodikker', path: '/test/metodikker' },
-      { slug: 'release', label: 'Release og kvalitet', path: '/test/release' },
-      { slug: 'bruno-e2e', label: 'Bruno og E2E', path: '/test/bruno-e2e' },
-      { slug: 'ci-cd', label: 'CI/CD', path: '/test/ci-cd' },
-      { slug: 'tryk', label: 'Tryktest', path: '/test/tryk' },
-      { slug: 'performance', label: 'Performance', path: '/test/performance' },
-      { slug: 'ux', label: 'UX-test', path: '/test/ux' },
+      { slug: 'oversigt', label: { da: 'Oversigt', en: 'Overview' }, path: '/test/oversigt' },
+      { slug: 'unit', label: { da: 'Unit testing', en: 'Unit testing' }, path: '/test/unit' },
+      {
+        slug: 'integration',
+        label: { da: 'Integrationstest', en: 'Integration testing' },
+        path: '/test/integration',
+      },
+      { slug: 'testplan', label: { da: 'Testplan', en: 'Test plan' }, path: '/test/testplan' },
+      {
+        slug: 'metodikker',
+        label: { da: 'Testmetodikker', en: 'Test methodologies' },
+        path: '/test/metodikker',
+      },
+      {
+        slug: 'release',
+        label: { da: 'Release og kvalitet', en: 'Release and quality' },
+        path: '/test/release',
+      },
+      {
+        slug: 'bruno-e2e',
+        label: { da: 'Bruno og E2E', en: 'Bruno and E2E' },
+        path: '/test/bruno-e2e',
+      },
+      { slug: 'ci-cd', label: { da: 'CI/CD', en: 'CI/CD' }, path: '/test/ci-cd' },
+      { slug: 'tryk', label: { da: 'Tryktest', en: 'Load testing' }, path: '/test/tryk' },
+      {
+        slug: 'performance',
+        label: { da: 'Performance', en: 'Performance' },
+        path: '/test/performance',
+      },
+      { slug: 'ux', label: { da: 'UX-test', en: 'UX testing' }, path: '/test/ux' },
     ],
   },
   {
     module: 'sikkerhed',
-    title: 'Sikkerhed',
+    title: { da: 'Sikkerhed', en: 'Security' },
     items: [
-      { slug: 'kryptering', label: 'Kryptering', path: '/sikkerhed/kryptering' },
-      { slug: 'standarder', label: 'Standarder', path: '/sikkerhed/standarder' },
+      {
+        slug: 'kryptering',
+        label: { da: 'Kryptering', en: 'Encryption' },
+        path: '/sikkerhed/kryptering',
+      },
+      {
+        slug: 'standarder',
+        label: { da: 'Standarder', en: 'Standards' },
+        path: '/sikkerhed/standarder',
+      },
       {
         slug: 'authentication',
-        label: 'Authentication',
+        label: { da: 'Authentication', en: 'Authentication' },
         path: '/sikkerhed/authentication',
       },
-      { slug: 'hashing', label: 'Hashing', path: '/sikkerhed/hashing' },
-      { slug: 'angreb', label: 'Angreb', path: '/sikkerhed/angreb' },
-      { slug: 'tools', label: 'Security tools', path: '/sikkerhed/tools' },
+      { slug: 'hashing', label: { da: 'Hashing', en: 'Hashing' }, path: '/sikkerhed/hashing' },
+      { slug: 'angreb', label: { da: 'Angreb', en: 'Attacks' }, path: '/sikkerhed/angreb' },
+      {
+        slug: 'tools',
+        label: { da: 'Security tools', en: 'Security tools' },
+        path: '/sikkerhed/tools',
+      },
     ],
   },
 ]
