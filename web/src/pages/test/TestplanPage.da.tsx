@@ -5,12 +5,12 @@ import ConceptStack from '../../components/ConceptStack'
 import LessonLayout from '../../components/LessonLayout'
 import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
+import ObjectiveSectionMap from '../../components/ObjectiveSectionMap'
 import PlanSectionGrid from '../../components/PlanSectionGrid'
 import RiskMatrix from '../../components/RiskMatrix'
 import TraceabilityBoard from '../../components/TraceabilityBoard'
 import WorkshopPanel from '../../components/WorkshopPanel'
-import { getObjectiveByPath } from '../../data/objectives'
+import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const processFlow = `
 flowchart LR
@@ -77,11 +77,6 @@ export default function TestplanPageDa() {
     <LessonLayout module="test">
       <header>
         {objective ? (
-          <p>
-            <ObjectiveBadge level={objective.level} /> <strong>Målpind {objective.id}</strong>
-          </p>
-        ) : null}
-        {objective ? (
           <LinkTrio
             sitePath={objective.sitePath}
             notionUrl={objective.notionUrl}
@@ -99,16 +94,45 @@ export default function TestplanPageDa() {
         sporbar, estimérbar og kan diskuteres med kunden.
       </p>
 
-      <h2>Læringsmål</h2>
-      <ul>
-        <li>Opbygge en testplan efter IEEE 829 / ISO 29119-struktur.</li>
-        <li>Omsætte funktionelle krav til konkrete, målbare testcases.</li>
-        <li>Opstille sporbarhed (traceability) mellem krav og tests.</li>
-        <li>Definere exit criteria og identificere testrisici.</li>
-        <li>Bruge en testcase-skabelon og skrive testcases som automatiserede tests.</li>
-      </ul>
+      {objective ? (
+        <ObjectiveSectionMap
+          level={objective.level}
+          objectiveId={objective.id}
+          objectiveLabel="Målpind"
+          objectiveText={objectiveTitle(objective, 'da')}
+          mapTitle="Fra målpind til sektion"
+          mapLead="Hvert læringsmål hopper til den del af siden, der træner det:"
+          items={[
+            {
+              goal: 'Opbygge en testplan efter IEEE 829 / ISO 29119-struktur',
+              sectionId: 'ieee',
+              sectionLabel: '§3 IEEE-struktur',
+            },
+            {
+              goal: 'Omsætte funktionelle krav til konkrete, målbare testcases',
+              sectionId: 'krav-til-testcases',
+              sectionLabel: '§4 Krav → testcases',
+            },
+            {
+              goal: 'Opstille sporbarhed mellem krav og tests',
+              sectionId: 'sporbarhed',
+              sectionLabel: 'Sporbarhedstavle',
+            },
+            {
+              goal: 'Definere exit criteria og identificere testrisici',
+              sectionId: 'risici',
+              sectionLabel: 'Risikomatrice',
+            },
+            {
+              goal: 'Bruge en testcase-skabelon og skrive testcases som automatiserede tests',
+              sectionId: 'workshop',
+              sectionLabel: 'Workshop + kode',
+            },
+          ]}
+        />
+      ) : null}
 
-      <h2>1. Testplan, teststrategi og testcase — begreberne</h2>
+      <h2 id="begreber">1. Testplan, teststrategi og testcase — begreberne</h2>
       <ConceptStack
         ariaLabel="Hierarki for testplanlægning"
         caption="Fra bred organisation til enkelt scenarie — hvert lag svarer på andre spørgsmål:"
@@ -146,7 +170,7 @@ export default function TestplanPageDa() {
         ]}
       />
 
-      <h2>2. Testprocessen</h2>
+      <h2 id="proces">2. Testprocessen</h2>
       <p>
         Processen er en <strong>sløjfe</strong>: hvis exit criteria ikke er opfyldt, går I tilbage
         til udførelse — ikke videre til release.
@@ -158,7 +182,7 @@ export default function TestplanPageDa() {
         end en perfekt plan på 40 sider, som ingen læser.
       </p>
 
-      <h2>3. IEEE-inspireret struktur</h2>
+      <h2 id="ieee">3. IEEE-inspireret struktur</h2>
       <PlanSectionGrid
         ariaLabel="IEEE testplan-sektioner"
         lead="IEEE 829 / ISO 29119-3 som tjekliste. De fremhævede felter er dem, teams oftest glemmer — og dem, der skaber mest værdi, når de er på plads."
@@ -277,7 +301,7 @@ export default function TestplanPageDa() {
         </article>
       </div>
 
-      <h2>Risikomatrice</h2>
+      <h2 id="risici">Risikomatrice</h2>
       <p>
         Du kan ikke teste alt. Score = <strong>sandsynlighed × konsekvens</strong> (1–5). Klik en
         risiko for afhjælpning — eller drej tallene selv og se, hvor i matricen I lander:
@@ -335,7 +359,7 @@ export default function TestplanPageDa() {
         1 = 2). Matricen gør den prioritering synlig for hele teamet.
       </p>
 
-      <h2>4. Fra funktionelle krav til testcases</h2>
+      <h2 id="krav-til-testcases">4. Fra funktionelle krav til testcases</h2>
       <p>
         Et funktionelt krav beskriver, <strong>hvad systemet skal gøre</strong>. Et godt
         krav er <em>testbart</em>: man kan afgøre entydigt, om det er opfyldt.
@@ -360,7 +384,7 @@ export default function TestplanPageDa() {
         <li>Tilføj de tests til en sporbarhedsmatrix.</li>
       </ol>
 
-      <h3>Sporbarhedstavle</h3>
+      <h3 id="sporbarhed">Sporbarhedstavle</h3>
       <p>Klik på et krav for at se, hvilke testcases der dækker det:</p>
       <TraceabilityBoard
         ariaLabel="Sporbarhed mellem krav og testcases"
@@ -462,6 +486,7 @@ export default function TestplanPageDa() {
         </tbody>
       </table>
 
+      <div id="workshop">
       <WorkshopPanel
         storageKey="softwaretest-workshop-testplan-da"
         requirementId="KRAV-01"
@@ -533,15 +558,16 @@ export default function TestplanPageDa() {
           },
         ]}
       />
+      </div>
 
-      <h3>Testcases som automatiseret kode</h3>
+      <h3 id="automation">Testcases som automatiseret kode</h3>
       <p>
         Hver række i tabellen kan blive til en test. Bemærk navngivning med TC-ID og
         krav-ID, som giver sporbarhed direkte i testresultaterne:
       </p>
       <CodeBlock language="csharp">{testCaseCsharp}</CodeBlock>
 
-      <h2>5. Skabelon til testcases</h2>
+      <h2 id="skabelon">5. Skabelon til testcases</h2>
       <p>Kopiér tabellen og udfyld den for hver testcase:</p>
       <table>
         <thead>
@@ -615,7 +641,7 @@ export default function TestplanPageDa() {
         kan reviewes i pull requests og følger releasen — præcis som koden.
       </Callout>
 
-      <h2>6. Rapportering</h2>
+      <h2 id="rapportering">6. Rapportering</h2>
       <p>
         Efter udførelsen laves en kort testrapport: antal tests planlagt/kørt/bestået/
         fejlet/blokeret, åbne fejl pr. alvorlighed, afvigelser fra planen, og en
@@ -623,7 +649,7 @@ export default function TestplanPageDa() {
         <Link to="/test/release">release-beslutningen</Link>.
       </p>
 
-      <h2>Øvelse</h2>
+      <h2 id="oevelse">Øvelse</h2>
       <ol>
         <li>
           Tag disse to krav: <em>&ldquo;Brugeren kan lægge varer i en kurv (max 20 pr.

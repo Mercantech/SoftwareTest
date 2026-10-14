@@ -431,6 +431,100 @@ pre {
   border-bottom: 1px solid var(--border);
 }
 
+.lesson h2[id],
+.lesson h3[id],
+.lesson section[id] {
+  scroll-margin-top: calc(var(--header-h) + 1rem);
+}
+
+/* ——— Objective → section map ——— */
+.objective-map {
+  margin: 1.5rem 0 2rem;
+}
+
+.objective-map__mandate {
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(45, 212, 191, 0.35);
+  background: rgba(45, 212, 191, 0.06);
+  margin-bottom: 1.25rem;
+}
+
+.objective-map__badge-row {
+  margin: 0 0 0.5rem;
+}
+
+.objective-map__text {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.objective-map__lead {
+  color: var(--text-muted);
+  margin: -0.25rem 0 0.85rem;
+}
+
+.objective-map__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.objective-map__list > li {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  margin: 0;
+}
+
+@media (min-width: 720px) {
+  .objective-map__list > li {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+.objective-map__goal {
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.objective-map__jump {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(45, 212, 191, 0.35);
+  background: rgba(45, 212, 191, 0.08);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-decoration: none;
+  white-space: nowrap;
+  justify-self: start;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.objective-map__jump:hover {
+  background: rgba(45, 212, 191, 0.16);
+  border-color: var(--accent);
+  color: #5eead4;
+}
+
+.objective-map__jump-arrow {
+  color: var(--accent-2);
+}
+
 .lesson h3 {
   font-size: 1.2rem;
   margin: 1.75rem 0 0.5rem;

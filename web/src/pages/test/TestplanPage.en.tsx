@@ -5,12 +5,12 @@ import ConceptStack from '../../components/ConceptStack'
 import LessonLayout from '../../components/LessonLayout'
 import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
+import ObjectiveSectionMap from '../../components/ObjectiveSectionMap'
 import PlanSectionGrid from '../../components/PlanSectionGrid'
 import RiskMatrix from '../../components/RiskMatrix'
 import TraceabilityBoard from '../../components/TraceabilityBoard'
 import WorkshopPanel from '../../components/WorkshopPanel'
-import { getObjectiveByPath } from '../../data/objectives'
+import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const processFlow = `
 flowchart LR
@@ -77,11 +77,6 @@ export default function TestplanPageEn() {
     <LessonLayout module="test">
       <header>
         {objective ? (
-          <p>
-            <ObjectiveBadge level={objective.level} /> <strong>Objective {objective.id}</strong>
-          </p>
-        ) : null}
-        {objective ? (
           <LinkTrio
             sitePath={objective.sitePath}
             notionUrl={objective.notionUrl}
@@ -99,16 +94,45 @@ export default function TestplanPageEn() {
         can be discussed with the customer.
       </p>
 
-      <h2>Learning objectives</h2>
-      <ul>
-        <li>Build a test plan following the IEEE 829 / ISO 29119 structure.</li>
-        <li>Turn functional requirements into concrete, measurable test cases.</li>
-        <li>Set up traceability between requirements and tests.</li>
-        <li>Define exit criteria and identify test risks.</li>
-        <li>Use a test case template and write test cases as automated tests.</li>
-      </ul>
+      {objective ? (
+        <ObjectiveSectionMap
+          level={objective.level}
+          objectiveId={objective.id}
+          objectiveLabel="Objective"
+          objectiveText={objectiveTitle(objective, 'en')}
+          mapTitle="From objective to section"
+          mapLead="Each learning goal jumps to the part of the page that trains it:"
+          items={[
+            {
+              goal: 'Build a test plan following the IEEE 829 / ISO 29119 structure',
+              sectionId: 'ieee',
+              sectionLabel: '§3 IEEE structure',
+            },
+            {
+              goal: 'Turn functional requirements into concrete, measurable test cases',
+              sectionId: 'krav-til-testcases',
+              sectionLabel: '§4 Requirements → cases',
+            },
+            {
+              goal: 'Set up traceability between requirements and tests',
+              sectionId: 'sporbarhed',
+              sectionLabel: 'Traceability board',
+            },
+            {
+              goal: 'Define exit criteria and identify test risks',
+              sectionId: 'risici',
+              sectionLabel: 'Risk matrix',
+            },
+            {
+              goal: 'Use a test case template and write test cases as automated tests',
+              sectionId: 'workshop',
+              sectionLabel: 'Workshop + code',
+            },
+          ]}
+        />
+      ) : null}
 
-      <h2>1. Test plan, test strategy and test case — the concepts</h2>
+      <h2 id="begreber">1. Test plan, test strategy and test case — the concepts</h2>
       <ConceptStack
         ariaLabel="Hierarchy for test planning"
         caption="From broad organisation to a single scenario — each layer answers different questions:"
@@ -146,7 +170,7 @@ export default function TestplanPageEn() {
         ]}
       />
 
-      <h2>2. The test process</h2>
+      <h2 id="proces">2. The test process</h2>
       <p>
         The process is a <strong>loop</strong>: if exit criteria are not met, you go back to
         execution — not on to release.
@@ -158,7 +182,7 @@ export default function TestplanPageEn() {
         40-page plan that nobody reads.
       </p>
 
-      <h2>3. IEEE-inspired structure</h2>
+      <h2 id="ieee">3. IEEE-inspired structure</h2>
       <PlanSectionGrid
         ariaLabel="IEEE test plan sections"
         lead="IEEE 829 / ISO 29119-3 as a checklist. Highlighted fields are the ones teams most often forget — and the ones that create the most value when they are in place."
@@ -277,7 +301,7 @@ export default function TestplanPageEn() {
         </article>
       </div>
 
-      <h2>Risk matrix</h2>
+      <h2 id="risici">Risk matrix</h2>
       <p>
         You cannot test everything. Score = <strong>likelihood × impact</strong> (1–5). Click a
         risk for mitigation — or dial the numbers yourself and see where you land in the matrix:
@@ -335,7 +359,7 @@ export default function TestplanPageEn() {
         picture&rdquo; (2 × 1 = 2). The matrix makes that prioritization visible to the whole team.
       </p>
 
-      <h2>4. From functional requirements to test cases</h2>
+      <h2 id="krav-til-testcases">4. From functional requirements to test cases</h2>
       <p>
         A functional requirement describes <strong>what the system must do</strong>. A good
         requirement is <em>testable</em>: you can determine unambiguously whether it has been met.
@@ -360,7 +384,7 @@ export default function TestplanPageEn() {
         <li>Add those tests to a traceability matrix.</li>
       </ol>
 
-      <h3>Traceability board</h3>
+      <h3 id="sporbarhed">Traceability board</h3>
       <p>Click a requirement to see which test cases cover it:</p>
       <TraceabilityBoard
         ariaLabel="Traceability between requirements and test cases"
@@ -462,6 +486,7 @@ export default function TestplanPageEn() {
         </tbody>
       </table>
 
+      <div id="workshop">
       <WorkshopPanel
         storageKey="softwaretest-workshop-testplan-en"
         requirementId="REQ-01"
@@ -533,15 +558,16 @@ export default function TestplanPageEn() {
           },
         ]}
       />
+      </div>
 
-      <h3>Test cases as automated code</h3>
+      <h3 id="automation">Test cases as automated code</h3>
       <p>
         Each row in the table can become a test. Note the naming with TC-ID and requirement ID,
         which gives traceability directly in the test results:
       </p>
       <CodeBlock language="csharp">{testCaseCsharp}</CodeBlock>
 
-      <h2>5. Test case template</h2>
+      <h2 id="skabelon">5. Test case template</h2>
       <p>Copy the table and fill it in for each test case:</p>
       <table>
         <thead>
@@ -616,7 +642,7 @@ export default function TestplanPageEn() {
         code.
       </Callout>
 
-      <h2>6. Reporting</h2>
+      <h2 id="rapportering">6. Reporting</h2>
       <p>
         After execution, a short test report is produced: number of tests planned/run/passed/
         failed/blocked, open defects per severity, deviations from the plan, and a recommendation
@@ -624,7 +650,7 @@ export default function TestplanPageEn() {
         <Link to="/test/release">release decision</Link>.
       </p>
 
-      <h2>Exercise</h2>
+      <h2 id="oevelse">Exercise</h2>
       <ol>
         <li>
           Take these two requirements: <em>&ldquo;The user can put items in a cart (max 20 per
