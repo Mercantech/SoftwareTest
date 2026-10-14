@@ -1,4 +1,14 @@
+# Lokal: undgår afhængighed af ekstern dokploy-network
 services:
   web:
     ports:
       - "3000:3000"
+    networks:
+      - local
+
+networks:
+  dokploy-network:
+    external: false
+    name: softwaretest-local
+  local:
+    driver: bridge

@@ -5,8 +5,9 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     networks:
-      - default
-      - dokploy-network
+      dokploy-network:
+        aliases:
+          - softwaretest-web
     labels:
       - traefik.enable=true
       - traefik.docker.network=dokploy-network
@@ -16,7 +17,5 @@ services:
       - traefik.http.services.softwaretest-web.loadbalancer.server.port=3000
 
 networks:
-  default:
-    driver: bridge
   dokploy-network:
     external: true
