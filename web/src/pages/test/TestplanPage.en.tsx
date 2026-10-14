@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom'
-import AccordionList from '../../components/AccordionList'
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
-import ConceptCards from '../../components/ConceptCards'
+import ConceptStack from '../../components/ConceptStack'
 import LessonLayout from '../../components/LessonLayout'
 import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
 import ObjectiveBadge from '../../components/ObjectiveBadge'
-import ProcessStepper from '../../components/ProcessStepper'
+import PlanSectionGrid from '../../components/PlanSectionGrid'
 import RiskMatrix from '../../components/RiskMatrix'
 import TraceabilityBoard from '../../components/TraceabilityBoard'
 import WorkshopPanel from '../../components/WorkshopPanel'
@@ -110,9 +109,9 @@ export default function TestplanPageEn() {
       </ul>
 
       <h2>1. Test plan, test strategy and test case — the concepts</h2>
-      <p>Click a card to see which level the concept belongs to:</p>
-      <ConceptCards
-        ariaLabel="Concept cards for test planning"
+      <ConceptStack
+        ariaLabel="Hierarchy for test planning"
+        caption="From broad organisation to a single scenario — each layer answers different questions:"
         items={[
           {
             id: 'strategy',
@@ -148,54 +147,10 @@ export default function TestplanPageEn() {
       />
 
       <h2>2. The test process</h2>
-      <p>Walk the process step by step — planning is iterative, not a one-off:</p>
-      <ProcessStepper
-        ariaLabel="Steps in the test process"
-        steps={[
-          {
-            id: 'analyze',
-            label: 'Analyze requirements',
-            detail:
-              'Make requirements testable. Find ambiguity early — a requirement without acceptance criteria becomes guesswork in testing.',
-          },
-          {
-            id: 'scope',
-            label: 'Scope & approach',
-            detail:
-              'Define what is tested and what is deliberately excluded. Choose levels and tools for the release.',
-          },
-          {
-            id: 'design',
-            label: 'Design test cases',
-            detail:
-              'Apply test design techniques. At least one positive and one negative scenario per must-have requirement.',
-          },
-          {
-            id: 'estimate',
-            label: 'Estimate & plan',
-            detail:
-              'Resources, schedule and risks. Prioritize by likelihood × impact.',
-          },
-          {
-            id: 'execute',
-            label: 'Execute tests',
-            detail:
-              'Run automated suites in CI and manual/exploratory tests where risk is high.',
-          },
-          {
-            id: 'report',
-            label: 'Report',
-            detail:
-              'Status on tests and defects. Deviations from the plan are documented — not hidden.',
-          },
-          {
-            id: 'exit',
-            label: 'Exit criteria',
-            detail:
-              'Objective conditions for stopping. If they are not met, you go back to execution.',
-          },
-        ]}
-      />
+      <p>
+        The process is a <strong>loop</strong>: if exit criteria are not met, you go back to
+        execution — not on to release.
+      </p>
       <MermaidDiagram chart={processFlow} />
       <p>
         Planning is <strong>iterative</strong>: in agile teams the plan is updated every sprint, but
@@ -204,97 +159,88 @@ export default function TestplanPageEn() {
       </p>
 
       <h2>3. IEEE-inspired structure</h2>
-      <p>
-        IEEE 829 (superseded by ISO/IEC/IEEE 29119-3) describes a standardized table of contents.
-        Open the sections as a checklist so nothing important is forgotten:
-      </p>
-      <AccordionList
+      <PlanSectionGrid
         ariaLabel="IEEE test plan sections"
+        lead="IEEE 829 / ISO 29119-3 as a checklist. Highlighted fields are the ones teams most often forget — and the ones that create the most value when they are in place."
         items={[
           {
             id: 'id',
             title: 'Test plan ID and version',
-            body: <p>TP-WEBSHOP-1.2, author, date, approver.</p>,
+            body: 'TP-WEBSHOP-1.2, author, date, approver.',
           },
           {
             id: 'intro',
             title: 'Introduction',
-            body: <p>Purpose, background, references (requirements spec, design doc).</p>,
+            body: 'Purpose, background, references (requirements spec, design doc).',
           },
           {
             id: 'items',
             title: 'Test items',
-            body: <p>Build 1.2.0, API v1, React frontend, PostgreSQL 16 — concrete versions.</p>,
+            body: 'Build 1.2.0, API v1, React frontend, PostgreSQL 16 — concrete versions.',
           },
           {
             id: 'in',
             title: 'Features to be tested',
-            body: <p>Login, Create order, Payment, Order history.</p>,
+            body: 'Login, Create order, Payment, Order history.',
+            emphasis: 'scope',
           },
           {
             id: 'out',
             title: 'Features NOT to be tested',
-            body: (
-              <p>
-                Admin reports (postponed to v1.3), 3rd-party payment page. Visible risk is better
-                than hidden risk.
-              </p>
-            ),
+            body: 'Admin reports (v1.3), 3rd-party payment page. Visible risk > hidden risk.',
+            emphasis: 'scope',
           },
           {
             id: 'approach',
             title: 'Approach (strategy)',
-            body: (
-              <p>
-                Unit + integration automated, E2E via Bruno, exploratory testing of the payment
-                flow, ZAP baseline in CI.
-              </p>
-            ),
+            body: 'Unit + integration, E2E via Bruno, exploratory payment test, ZAP in CI.',
           },
           {
             id: 'passfail',
             title: 'Pass/fail criteria',
-            body: <p>A test case passes when the actual result equals the expected result.</p>,
+            body: 'A test case passes when the actual result equals the expected result.',
           },
           {
             id: 'suspend',
             title: 'Suspension / resumption',
-            body: <p>Stop on a blocker in login; resume after hotfix + smoke.</p>,
+            body: 'Stop on a blocker in login; resume after hotfix + smoke.',
           },
           {
             id: 'deliverables',
             title: 'Deliverables',
-            body: <p>Test cases, test report, defect list, coverage report.</p>,
+            body: 'Test cases, test report, defect list, coverage report.',
           },
           {
             id: 'env',
             title: 'Test environment',
-            body: <p>Docker Compose: web, api, db; seed data; test SMTP.</p>,
+            body: 'Docker Compose: web, api, db; seed data; test SMTP.',
           },
           {
             id: 'roles',
             title: 'Responsibilities / resources',
-            body: <p>QA: Anna, Dev: Bo, Product owner: Carla.</p>,
+            body: 'QA: Anna, Dev: Bo, Product owner: Carla.',
           },
           {
             id: 'schedule',
             title: 'Schedule',
-            body: <p>Sprint 14: design week 1, execution week 2, regression week 3.</p>,
+            body: 'Sprint 14: design week 1, execution week 2, regression week 3.',
           },
           {
             id: 'risks',
             title: 'Risks and mitigation',
-            body: <p>See the risk matrix below.</p>,
+            body: 'See the risk matrix below — score = likelihood × impact.',
+            emphasis: 'risk',
           },
           {
             id: 'exit',
             title: 'Exit criteria',
-            body: <p>Objective conditions — see the checklist in the workshop.</p>,
+            body: 'Objective conditions for stopping. Without them, “done” is a feeling.',
+            emphasis: 'exit',
           },
           {
             id: 'approvals',
             title: 'Approvals',
-            body: <p>Signatures / formal acceptance from stakeholders.</p>,
+            body: 'Signatures / formal acceptance from stakeholders.',
           },
         ]}
       />
@@ -333,8 +279,8 @@ export default function TestplanPageEn() {
 
       <h2>Risk matrix</h2>
       <p>
-        You cannot test everything. Give each risk a score = likelihood × impact (1–5) and spend
-        the most time on the highest scores. Click a chip in the matrix:
+        You cannot test everything. Score = <strong>likelihood × impact</strong> (1–5). Click a
+        risk for mitigation — or dial the numbers yourself and see where you land in the matrix:
       </p>
       <RiskMatrix
         ariaLabel="Test risks in a likelihood × impact matrix"
@@ -343,6 +289,9 @@ export default function TestplanPageEn() {
         emptyLabel="Select a risk in the matrix"
         scoreLabel="Risk score"
         mitigationLabel="Mitigation"
+        tryLabel="Try it: place a risk"
+        tryHint="Pick likelihood and impact — the matrix cell highlights, and you see the priority."
+        priorityHint="High priority — test deeply|Medium — cover with automation|Low — spot-check"
         risks={[
           {
             id: 'env',
@@ -382,8 +331,8 @@ export default function TestplanPageEn() {
         ]}
       />
       <p>
-        Example: the payment flow (likelihood 3 × impact 5 = 15) is prioritized over &ldquo;change
-        profile picture&rdquo; (2 × 1 = 2).
+        Example: the payment flow (3 × 5 = 15) is prioritized over &ldquo;change profile
+        picture&rdquo; (2 × 1 = 2). The matrix makes that prioritization visible to the whole team.
       </p>
 
       <h2>4. From functional requirements to test cases</h2>

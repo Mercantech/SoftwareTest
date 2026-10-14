@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom'
-import AccordionList from '../../components/AccordionList'
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
-import ConceptCards from '../../components/ConceptCards'
+import ConceptStack from '../../components/ConceptStack'
 import LessonLayout from '../../components/LessonLayout'
 import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
 import ObjectiveBadge from '../../components/ObjectiveBadge'
-import ProcessStepper from '../../components/ProcessStepper'
+import PlanSectionGrid from '../../components/PlanSectionGrid'
 import RiskMatrix from '../../components/RiskMatrix'
 import TraceabilityBoard from '../../components/TraceabilityBoard'
 import WorkshopPanel from '../../components/WorkshopPanel'
@@ -110,9 +109,9 @@ export default function TestplanPageDa() {
       </ul>
 
       <h2>1. Testplan, teststrategi og testcase — begreberne</h2>
-      <p>Klik på et kort for at se, hvilket niveau begrebet hører til:</p>
-      <ConceptCards
-        ariaLabel="Begrebskort for testplanlægning"
+      <ConceptStack
+        ariaLabel="Hierarki for testplanlægning"
+        caption="Fra bred organisation til enkelt scenarie — hvert lag svarer på andre spørgsmål:"
         items={[
           {
             id: 'strategy',
@@ -148,54 +147,10 @@ export default function TestplanPageDa() {
       />
 
       <h2>2. Testprocessen</h2>
-      <p>Gå trin for trin gennem processen — planen er iterativ, ikke en engangsøvelse:</p>
-      <ProcessStepper
-        ariaLabel="Testprocessens trin"
-        steps={[
-          {
-            id: 'analyze',
-            label: 'Analysér krav',
-            detail:
-              'Gør krav testbare. Find uklarheder tidligt — et krav uden acceptkriterier bliver til gætteri i test.',
-          },
-          {
-            id: 'scope',
-            label: 'Scope & approach',
-            detail:
-              'Afgræns hvad der testes og hvad der bevidst udelades. Vælg niveauer og værktøjer til releasen.',
-          },
-          {
-            id: 'design',
-            label: 'Design testcases',
-            detail:
-              'Brug testdesignteknikker. Mindst ét positivt og ét negativt scenarie pr. must-have krav.',
-          },
-          {
-            id: 'estimate',
-            label: 'Estimér & planlæg',
-            detail:
-              'Ressourcer, tidsplan og risici. Prioritér efter sandsynlighed × konsekvens.',
-          },
-          {
-            id: 'execute',
-            label: 'Udfør tests',
-            detail:
-              'Kør automatiserede suites i CI og manuelle/eksplorative tests der, hvor risikoen er høj.',
-          },
-          {
-            id: 'report',
-            label: 'Rapportér',
-            detail:
-              'Status på tests og fejl. Afvigelser fra planen dokumenteres — ikke skjules.',
-          },
-          {
-            id: 'exit',
-            label: 'Exit criteria',
-            detail:
-              'Objektive betingelser for at stoppe. Er de ikke opfyldt, går I tilbage til udførelse.',
-          },
-        ]}
-      />
+      <p>
+        Processen er en <strong>sløjfe</strong>: hvis exit criteria ikke er opfyldt, går I tilbage
+        til udførelse — ikke videre til release.
+      </p>
       <MermaidDiagram chart={processFlow} />
       <p>
         Planlægning er <strong>iterativ</strong>: i agile teams opdateres planen hver
@@ -204,97 +159,88 @@ export default function TestplanPageDa() {
       </p>
 
       <h2>3. IEEE-inspireret struktur</h2>
-      <p>
-        IEEE 829 (afløst af ISO/IEC/IEEE 29119-3) beskriver en standardiseret indholdsfortegnelse.
-        Åbn sektionerne som en tjekliste, så intet vigtigt glemmes:
-      </p>
-      <AccordionList
+      <PlanSectionGrid
         ariaLabel="IEEE testplan-sektioner"
+        lead="IEEE 829 / ISO 29119-3 som tjekliste. De fremhævede felter er dem, teams oftest glemmer — og dem, der skaber mest værdi, når de er på plads."
         items={[
           {
             id: 'id',
             title: 'Testplan-ID og version',
-            body: <p>TP-WEBSHOP-1.2, forfatter, dato, godkender.</p>,
+            body: 'TP-WEBSHOP-1.2, forfatter, dato, godkender.',
           },
           {
             id: 'intro',
             title: 'Introduktion',
-            body: <p>Formål, baggrund, referencer (kravspec, designdok).</p>,
+            body: 'Formål, baggrund, referencer (kravspec, designdok).',
           },
           {
             id: 'items',
             title: 'Testobjekter (items)',
-            body: <p>Build 1.2.0, API v1, React-frontend, PostgreSQL 16 — konkrete versioner.</p>,
+            body: 'Build 1.2.0, API v1, React-frontend, PostgreSQL 16 — konkrete versioner.',
           },
           {
             id: 'in',
             title: 'Features der testes',
-            body: <p>Login, Opret ordre, Betaling, Ordrehistorik.</p>,
+            body: 'Login, Opret ordre, Betaling, Ordrehistorik.',
+            emphasis: 'scope',
           },
           {
             id: 'out',
             title: 'Features der IKKE testes',
-            body: (
-              <p>
-                Admin-rapporter (udskudt til v1.3), 3. parts betalingsside. Synlig risiko er bedre
-                end skjult risiko.
-              </p>
-            ),
+            body: 'Admin-rapporter (v1.3), 3. parts betalingsside. Synlig risiko > skjult risiko.',
+            emphasis: 'scope',
           },
           {
             id: 'approach',
             title: 'Approach (strategi)',
-            body: (
-              <p>
-                Unit + integration automatiseret, E2E via Bruno, eksplorativ test af betalingsflow,
-                ZAP-baseline i CI.
-              </p>
-            ),
+            body: 'Unit + integration, E2E via Bruno, eksplorativ betalingstest, ZAP i CI.',
           },
           {
             id: 'passfail',
             title: 'Pass/fail-kriterier',
-            body: <p>Testcase består, når faktisk resultat = forventet resultat.</p>,
+            body: 'Testcase består, når faktisk resultat = forventet resultat.',
           },
           {
             id: 'suspend',
             title: 'Suspension / resumption',
-            body: <p>Stop ved blocker i login; genoptag efter hotfix + smoke.</p>,
+            body: 'Stop ved blocker i login; genoptag efter hotfix + smoke.',
           },
           {
             id: 'deliverables',
             title: 'Deliverables',
-            body: <p>Testcases, testrapport, fejlliste, dækningsrapport.</p>,
+            body: 'Testcases, testrapport, fejlliste, dækningsrapport.',
           },
           {
             id: 'env',
             title: 'Testmiljø',
-            body: <p>Docker Compose: web, api, db; seed-data; test-SMTP.</p>,
+            body: 'Docker Compose: web, api, db; seed-data; test-SMTP.',
           },
           {
             id: 'roles',
             title: 'Ansvar og ressourcer',
-            body: <p>QA: Anna, Dev: Bo, Product owner: Carla.</p>,
+            body: 'QA: Anna, Dev: Bo, Product owner: Carla.',
           },
           {
             id: 'schedule',
             title: 'Tidsplan',
-            body: <p>Sprint 14: design uge 1, udførelse uge 2, regression uge 3.</p>,
+            body: 'Sprint 14: design uge 1, udførelse uge 2, regression uge 3.',
           },
           {
             id: 'risks',
             title: 'Risici og afhjælpning',
-            body: <p>Se risikomatrice nedenfor.</p>,
+            body: 'Se risikomatrice nedenfor — score = sandsynlighed × konsekvens.',
+            emphasis: 'risk',
           },
           {
             id: 'exit',
             title: 'Exit criteria',
-            body: <p>Objektive betingelser — se tjeklisten i workshoppen.</p>,
+            body: 'Objektive betingelser for at stoppe. Uden dem bliver “færdig” en fornemmelse.',
+            emphasis: 'exit',
           },
           {
             id: 'approvals',
             title: 'Godkendelser',
-            body: <p>Underskrifter / formel accept fra interessenter.</p>,
+            body: 'Underskrifter / formel accept fra interessenter.',
           },
         ]}
       />
@@ -333,8 +279,8 @@ export default function TestplanPageDa() {
 
       <h2>Risikomatrice</h2>
       <p>
-        Du kan ikke teste alt. Giv hver risiko en score = sandsynlighed × konsekvens (1–5) og brug
-        mest tid på de højeste scorer. Klik på en chip i matricen:
+        Du kan ikke teste alt. Score = <strong>sandsynlighed × konsekvens</strong> (1–5). Klik en
+        risiko for afhjælpning — eller drej tallene selv og se, hvor i matricen I lander:
       </p>
       <RiskMatrix
         ariaLabel="Testrisici i sandsynlighed × konsekvens-matrice"
@@ -343,6 +289,9 @@ export default function TestplanPageDa() {
         emptyLabel="Vælg en risiko i matricen"
         scoreLabel="Risikoscore"
         mitigationLabel="Afhjælpning"
+        tryLabel="Prøv selv: placér en risiko"
+        tryHint="Vælg sandsynlighed og konsekvens — cellen i matricen markeres, og du ser prioriteten."
+        priorityHint="Høj prioritet — test dybt|Medium — dæk med automation|Lav — spot-check"
         risks={[
           {
             id: 'env',
@@ -382,8 +331,8 @@ export default function TestplanPageDa() {
         ]}
       />
       <p>
-        Eksempel: betalingsflow (sandsynlighed 3 × konsekvens 5 = 15) prioriteres over &ldquo;skift
-        profilbillede&rdquo; (2 × 1 = 2).
+        Eksempel: betalingsflow (3 × 5 = 15) prioriteres over &ldquo;skift profilbillede&rdquo; (2 ×
+        1 = 2). Matricen gør den prioritering synlig for hele teamet.
       </p>
 
       <h2>4. Fra funktionelle krav til testcases</h2>
