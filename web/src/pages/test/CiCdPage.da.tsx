@@ -82,7 +82,7 @@ jobs:
   e2e:
     name: E2E med Bruno
     runs-on: ubuntu-latest
-    needs: unit            # kÃ¸rer kun hvis unit-tests er grÃ¸nne
+    needs: unit            # kører kun hvis unit-tests er grønne
     steps:
       - uses: actions/checkout@v4
 
@@ -111,14 +111,14 @@ export default function CiCdPageDa() {
 
   return (
     <LessonLayout module="test">
-      <h1>CI/CD â€“ automatiserede tests i udviklingscyklussen</h1>
+      <h1>CI/CD – automatiserede tests i udviklingscyklussen</h1>
       {objective ? (
         <p>
           <ObjectiveBadge level={objective.level} /> {objectiveTitle(objective, lang)}
         </p>
       ) : (
         <p>
-          <ObjectiveBadge level="H4" /> LÃ¦rlingen kan integrere automatiserede tests i software
+          <ObjectiveBadge level="H4" /> Lærlingen kan integrere automatiserede tests i software
           udviklingscyklussen.
         </p>
       )}
@@ -138,23 +138,23 @@ export default function CiCdPageDa() {
       <Figure
         src="/images/cicd.png"
         alt="CI/CD-pipeline fra commit til produktion"
-        caption="Fra commit til produktion â€“ automatiseret og med tests som kvalitetsporte."
+        caption="Fra commit til produktion – automatiseret og med tests som kvalitetsporte."
       />
 
-      <h2>LÃ¦ringsmÃ¥l</h2>
+      <h2>Læringsmål</h2>
       <p>Efter lektionen (Dag 29) skal du kunne:</p>
       <ul>
         <li>
-          Forklare forskellen pÃ¥ <strong>Continuous Integration</strong>,{' '}
+          Forklare forskellen på <strong>Continuous Integration</strong>,{' '}
           <strong>Continuous Delivery</strong> og <strong>Continuous Deployment</strong>.
         </li>
         <li>
           Placere unit-, integrations- og E2E-tests som <strong>gates</strong> i en pipeline og
-          begrunde rÃ¦kkefÃ¸lgen.
+          begrunde rækkefølgen.
         </li>
         <li>
-          LÃ¦se og skrive en simpel <strong>GitHub Actions workflow</strong>, der bygger og tester
-          en .NET-lÃ¸sning.
+          Læse og skrive en simpel <strong>GitHub Actions workflow</strong>, der bygger og tester
+          en .NET-løsning.
         </li>
         <li>
           Sammenligne <strong>GitHub Actions</strong> og <strong>Dokploy</strong> og forklare, hvilken
@@ -162,44 +162,44 @@ export default function CiCdPageDa() {
         </li>
       </ul>
 
-      <h2>CI vs. CD â€“ hvad er forskellen?</h2>
+      <h2>CI vs. CD – hvad er forskellen?</h2>
       <p>
-        De to forkortelser bruges ofte i flÃ¦ng, men dÃ¦kker over forskellige trin. FÃ¦lles for dem er
+        De to forkortelser bruges ofte i flæng, men dækker over forskellige trin. Fælles for dem er
         ideen om, at <strong>alt, der kan automatiseres mellem "jeg har skrevet kode" og "brugeren
-        kan bruge den", bÃ¸r automatiseres</strong> â€“ for mennesker glemmer ting, og maskiner gÃ¸r
+        kan bruge den", bør automatiseres</strong> – for mennesker glemmer ting, og maskiner gør
         det samme hver gang.
       </p>
 
       <h3>Continuous Integration (CI)</h3>
       <p>
         CI betyder, at alle udviklere <strong>integrerer deres kode ofte</strong> (mindst dagligt)
-        i en fÃ¦lles gren, og at hver integration automatisk <strong>bygges og testes</strong>.
-        MÃ¥let er at finde integrationsfejl tidligt, mens Ã¦ndringen stadig er lille og frisk i
-        hukommelsen. Uden CI opdager man fÃ¸rst i slutningen af et projekt, at to udvikleres kode
-        ikke passer sammen â€“ og sÃ¥ er fejlsÃ¸gningen dyr.
+        i en fælles gren, og at hver integration automatisk <strong>bygges og testes</strong>.
+        Målet er at finde integrationsfejl tidligt, mens ændringen stadig er lille og frisk i
+        hukommelsen. Uden CI opdager man først i slutningen af et projekt, at to udvikleres kode
+        ikke passer sammen – og så er fejlsøgningen dyr.
       </p>
       <Callout type="info">
-        <strong>CI-regel:</strong> NÃ¥r main er rÃ¸d, er det alles fÃ¸rste prioritet at fÃ¥ den grÃ¸n igen.
-        En pipeline, ingen stoler pÃ¥, bliver ignoreret â€“ og sÃ¥ er den vÃ¦rdilÃ¸s.
+        <strong>CI-regel:</strong> Når main er rød, er det alles første prioritet at få den grøn igen.
+        En pipeline, ingen stoler på, bliver ignoreret – og så er den værdiløs.
       </Callout>
 
       <h3>Continuous Delivery (CD)</h3>
       <p>
-        Continuous <strong>Delivery</strong> bygger videre pÃ¥ CI: hver Ã¦ndring, der bestÃ¥r pipelinen,
-        er <strong>klar til at blive udgivet</strong> â€“ artefakter er bygget, miljÃ¸et er
-        konfigureret, og alle tests er grÃ¸nne. Selve udgivelsen til produktion er dog en{' '}
-        <em>bevidst, manuel beslutning</em> (et klik pÃ¥ en knap).
+        Continuous <strong>Delivery</strong> bygger videre på CI: hver ændring, der består pipelinen,
+        er <strong>klar til at blive udgivet</strong> – artefakter er bygget, miljøet er
+        konfigureret, og alle tests er grønne. Selve udgivelsen til produktion er dog en{' '}
+        <em>bevidst, manuel beslutning</em> (et klik på en knap).
       </p>
 
       <h3>Continuous Deployment</h3>
       <p>
-        Continuous <strong>Deployment</strong> gÃ¥r Ã©t skridt videre: hver grÃ¸n Ã¦ndring pÃ¥ main
-        udgives automatisk til produktion, uden manuelt klik. Det krÃ¦ver meget hÃ¸j tillid til
-        testene â€“ og netop her bliver automatiserede tests uundvÃ¦rlige.
+        Continuous <strong>Deployment</strong> går ét skridt videre: hver grøn ændring på main
+        udgives automatisk til produktion, uden manuelt klik. Det kræver meget høj tillid til
+        testene – og netop her bliver automatiserede tests uundværlige.
       </p>
       <Callout type="tip">
         Husk det som tre trin: <strong>Integration</strong> = bygget og testet.{' '}
-        <strong>Delivery</strong> = kan udgives nÃ¥r som helst. <strong>Deployment</strong> = udgives
+        <strong>Delivery</strong> = kan udgives når som helst. <strong>Deployment</strong> = udgives
         automatisk.
       </Callout>
       <MermaidDiagram chart={ciCdChart} />
@@ -216,11 +216,11 @@ export default function CiCdPageDa() {
         <tbody>
           <tr>
             <td>
-              <strong>UdlÃ¸ser</strong>
+              <strong>Udløser</strong>
             </td>
             <td>Push / pull request</td>
-            <td>GrÃ¸n pipeline pÃ¥ main</td>
-            <td>GrÃ¸n pipeline pÃ¥ main</td>
+            <td>Grøn pipeline på main</td>
+            <td>Grøn pipeline på main</td>
           </tr>
           <tr>
             <td>
@@ -232,10 +232,10 @@ export default function CiCdPageDa() {
           </tr>
           <tr>
             <td>
-              <strong>Menneske i lÃ¸kken?</strong>
+              <strong>Menneske i løkken?</strong>
             </td>
             <td>Nej (kun review)</td>
-            <td>Ja â€“ godkender udgivelse</td>
+            <td>Ja – godkender udgivelse</td>
             <td>Nej</td>
           </tr>
         </tbody>
@@ -243,10 +243,10 @@ export default function CiCdPageDa() {
 
       <h2>Hvor passer tests ind? Tests som gates</h2>
       <p>
-        En pipeline er en rÃ¦kke <strong>porte (gates)</strong>. Kun hvis en port passeres, gÃ¥r
-        koden videre til nÃ¦ste. Principper for rÃ¦kkefÃ¸lgen er enkle: <em>hurtige og billige tests
-        fÃ¸rst</em>, dyre og langsomme sidst. Fejler noget tidligt, spilder du ikke minutter pÃ¥ at
-        starte Docker og kÃ¸re E2E-flows.
+        En pipeline er en række <strong>porte (gates)</strong>. Kun hvis en port passeres, går
+        koden videre til næste. Principper for rækkefølgen er enkle: <em>hurtige og billige tests
+        først</em>, dyre og langsomme sidst. Fejler noget tidligt, spilder du ikke minutter på at
+        starte Docker og køre E2E-flows.
       </p>
       <MermaidDiagram chart={gatesChart} />
       <ul>
@@ -263,66 +263,66 @@ export default function CiCdPageDa() {
           integrationstest og Bruno.
         </li>
         <li>
-          <strong>Review + branch protection:</strong> Menneskelig kontrol. KrÃ¦v grÃ¸nne checks og
-          mindst Ã©t review, fÃ¸r man kan merge til <code>main</code>.
+          <strong>Review + branch protection:</strong> Menneskelig kontrol. Kræv grønne checks og
+          mindst ét review, før man kan merge til <code>main</code>.
         </li>
         <li>
-          <strong>Deploy:</strong> FÃ¸rst nÃ¥r alle porte er passeret, rulles koden ud.
+          <strong>Deploy:</strong> Først når alle porte er passeret, rulles koden ud.
         </li>
       </ul>
       <Callout type="warn">
-        En pipeline giver kun falsk tryghed, hvis testene er dÃ¥rlige eller bliver sprunget
-        over. UndgÃ¥ at slÃ¥ tests fra, "bare lige for at fÃ¥ den grÃ¸n". En deaktiveret test er en bug, der
-        venter pÃ¥ at ske.
+        En pipeline giver kun falsk tryghed, hvis testene er dårlige eller bliver sprunget
+        over. Undgå at slå tests fra, "bare lige for at få den grøn". En deaktiveret test er en bug, der
+        venter på at ske.
       </Callout>
       <Callout type="danger">
-        Husk <strong>PR-fÃ¦lden</strong> fra lektionen om Bruno: E2E-tests mod et allerede deployet
-        miljÃ¸ tester ikke din PR-kode. Byg og start stacken i selve pipelinen.
+        Husk <strong>PR-fælden</strong> fra lektionen om Bruno: E2E-tests mod et allerede deployet
+        miljø tester ikke din PR-kode. Byg og start stacken i selve pipelinen.
       </Callout>
 
       <h2>Eksempel: GitHub Actions workflow</h2>
       <p>
         GitHub Actions konfigureres med YAML-filer i <code>.github/workflows/</code>. En{' '}
-        <strong>workflow</strong> udlÃ¸ses af <em>events</em> (<code>on:</code>), bestÃ¥r af{' '}
-        <strong>jobs</strong>, som kÃ¸rer pÃ¥ en <em>runner</em> (<code>runs-on</code>), og hvert job
-        bestÃ¥r af <strong>steps</strong> â€“ enten genbrugelige actions (<code>uses:</code>) eller
-        shell-kommandoer (<code>run:</code>). Med <code>needs:</code> laver du afhÃ¦ngigheder, sÃ¥ e2e-jobbet
-        fÃ¸rst starter, nÃ¥r unit er grÃ¸nt.
+        <strong>workflow</strong> udløses af <em>events</em> (<code>on:</code>), består af{' '}
+        <strong>jobs</strong>, som kører på en <em>runner</em> (<code>runs-on</code>), og hvert job
+        består af <strong>steps</strong> – enten genbrugelige actions (<code>uses:</code>) eller
+        shell-kommandoer (<code>run:</code>). Med <code>needs:</code> laver du afhængigheder, så e2e-jobbet
+        først starter, når unit er grønt.
       </p>
       <CodeBlock language="yaml">{workflowYaml}</CodeBlock>
-      <p>BemÃ¦rk de vigtige detaljer i filen:</p>
+      <p>Bemærk de vigtige detaljer i filen:</p>
       <ul>
         <li>
-          <code>on: pull_request</code> sÃ¸rger for, at tests kÃ¸rer <em>fÃ¸r</em> merge â€“ ikke fÃ¸rst
+          <code>on: pull_request</code> sørger for, at tests kører <em>før</em> merge – ikke først
           bagefter.
         </li>
         <li>
-          <code>concurrency</code> annullerer forÃ¦ldede kÃ¸rsler, nÃ¥r du pusher igen pÃ¥ samme branch
-          â€“ det sparer tid og gratis minutter.
+          <code>concurrency</code> annullerer forældede kørsler, når du pusher igen på samme branch
+          – det sparer tid og gratis minutter.
         </li>
         <li>
-          <code>--no-restore</code> og <code>--no-build</code> undgÃ¥r at gÃ¸re arbejdet to
+          <code>--no-restore</code> og <code>--no-build</code> undgår at gøre arbejdet to
           gange.
         </li>
         <li>
-          <code>if: always()</code> sikrer, at testresultater uploades, selv nÃ¥r testene fejler â€“ lige
-          dÃ©r, hvor du har mest brug for dem.
+          <code>if: always()</code> sikrer, at testresultater uploades, selv når testene fejler – lige
+          dér, hvor du har mest brug for dem.
         </li>
         <li>
-          Hemmeligheder hentes fra <code>secrets</code> â€“ aldrig hardkodet i filen.
+          Hemmeligheder hentes fra <code>secrets</code> – aldrig hardkodet i filen.
         </li>
       </ul>
       <Callout type="tip">
-        AktivÃ©r <strong>branch protection</strong> pÃ¥ <code>main</code> i GitHub: krÃ¦v at checks{' '}
-        <em>Build og unit-tests</em> og <em>E2E med Bruno</em> er grÃ¸nne, fÃ¸r en PR kan merges. FÃ¸rst
+        Aktivér <strong>branch protection</strong> på <code>main</code> i GitHub: kræv at checks{' '}
+        <em>Build og unit-tests</em> og <em>E2E med Bruno</em> er grønne, før en PR kan merges. Først
         da bliver pipelinen en rigtig gate og ikke bare et forslag.
       </Callout>
 
       <h2>GitHub Actions vs. Dokploy</h2>
       <p>
         I vores setup bruger vi begge, og de overlapper mindre, end man skulle tro. Kort
-        sagt: <strong>GitHub Actions svarer pÃ¥ "er koden god nok?"</strong> og{' '}
-        <strong>Dokploy svarer pÃ¥ "hvordan kÃ¸rer den?"</strong>.
+        sagt: <strong>GitHub Actions svarer på "er koden god nok?"</strong> og{' '}
+        <strong>Dokploy svarer på "hvordan kører den?"</strong>.
       </p>
       <table>
         <thead>
@@ -335,14 +335,14 @@ export default function CiCdPageDa() {
         <tbody>
           <tr>
             <td>
-              <strong>HovedformÃ¥l</strong>
+              <strong>Hovedformål</strong>
             </td>
             <td>CI: build, test, lint, scanning</td>
             <td>Hosting og deploy af Docker Compose-apps</td>
           </tr>
           <tr>
             <td>
-              <strong>UdlÃ¸ses af</strong>
+              <strong>Udløses af</strong>
             </td>
             <td>Events: push, PR, schedule, manuelt</td>
             <td>Push til en valgt branch (webhook) eller manuelt redeploy</td>
@@ -356,7 +356,7 @@ export default function CiCdPageDa() {
           </tr>
           <tr>
             <td>
-              <strong>KÃ¸rer hvor</strong>
+              <strong>Kører hvor</strong>
             </td>
             <td>Midlertidige GitHub-runners (eller egne)</td>
             <td>Vores egen server (<code>deploy.mags.dk</code>)</td>
@@ -365,22 +365,22 @@ export default function CiCdPageDa() {
             <td>
               <strong>Tests</strong>
             </td>
-            <td>Ja â€“ det er her gates ligger (unit, integration, E2E)</td>
-            <td>Nej â€“ kÃ¸rer ikke tests, kun build og start</td>
+            <td>Ja – det er her gates ligger (unit, integration, E2E)</td>
+            <td>Nej – kører ikke tests, kun build og start</td>
           </tr>
           <tr>
             <td>
               <strong>Secrets</strong>
             </td>
             <td>GitHub Secrets (til test/CI)</td>
-            <td>MiljÃ¸variabler pr. miljÃ¸ (dev/prod)</td>
+            <td>Miljøvariabler pr. miljø (dev/prod)</td>
           </tr>
           <tr>
             <td>
               <strong>Resultat</strong>
             </td>
-            <td>GrÃ¸n/rÃ¸d check pÃ¥ commit eller PR</td>
-            <td>KÃ¸rende container bag Traefik + logs</td>
+            <td>Grøn/rød check på commit eller PR</td>
+            <td>Kørende container bag Traefik + logs</td>
           </tr>
           <tr>
             <td>
@@ -392,21 +392,21 @@ export default function CiCdPageDa() {
         </tbody>
       </table>
       <p>
-        Det ideelle samspil er: <strong>Actions tester PR'en</strong> â†’ merge til main kun hvis
-        grÃ¸n â†’ <strong>Dokploy deployer main</strong> til miljÃ¸et. Vil du have, at Dokploy
-        <em> venter</em> pÃ¥ CI, kan du bruge Dokploys mulighed for at udlÃ¸se deploy via webhook/API som
-        sidste step i workflowet i stedet for automatisk deploy pÃ¥ hvert push. SÃ¥ sikrer du, at
-        kun testet kode nogensinde nÃ¥r produktion.
+        Det ideelle samspil er: <strong>Actions tester PR'en</strong> → merge til main kun hvis
+        grøn → <strong>Dokploy deployer main</strong> til miljøet. Vil du have, at Dokploy
+        <em> venter</em> på CI, kan du bruge Dokploys mulighed for at udløse deploy via webhook/API som
+        sidste step i workflowet i stedet for automatisk deploy på hvert push. Så sikrer du, at
+        kun testet kode nogensinde når produktion.
       </p>
 
       <h3>Tjekliste: er testene integreret i cyklussen?</h3>
       <ul>
-        <li>KÃ¸rer unit-tests automatisk pÃ¥ hver PR?</li>
-        <li>Er branch protection slÃ¥et til, sÃ¥ rÃ¸de checks blokerer merge?</li>
-        <li>Er de hurtigste tests fÃ¸rst i pipelinen?</li>
-        <li>Gemmes testrapporter som artefakter, sÃ¥ fejl kan undersÃ¸ges?</li>
-        <li>Tester E2E den kode, der er i PR'en â€“ ikke et gammelt deploy?</li>
-        <li>Ligger secrets i GitHub Secrets/Dokploy â€“ aldrig i git?</li>
+        <li>Kører unit-tests automatisk på hver PR?</li>
+        <li>Er branch protection slået til, så røde checks blokerer merge?</li>
+        <li>Er de hurtigste tests først i pipelinen?</li>
+        <li>Gemmes testrapporter som artefakter, så fejl kan undersøges?</li>
+        <li>Tester E2E den kode, der er i PR'en – ikke et gammelt deploy?</li>
+        <li>Ligger secrets i GitHub Secrets/Dokploy – aldrig i git?</li>
       </ul>
     </LessonLayout>
   )

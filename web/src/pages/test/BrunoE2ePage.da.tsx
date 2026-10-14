@@ -10,7 +10,7 @@ import { useLanguage } from '../../i18n/LanguageContext'
 
 const pyramidChart = `
 flowchart TB
-  E2E["E2E-tests<br/>FÃ¥ - langsomme - realistiske<br/>Bruno mod kÃ¸rende API"]
+  E2E["E2E-tests<br/>Få - langsomme - realistiske<br/>Bruno mod kørende API"]
   INT["Integrationstests<br/>Nogle - flere dele sammen<br/>fx API + database"]
   UNIT["Unit-tests<br/>Mange - hurtige - isolerede<br/>NUnit + Moq"]
   E2E --> INT
@@ -22,7 +22,7 @@ flowchart LR
   Start(["Tom testbruger"]) --> F01["01 Register<br/>POST /auth/register"]
   F01 --> F02["02 Login<br/>POST /auth/login<br/>gem token"]
   F02 --> F03["03 Brugerflow<br/>GET /me, POST /items,<br/>GET /items"]
-  F03 --> Slut(["Cleanup / ny testbruger nÃ¦ste gang"])
+  F03 --> Slut(["Cleanup / ny testbruger næste gang"])
 `
 
 const sequenceChart = `
@@ -30,12 +30,12 @@ sequenceDiagram
   participant Bruno as Bruno-CLI
   participant Api as API
   participant Db as Database
-  Bruno->>Bruno: LÃ¦s environment og pre-request script
+  Bruno->>Bruno: Læs environment og pre-request script
   Bruno->>Api: POST /auth/login med JSON body
-  Api->>Db: SlÃ¥ bruger op og tjek password
-  Db-->>Api: BrugerrÃ¦kke
+  Api->>Db: Slå bruger op og tjek password
+  Db-->>Api: Brugerrække
   Api-->>Bruno: 200 OK + JSON med token
-  Bruno->>Bruno: KÃ¸r tests og assertions
+  Bruno->>Bruno: Kør tests og assertions
   Bruno->>Bruno: post-response script gemmer token i variabel
 `
 
@@ -43,10 +43,10 @@ const ciChart = `
 flowchart LR
   PR["Pull request / push"] --> GA["GitHub Actions"]
   GA --> Compose["docker compose up -d --build<br/>API + database"]
-  Compose --> Health["Vent pÃ¥ health check"]
+  Compose --> Health["Vent på health check"]
   Health --> Bruno["bru run E2E-UserFlows --env ci"]
-  Bruno --> Res{"Alle tests grÃ¸nne?"}
-  Res -- "Ja" --> Ok["Check bestÃ¥r"]
+  Bruno --> Res{"Alle tests grønne?"}
+  Res -- "Ja" --> Ok["Check består"]
   Res -- "Nej" --> Fail["Check fejler - merge blokeres"]
 `
 
@@ -55,7 +55,7 @@ flowchart LR
   Dev["PR-kode<br/>ny fejlrettelse"] -. "ikke med i testen!" .-> Api
   Main["main-branch<br/>deployet via Dokploy"] --> Api["Deployet API<br/>den gamle version"]
   Bruno["Bruno E2E i CI"] --> Api
-  Api --> Res["GrÃ¸nne tests<br/>men PR-koden er aldrig kÃ¸rt"]
+  Api --> Res["Grønne tests<br/>men PR-koden er aldrig kørt"]
 `
 
 export default function BrunoE2ePageDa() {
@@ -71,7 +71,7 @@ export default function BrunoE2ePageDa() {
         </p>
       ) : (
         <p>
-          <ObjectiveBadge level="H3" /> LÃ¦rlingen kan gennemfÃ¸re en scriptet test pÃ¥ en app- eller
+          <ObjectiveBadge level="H3" /> Lærlingen kan gennemføre en scriptet test på en app- eller
           webplatform.
         </p>
       )}
@@ -91,14 +91,14 @@ export default function BrunoE2ePageDa() {
       <Figure
         src="/images/bruno.png"
         alt="Bruno API-klient"
-        caption="Bruno â€“ en open source API-klient, hvor requests er almindelige filer i dit repo."
+        caption="Bruno – en open source API-klient, hvor requests er almindelige filer i dit repo."
       />
 
-      <h2>LÃ¦ringsmÃ¥l</h2>
+      <h2>Læringsmål</h2>
       <p>Efter lektionen (Dag 28) skal du kunne:</p>
       <ul>
         <li>
-          Placere <strong>E2E- og API-tests</strong> i testpyramiden og forklare forskellen pÃ¥ de
+          Placere <strong>E2E- og API-tests</strong> i testpyramiden og forklare forskellen på de
           tre lag: unit, integration og E2E.
         </li>
         <li>
@@ -106,7 +106,7 @@ export default function BrunoE2ePageDa() {
           assertions, der tilsammen afspejler et rigtigt brugerflow.
         </li>
         <li>
-          Forklare, hvordan Bruno-tests kÃ¸res i <strong>GitHub Actions</strong> mod en API startet
+          Forklare, hvordan Bruno-tests køres i <strong>GitHub Actions</strong> mod en API startet
           med Docker Compose.
         </li>
         <li>
@@ -117,18 +117,18 @@ export default function BrunoE2ePageDa() {
 
       <h2>De tre lag: unit, integration og E2E</h2>
       <p>
-        I lektionen om unit-tests lÃ¦rte du det nederste lag. Nu bevÃ¦ger vi os til toppen. De tre lag
-        besvarer tre forskellige spÃ¸rgsmÃ¥l, og du har brug for dem alle â€“ de erstatter ikke hinanden.
+        I lektionen om unit-tests lærte du det nederste lag. Nu bevæger vi os til toppen. De tre lag
+        besvarer tre forskellige spørgsmål, og du har brug for dem alle – de erstatter ikke hinanden.
       </p>
       <table>
         <thead>
           <tr>
             <th>Lag</th>
-            <th>SpÃ¸rgsmÃ¥l der besvares</th>
+            <th>Spørgsmål der besvares</th>
             <th>Hvad er med?</th>
             <th>Hastighed</th>
             <th>Antal</th>
-            <th>VÃ¦rktÃ¸j i pensum</th>
+            <th>Værktøj i pensum</th>
           </tr>
         </thead>
         <tbody>
@@ -137,7 +137,7 @@ export default function BrunoE2ePageDa() {
               <strong>Unit</strong>
             </td>
             <td>Virker denne lille klasse/metode som forventet?</td>
-            <td>Ã‰n enhed, afhÃ¦ngigheder er mocket</td>
+            <td>Én enhed, afhængigheder er mocket</td>
             <td>Millisekunder</td>
             <td>Mange</td>
             <td>NUnit + Moq</td>
@@ -157,44 +157,44 @@ export default function BrunoE2ePageDa() {
               <strong>E2E</strong>
             </td>
             <td>Virker hele flowet, som en bruger/klient oplever det?</td>
-            <td>Hele systemet kÃ¸rende udefra: HTTP, auth, DB</td>
+            <td>Hele systemet kørende udefra: HTTP, auth, DB</td>
             <td>Sekunder til minutter</td>
-            <td>FÃ¥</td>
+            <td>Få</td>
             <td>Bruno (API-flows)</td>
           </tr>
         </tbody>
       </table>
       <MermaidDiagram chart={pyramidChart} />
       <p>
-        Pyramiden er en tommelfingerregel om <em>balance</em>: jo hÃ¸jere op, jo dyrere er testen at
-        skrive, kÃ¸re og vedligeholde â€“ og jo flere ting kan gÃ¥ galt af Ã¥rsager, der ikke har med
-        koden at gÃ¸re (netvÃ¦rk, timing, testdata). Derfor skriver vi fÃ¥, veludvalgte E2E-tests til
-        de vigtigste brugerflows og lader de mange smÃ¥ unit-tests tage resten.
+        Pyramiden er en tommelfingerregel om <em>balance</em>: jo højere op, jo dyrere er testen at
+        skrive, køre og vedligeholde – og jo flere ting kan gå galt af årsager, der ikke har med
+        koden at gøre (netværk, timing, testdata). Derfor skriver vi få, veludvalgte E2E-tests til
+        de vigtigste brugerflows og lader de mange små unit-tests tage resten.
       </p>
 
       <h2>Hvad er API-test og E2E?</h2>
       <p>
-        En <strong>API-test</strong> sender rigtige HTTP-requests til et kÃ¸rende API og kontrollerer
+        En <strong>API-test</strong> sender rigtige HTTP-requests til et kørende API og kontrollerer
         svaret: statuskode, headers, JSON-indhold og responstid. Du tester ikke koden indefra, men{' '}
-        <em>kontrakten udefra</em> â€“ pÃ¥ samme mÃ¥de som en frontend eller en tredjepart ville bruge
-        den. Det gÃ¸r API-tests oplagte som <strong>E2E-test</strong> for backends, fordi hele
-        kÃ¦den bliver brugt: routing, middleware, authentication, forretningslogik, database og
+        <em>kontrakten udefra</em> – på samme måde som en frontend eller en tredjepart ville bruge
+        den. Det gør API-tests oplagte som <strong>E2E-test</strong> for backends, fordi hele
+        kæden bliver brugt: routing, middleware, authentication, forretningslogik, database og
         serialisering.
       </p>
       <p>
         <strong>End-to-end</strong> betyder "fra ende til anden": fra brugerens handling til data er
         gemt og returneret. En E2E-test beskriver typisk et <em>flow</em>, ikke en enkelt
-        handling: "opret bruger â†’ log ind â†’ opret opgave â†’ hent opgaveliste". Hver
-        request afhÃ¦nger af den forrige, og det er netop det, der gÃ¸r testen realistisk.
+        handling: "opret bruger → log ind → opret opgave → hent opgaveliste". Hver
+        request afhænger af den forrige, og det er netop det, der gør testen realistisk.
       </p>
       <Callout type="info">
-        Til UI-tests i browseren bruges vÃ¦rktÃ¸jer som Playwright eller Cypress. I pensum holder vi os til
+        Til UI-tests i browseren bruges værktøjer som Playwright eller Cypress. I pensum holder vi os til
         API-niveauet, fordi det er hurtigere, mere stabilt og tester den logik, vi selv har skrevet.
       </Callout>
 
       <h2>Hvorfor Bruno?</h2>
       <p>
-        Postman er det mest kendte vÃ¦rktÃ¸j, men Bruno har en rÃ¦kke fordele, som passer godt til
+        Postman er det mest kendte værktøj, men Bruno har en række fordele, som passer godt til
         et udviklerhold, der arbejder i Git:
       </p>
       <ul>
@@ -211,16 +211,16 @@ export default function BrunoE2ePageDa() {
           og <code>test()</code>-blokke med Chai-assertions.
         </li>
         <li>
-          <strong>CLI til CI:</strong> <code>bru run</code> kÃ¸rer hele mapper af requests fra
-          kommandolinjen og returnerer en exit-kode, som en pipeline kan reagere pÃ¥.
+          <strong>CLI til CI:</strong> <code>bru run</code> kører hele mapper af requests fra
+          kommandolinjen og returnerer en exit-kode, som en pipeline kan reagere på.
         </li>
         <li>
-          <strong>Environments:</strong> samme tests kan kÃ¸re mod <code>local</code>, <code>ci</code>{' '}
+          <strong>Environments:</strong> samme tests kan køre mod <code>local</code>, <code>ci</code>{' '}
           og <code>prod</code> ved at skifte baseUrl og secrets.
         </li>
       </ul>
       <Callout type="warn">
-        LÃ¦g aldrig rigtige passwords eller tokens i <code>.bru</code>-filer. Brug environment-filer
+        Læg aldrig rigtige passwords eller tokens i <code>.bru</code>-filer. Brug environment-filer
         uden secrets (eller <code>.env</code> der er i <code>.gitignore</code>) og lad CI levere hemmeligheder via
         GitHub Secrets.
       </Callout>
@@ -228,8 +228,8 @@ export default function BrunoE2ePageDa() {
       <h2>E2E-struktur i repo: Bruno/E2E-UserFlows</h2>
       <p>
         I h4-mags ligger E2E-testene i mappen <code>Bruno/E2E-UserFlows</code>. De nummererede
-        filer sikrer, at Bruno kÃ¸rer dem i den rÃ¦kkefÃ¸lge, flowet krÃ¦ver â€“ hver fil bygger pÃ¥
-        resultatet af den foregÃ¥ende.
+        filer sikrer, at Bruno kører dem i den rækkefølge, flowet kræver – hver fil bygger på
+        resultatet af den foregående.
       </p>
       <CodeBlock language="text">{`Bruno/
   bruno.json
@@ -246,8 +246,8 @@ export default function BrunoE2ePageDa() {
         <thead>
           <tr>
             <th>Fil</th>
-            <th>FormÃ¥l</th>
-            <th>Gemmer til nÃ¦ste step</th>
+            <th>Formål</th>
+            <th>Gemmer til næste step</th>
             <th>Typiske assertions</th>
           </tr>
         </thead>
@@ -273,20 +273,20 @@ export default function BrunoE2ePageDa() {
               <code>03-user-flow</code>
             </td>
             <td>Bruger token til beskyttede endpoints og tjekker data</td>
-            <td>Evt. id pÃ¥ oprettede ressourcer</td>
+            <td>Evt. id på oprettede ressourcer</td>
             <td>Status 200/201, liste indeholder det oprettede element; uden token giver 401</td>
           </tr>
         </tbody>
       </table>
       <p>
-        BemÃ¦rk, at hele flowet er en <strong>kÃ¦de</strong>. Fejler 01, er 02 og 03 meningslÃ¸se â€“
-        derfor stopper en god pipeline ved fÃ¸rste fejl og rapporterer netop <em>hvilket step</em>, der
-        gik galt. Det gÃ¸r fejlsÃ¸gning markant lettere end at gÃ¦tte ud fra "hele testen fejlede".
+        Bemærk, at hele flowet er en <strong>kæde</strong>. Fejler 01, er 02 og 03 meningsløse –
+        derfor stopper en god pipeline ved første fejl og rapporterer netop <em>hvilket step</em>, der
+        gik galt. Det gør fejlsøgning markant lettere end at gætte ud fra "hele testen fejlede".
       </p>
 
-      <h2>Anatomien i Ã©n Bruno-request</h2>
+      <h2>Anatomien i én Bruno-request</h2>
       <p>
-        En <code>.bru</code>-fil er ren tekst og bestÃ¥r af blokke. Her er login-requesten:
+        En <code>.bru</code>-fil er ren tekst og består af blokke. Her er login-requesten:
       </p>
       <CodeBlock language="text">{`meta {
   name: 02-login
@@ -339,9 +339,9 @@ tests {
             <td>
               <code>meta</code>
             </td>
-            <td>Navn og rÃ¦kkefÃ¸lge (<code>seq</code>) i mappen</td>
+            <td>Navn og rækkefølge (<code>seq</code>) i mappen</td>
             <td>
-              <code>seq: 2</code> kÃ¸rer efter register
+              <code>seq: 2</code> kører efter register
             </td>
           </tr>
           <tr>
@@ -373,7 +373,7 @@ tests {
             <td>
               <code>script:pre-request</code>
             </td>
-            <td>JavaScript fÃ¸r requesten (generÃ©r data)</td>
+            <td>JavaScript før requesten (generér data)</td>
             <td>Unik e-mail med timestamp</td>
           </tr>
           <tr>
@@ -407,17 +407,17 @@ tests {
       </table>
       <MermaidDiagram chart={sequenceChart} />
       <p>
-        Sekvensdiagrammet viser, at Bruno bÃ¥de er <em>klient</em> og <em>testlÃ¸ber</em>: den sender
-        requesten som en rigtig klient, men bagefter kÃ¸rer den ogsÃ¥ dine assertions og gemmer
-        data til nÃ¦ste request. Databasen er med i kÃ¦den â€“ det er netop det, der adskiller E2E
+        Sekvensdiagrammet viser, at Bruno både er <em>klient</em> og <em>testløber</em>: den sender
+        requesten som en rigtig klient, men bagefter kører den også dine assertions og gemmer
+        data til næste request. Databasen er med i kæden – det er netop det, der adskiller E2E
         fra en unit-test med mocks.
       </p>
 
-      <h2>KÃ¸rsel i CI: GitHub Actions + Docker Compose</h2>
+      <h2>Kørsel i CI: GitHub Actions + Docker Compose</h2>
       <p>
-        Lokalt kÃ¸rer du Bruno i GUI'et. I CI bruger du CLI'en (<code>@usebruno/cli</code>). For at
+        Lokalt kører du Bruno i GUI'et. I CI bruger du CLI'en (<code>@usebruno/cli</code>). For at
         have noget at teste imod, starter pipelinen hele stacken med Docker Compose: API og
-        database bygges fra den kode, der ligger i repoet, og Bruno kÃ¸rer mod{' '}
+        database bygges fra den kode, der ligger i repoet, og Bruno kører mod{' '}
         <code>http://localhost:PORT</code>.
       </p>
       <MermaidDiagram chart={ciChart} />
@@ -437,7 +437,7 @@ jobs:
       - name: Start API + database
         run: docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build
 
-      - name: Vent pÃ¥ at API er klar
+      - name: Vent på at API er klar
         run: |
           for i in $(seq 1 30); do
             curl -fs http://localhost:8080/health && exit 0
@@ -452,7 +452,7 @@ jobs:
       - name: Installer Bruno CLI
         run: npm install -g @usebruno/cli
 
-      - name: KÃ¸r E2E-flows
+      - name: Kør E2E-flows
         working-directory: Bruno
         run: bru run E2E-UserFlows --env ci --reporter-html e2e-report.html
 
@@ -467,47 +467,47 @@ jobs:
         if: always()
         run: docker compose down -v`}</CodeBlock>
       <p>
-        Pipelinen gÃ¸r fire ting i rÃ¦kkefÃ¸lge: <strong>(1)</strong> bygger og starter stacken,{' '}
-        <strong>(2)</strong> venter pÃ¥ et health-endpoint, sÃ¥ Bruno ikke starter, fÃ¸r API'et
-        er klar (en klassisk kilde til flaky tests), <strong>(3)</strong> kÃ¸rer flowene og{' '}
-        <strong>(4)</strong> rydder op og gemmer rapporten som artefakt â€“ ogsÃ¥ hvis testene fejler (
+        Pipelinen gør fire ting i rækkefølge: <strong>(1)</strong> bygger og starter stacken,{' '}
+        <strong>(2)</strong> venter på et health-endpoint, så Bruno ikke starter, før API'et
+        er klar (en klassisk kilde til flaky tests), <strong>(3)</strong> kører flowene og{' '}
+        <strong>(4)</strong> rydder op og gemmer rapporten som artefakt – også hvis testene fejler (
         <code>if: always()</code>). Fordi <code>bru run</code> returnerer en exit-kode forskellig
-        fra 0 ved fejlede tests, bliver jobbet rÃ¸dt, og et branch protection-regelsÃ¦t kan blokere
+        fra 0 ved fejlede tests, bliver jobbet rødt, og et branch protection-regelsæt kan blokere
         merge.
       </p>
       <Callout type="tip">
-        Giv testbrugeren en unik e-mail pr. kÃ¸rsel (fx{' '}
-        <code>test+timestamp@example.com</code> genereret i et pre-request script). SÃ¥ fejler
-        testen ikke bare fordi brugeren allerede findes fra sidste kÃ¸rsel.
+        Giv testbrugeren en unik e-mail pr. kørsel (fx{' '}
+        <code>test+timestamp@example.com</code> genereret i et pre-request script). Så fejler
+        testen ikke bare fordi brugeren allerede findes fra sidste kørsel.
       </Callout>
 
       <h2>PR-problemet: E2E tester det deployede API, ikke PR-koden</h2>
       <p>
-        Et vigtigt forbehold: hvis Bruno-testene peger pÃ¥ et <strong>allerede deployet</strong> API
-        (fx miljÃ¸et pÃ¥ Dokploy) i stedet for en stack bygget i pipelinen, tester de ikke det, du
-        har Ã¦ndret i din pull request. De tester den version, der kÃ¸rer i dag â€“ altsÃ¥{' '}
-        <code>main</code>. Resultatet er et <em>falsk grÃ¸nt</em> signal: testene bestÃ¥r, men din
-        nye kode er aldrig blevet kÃ¸rt.
+        Et vigtigt forbehold: hvis Bruno-testene peger på et <strong>allerede deployet</strong> API
+        (fx miljøet på Dokploy) i stedet for en stack bygget i pipelinen, tester de ikke det, du
+        har ændret i din pull request. De tester den version, der kører i dag – altså{' '}
+        <code>main</code>. Resultatet er et <em>falsk grønt</em> signal: testene består, men din
+        nye kode er aldrig blevet kørt.
       </p>
       <MermaidDiagram chart={prProblemChart} />
       <Callout type="danger">
-        Et grÃ¸nt E2E-check pÃ¥ en PR har kun vÃ¦rdi, hvis den kode, der testes, er PR-koden. Ellers
-        risikerer du at merge en fejl og fÃ¸rst opdage den, nÃ¥r den er deployet og testene kÃ¸rer
+        Et grønt E2E-check på en PR har kun værdi, hvis den kode, der testes, er PR-koden. Ellers
+        risikerer du at merge en fejl og først opdage den, når den er deployet og testene kører
         igen.
       </Callout>
-      <p>Der er flere mÃ¥der at lÃ¸se det pÃ¥:</p>
+      <p>Der er flere måder at løse det på:</p>
       <ul>
         <li>
           <strong>Byg stacken i CI (anbefalet):</strong> Docker Compose i pipelinen bygger API'et
           fra PR'ens commit, som vist ovenfor.
         </li>
         <li>
-          <strong>Preview-miljÃ¸er:</strong> Dokploy kan oprette et midlertidigt miljÃ¸ pr. PR, som
-          Bruno derefter tester mod. KrÃ¦ver mere opsÃ¦tning, men er tÃ¦ttest pÃ¥ produktion.
+          <strong>Preview-miljøer:</strong> Dokploy kan oprette et midlertidigt miljø pr. PR, som
+          Bruno derefter tester mod. Kræver mere opsætning, men er tættest på produktion.
         </li>
         <li>
-          <strong>KÃ¸r E2E efter deploy som smoke test:</strong> accepter, at E2E mod det deployede
-          miljÃ¸ er en <em>post-deploy</em>-kontrol, ikke en PR-gate, og brug unit-/integrationstests
+          <strong>Kør E2E efter deploy som smoke test:</strong> accepter, at E2E mod det deployede
+          miljø er en <em>post-deploy</em>-kontrol, ikke en PR-gate, og brug unit-/integrationstests
           som PR-gate.
         </li>
       </ul>
@@ -523,7 +523,7 @@ jobs:
         <tbody>
           <tr>
             <td>Testpyramiden</td>
-            <td>Mange unit, nogle integration, fÃ¥ E2E â€“ balance mellem hastighed og realisme</td>
+            <td>Mange unit, nogle integration, få E2E – balance mellem hastighed og realisme</td>
           </tr>
           <tr>
             <td>API-test / E2E</td>
@@ -535,7 +535,7 @@ jobs:
           </tr>
           <tr>
             <td>E2E-UserFlows</td>
-            <td>01 register â†’ 02 login (gem token) â†’ 03 brugerflow med auth</td>
+            <td>01 register → 02 login (gem token) → 03 brugerflow med auth</td>
           </tr>
           <tr>
             <td>Request-anatomi</td>
@@ -543,11 +543,11 @@ jobs:
           </tr>
           <tr>
             <td>CI</td>
-            <td>GitHub Actions starter Docker Compose, venter pÃ¥ health, kÃ¸rer <code>bru run</code></td>
+            <td>GitHub Actions starter Docker Compose, venter på health, kører <code>bru run</code></td>
           </tr>
           <tr>
-            <td>PR-fÃ¦lden</td>
-            <td>Test mod deployet API tester ikke PR-koden â€“ byg stacken i pipelinen</td>
+            <td>PR-fælden</td>
+            <td>Test mod deployet API tester ikke PR-koden – byg stacken i pipelinen</td>
           </tr>
         </tbody>
       </table>

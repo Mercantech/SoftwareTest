@@ -9,11 +9,11 @@ import { getObjectiveByPath } from '../../data/objectives'
 
 const processFlow = `
 flowchart LR
-  A["AnalysÃƒÂ©r krav"] --> B["DefinÃƒÂ©r scope og approach"]
+  A["Analysér krav"] --> B["Definér scope og approach"]
   B --> C["Design testcases"]
-  C --> D["EstimÃƒÂ©r og planlÃƒÂ¦g"]
-  D --> E["UdfÃƒÂ¸r tests"]
-  E --> F["RapportÃƒÂ©r"]
+  C --> D["Estimér og planlæg"]
+  D --> E["Udfør tests"]
+  E --> F["Rapportér"]
   F --> G{"Exit criteria<br/>opfyldt?"}
   G -- Nej --> E
   G -- Ja --> H["Afslut / release"]
@@ -23,29 +23,29 @@ const traceability = `
 flowchart LR
   R1["KRAV-01<br/>Login"] --> TC1["TC-01 gyldigt login"]
   R1 --> TC2["TC-02 forkert kodeord"]
-  R1 --> TC3["TC-03 lÃƒÂ¥st konto"]
+  R1 --> TC3["TC-03 låst konto"]
   R2["KRAV-02<br/>Opret ordre"] --> TC4["TC-04 gyldig ordre"]
   R2 --> TC5["TC-05 tom kurv"]
-  R2 --> TC6["TC-06 negativ mÃƒÂ¦ngde"]
+  R2 --> TC6["TC-06 negativ mængde"]
 `
 
 const planSkeleton = `
 # Testplan: WebShop v1.2          (efter IEEE 829 / ISO/IEC/IEEE 29119-3)
 
 1. Testplan-ID og version        TP-WEBSHOP-1.2, forfatter, dato, godkender
-2. Introduktion                  FormÃƒÂ¥l, baggrund, referencer (kravspec, designdok)
+2. Introduktion                  Formål, baggrund, referencer (kravspec, designdok)
 3. Testobjekter (items)          Build 1.2.0, API v1, React-frontend, PostgreSQL 16
 4. Features der testes           Login, Opret ordre, Betaling, Ordrehistorik
 5. Features der IKKE testes      Admin-rapporter (udskudt til v1.3), 3. parts betalingsside
 6. Approach (strategi)           Unit + integration automatiseret, E2E via Bruno,
                                  eksplorativ test af betalingsflow, ZAP-baseline i CI
-7. Pass/fail-kriterier           Testcase bestÃƒÂ¥r, nÃƒÂ¥r faktisk = forventet resultat
+7. Pass/fail-kriterier           Testcase består, når faktisk = forventet resultat
 8. Suspension / resumption       Stop ved blocker i login; genoptag efter hotfix + smoke
-9. Deliverables                  Testcases, testrapport, fejlliste, dÃƒÂ¦kningsrapport
-10. TestmiljÃƒÂ¸                    Docker Compose: web, api, db; seed-data; test-SMTP
+9. Deliverables                  Testcases, testrapport, fejlliste, dækningsrapport
+10. Testmiljø                    Docker Compose: web, api, db; seed-data; test-SMTP
 11. Ansvar og ressourcer         QA: Anna, Dev: Bo, Product owner: Carla
-12. Tidsplan                     Sprint 14: design uge 1, udfÃƒÂ¸relse uge 2, regression uge 3
-13. Risici og afhjÃƒÂ¦lpning        Se risikotabel
+12. Tidsplan                     Sprint 14: design uge 1, udførelse uge 2, regression uge 3
+13. Risici og afhjælpning        Se risikotabel
 14. Exit criteria                Se afsnit nedenfor
 15. Godkendelser                 Underskrifter
 `
@@ -80,7 +80,7 @@ public class LoginTests : IClassFixture<WebApplicationFactory<Program>>
         Assert.Equal(HttpStatusCode.Unauthorized, resp.StatusCode);
     }
 
-    // TC-03 (KRAV-01): konto lÃƒÂ¥ses efter 5 mislykkede forsÃƒÂ¸g
+    // TC-03 (KRAV-01): konto låses efter 5 mislykkede forsøg
     [Fact]
     public async Task TC03_FemFejlForsoeg_LaaserKonto()
     {
@@ -104,7 +104,7 @@ export default function TestplanPageDa() {
       <header>
         {objective ? (
           <p>
-            <ObjectiveBadge level={objective.level} /> <strong>MÃƒÂ¥lpind {objective.id}</strong>
+            <ObjectiveBadge level={objective.level} /> <strong>Målpind {objective.id}</strong>
           </p>
         ) : null}
         {objective ? (
@@ -119,22 +119,22 @@ export default function TestplanPageDa() {
       <h1>Testplan til funktionelle krav</h1>
 
       <p>
-        En testplan er det dokument, der besvarer spÃƒÂ¸rgsmÃƒÂ¥lene: <em>Hvad skal testes?
-        Hvordan? Af hvem? HvornÃƒÂ¥r? Og hvornÃƒÂ¥r er vi fÃƒÂ¦rdige?</em> Uden en plan bliver test
-        tilfÃƒÂ¦ldig, og ingen kan sige, om systemet er dÃƒÂ¦kket. Med en plan bliver test
-        sporbar, estimÃƒÂ©rbar og kan diskuteres med kunden.
+        En testplan er det dokument, der besvarer spørgsmålene: <em>Hvad skal testes?
+        Hvordan? Af hvem? Hvornår? Og hvornår er vi færdige?</em> Uden en plan bliver test
+        tilfældig, og ingen kan sige, om systemet er dækket. Med en plan bliver test
+        sporbar, estimérbar og kan diskuteres med kunden.
       </p>
 
-      <h2>LÃƒÂ¦ringsmÃƒÂ¥l</h2>
+      <h2>Læringsmål</h2>
       <ul>
         <li>Opbygge en testplan efter IEEE 829 / ISO 29119-struktur.</li>
-        <li>OmsÃƒÂ¦tte funktionelle krav til konkrete, mÃƒÂ¥lbare testcases.</li>
+        <li>Omsætte funktionelle krav til konkrete, målbare testcases.</li>
         <li>Opstille sporbarhed (traceability) mellem krav og tests.</li>
         <li>Definere exit criteria og identificere testrisici.</li>
         <li>Bruge en testcase-skabelon og skrive testcases som automatiserede tests.</li>
       </ul>
 
-      <h2>1. Testplan, teststrategi og testcase Ã¢â‚¬â€ begreberne</h2>
+      <h2>1. Testplan, teststrategi og testcase — begreberne</h2>
       <table>
         <thead>
           <tr>
@@ -147,7 +147,7 @@ export default function TestplanPageDa() {
           <tr>
             <td>Teststrategi</td>
             <td>Organisation/produkt</td>
-            <td>Overordnede principper: automatiseringsgrad, vÃƒÂ¦rktÃƒÂ¸jer, risikotilgang</td>
+            <td>Overordnede principper: automatiseringsgrad, værktøjer, risikotilgang</td>
           </tr>
           <tr>
             <td>Testplan</td>
@@ -157,17 +157,17 @@ export default function TestplanPageDa() {
           <tr>
             <td>Testdesign/-specifikation</td>
             <td>Feature</td>
-            <td>Hvilke teknikker og betingelser dÃƒÂ¦kker featuren</td>
+            <td>Hvilke teknikker og betingelser dækker featuren</td>
           </tr>
           <tr>
             <td>Testcase</td>
             <td>Enkelt scenarie</td>
-            <td>ForudsÃƒÂ¦tninger, trin, input, forventet resultat</td>
+            <td>Forudsætninger, trin, input, forventet resultat</td>
           </tr>
           <tr>
             <td>Testrapport</td>
-            <td>Efter udfÃƒÂ¸relse</td>
-            <td>Resultater, fejl, dÃƒÂ¦kning, anbefaling</td>
+            <td>Efter udførelse</td>
+            <td>Resultater, fejl, dækning, anbefaling</td>
           </tr>
         </tbody>
       </table>
@@ -175,23 +175,23 @@ export default function TestplanPageDa() {
       <h2>2. Testprocessen</h2>
       <MermaidDiagram chart={processFlow} />
       <p>
-        PlanlÃƒÂ¦gning er <strong>iterativ</strong>: i agile teams opdateres planen hver
-        sprint, men de samme spÃƒÂ¸rgsmÃƒÂ¥l besvares. En letvÃƒÂ¦gts-testplan pÃƒÂ¥ en side er bedre
-        end en perfekt plan pÃƒÂ¥ 40 sider, som ingen lÃƒÂ¦ser.
+        Planlægning er <strong>iterativ</strong>: i agile teams opdateres planen hver
+        sprint, men de samme spørgsmål besvares. En letvægts-testplan på en side er bedre
+        end en perfekt plan på 40 sider, som ingen læser.
       </p>
 
       <h2>3. IEEE-inspireret struktur</h2>
       <p>
-        IEEE 829 (aflÃƒÂ¸st af ISO/IEC/IEEE 29119-3) beskriver en standardiseret indholdsfortegnelse.
-        Den giver en tjekliste, sÃƒÂ¥ intet vigtigt glemmes. Skabelon:
+        IEEE 829 (afløst af ISO/IEC/IEEE 29119-3) beskriver en standardiseret indholdsfortegnelse.
+        Den giver en tjekliste, så intet vigtigt glemmes. Skabelon:
       </p>
       <CodeBlock language="text">{planSkeleton}</CodeBlock>
 
-      <h3>Scope (afgrÃƒÂ¦nsning)</h3>
+      <h3>Scope (afgrænsning)</h3>
       <p>
-        Scope er bÃƒÂ¥de det, der <strong>er med</strong>, og det, der <strong>bevidst er
+        Scope er både det, der <strong>er med</strong>, og det, der <strong>bevidst er
         udeladt</strong>. At skrive &ldquo;ikke testet: 3. parts betalingsside&rdquo; er
-        en vigtig kommunikation til interessenterne Ã¢â‚¬â€ det gÃƒÂ¸r risikoen synlig i stedet for
+        en vigtig kommunikation til interessenterne — det gør risikoen synlig i stedet for
         skjult.
       </p>
 
@@ -203,7 +203,7 @@ export default function TestplanPageDa() {
 
       <h3>Approach</h3>
       <p>
-        Beskriv testniveauer, teknikker og vÃƒÂ¦rktÃƒÂ¸jer: &ldquo;Forretningslogik testes med
+        Beskriv testniveauer, teknikker og værktøjer: &ldquo;Forretningslogik testes med
         unit tests (xUnit), API&apos;et med integrationstests
         (WebApplicationFactory), kritiske flows med E2E (Bruno), betalingsflow med
         eksplorativ test.&rdquo; Link til siderne{' '}
@@ -213,18 +213,18 @@ export default function TestplanPageDa() {
 
       <h3>Testcases</h3>
       <p>
-        Selve testcases kan ligge i et vÃƒÂ¦rktÃƒÂ¸j (Jira/Xray, TestRail, Notion) eller Ã¢â‚¬â€
-        bedst for automatiserede tests Ã¢â‚¬â€ som kode i repoet, med testnavne der refererer
+        Selve testcases kan ligge i et værktøj (Jira/Xray, TestRail, Notion) eller —
+        bedst for automatiserede tests — som kode i repoet, med testnavne der refererer
         til krav-ID&apos;er.
       </p>
 
       <h3>Exit criteria (afslutningskriterier)</h3>
       <p>Objektive betingelser for, at testfasen kan afsluttes. Eksempler:</p>
       <ul>
-        <li>100 % af must-have testcases er udfÃƒÂ¸rt, og Ã¢â€°Â¥ 95 % bestÃƒÂ¥r.</li>
-        <li>Ingen ÃƒÂ¥bne fejl af alvorlighed <em>kritisk</em> eller <em>hÃƒÂ¸j</em>.</li>
-        <li>Alle regressionstests er grÃƒÂ¸nne i CI pÃƒÂ¥ release-commit.</li>
-        <li>KodedÃƒÂ¦kning for forretningslogik Ã¢â€°Â¥ 80 % (som signal, ikke mÃƒÂ¥l Ã¢â‚¬â€ se{' '}
+        <li>100 % af must-have testcases er udført, og ≥ 95 % består.</li>
+        <li>Ingen åbne fejl af alvorlighed <em>kritisk</em> eller <em>høj</em>.</li>
+        <li>Alle regressionstests er grønne i CI på release-commit.</li>
+        <li>Kodedækning for forretningslogik ≥ 80 % (som signal, ikke mål — se{' '}
           <Link to="/test/release">Release</Link>).</li>
         <li>Performance: p95 &lt; 500 ms ved 100 samtidige brugere.</li>
       </ul>
@@ -236,36 +236,36 @@ export default function TestplanPageDa() {
             <th>Risiko</th>
             <th>Sandsynlighed</th>
             <th>Konsekvens</th>
-            <th>AfhjÃƒÂ¦lpning</th>
+            <th>Afhjælpning</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>TestmiljÃƒÂ¸ ikke klar til tiden</td>
+            <td>Testmiljø ikke klar til tiden</td>
             <td>Middel</td>
-            <td>HÃƒÂ¸j</td>
-            <td>Docker Compose-miljÃƒÂ¸ i repo; automatisk opsÃƒÂ¦tning</td>
+            <td>Høj</td>
+            <td>Docker Compose-miljø i repo; automatisk opsætning</td>
           </tr>
           <tr>
-            <td>Krav ÃƒÂ¦ndres midt i sprint</td>
-            <td>HÃƒÂ¸j</td>
+            <td>Krav ændres midt i sprint</td>
+            <td>Høj</td>
             <td>Middel</td>
-            <td>Korte planer; regressionssuite; kravÃƒÂ¦ndringer under change control</td>
+            <td>Korte planer; regressionssuite; kravændringer under change control</td>
           </tr>
           <tr>
-            <td>NÃƒÂ¸glepersoner syge</td>
+            <td>Nøglepersoner syge</td>
             <td>Lav</td>
-            <td>HÃƒÂ¸j</td>
-            <td>DokumentÃƒÂ©r testcases; parprogrammering</td>
+            <td>Høj</td>
+            <td>Dokumentér testcases; parprogrammering</td>
           </tr>
           <tr>
             <td>Flaky E2E-tests skjuler rigtige fejl</td>
             <td>Middel</td>
             <td>Middel</td>
-            <td>KarantÃƒÂ¦ne-regler, fast testdata, retry-politik</td>
+            <td>Karantæne-regler, fast testdata, retry-politik</td>
           </tr>
           <tr>
-            <td>Ekstern API ikke tilgÃƒÂ¦ngelig</td>
+            <td>Ekstern API ikke tilgængelig</td>
             <td>Middel</td>
             <td>Middel</td>
             <td>Mock/stub (fx WireMock) og kontrakttests</td>
@@ -275,15 +275,15 @@ export default function TestplanPageDa() {
 
       <h2>4. Fra funktionelle krav til testcases</h2>
       <p>
-        Et funktionelt krav beskriver, <strong>hvad systemet skal gÃƒÂ¸re</strong>. Et godt
-        krav er <em>testbart</em>: man kan afgÃƒÂ¸re entydigt, om det er opfyldt.
+        Et funktionelt krav beskriver, <strong>hvad systemet skal gøre</strong>. Et godt
+        krav er <em>testbart</em>: man kan afgøre entydigt, om det er opfyldt.
       </p>
 
       <Callout type="warn">
-        <strong>Utestbart krav:</strong> &ldquo;Systemet skal vÃƒÂ¦re brugervenligt og
+        <strong>Utestbart krav:</strong> &ldquo;Systemet skal være brugervenligt og
         hurtigt.&rdquo; <br />
-        <strong>Testbart krav:</strong> &ldquo;NÃƒÂ¥r brugeren indtaster korrekt email og
-        adgangskode, skal vedkommende fÃƒÂ¸res til forsiden inden for 2 sekunder.&rdquo;
+        <strong>Testbart krav:</strong> &ldquo;Når brugeren indtaster korrekt email og
+        adgangskode, skal vedkommende føres til forsiden inden for 2 sekunder.&rdquo;
       </Callout>
 
       <h3>Trin-for-trin-teknik</h3>
@@ -292,18 +292,18 @@ export default function TestplanPageDa() {
         <li>Find acceptkriterier (Given/When/Then, hvis I bruger BDD).</li>
         <li>
           Anvend testdesignteknikker (se <Link to="/test/metodikker">Metodikker</Link>):
-          ÃƒÂ¦kvivalensklasser, grÃƒÂ¦nsevÃƒÂ¦rdier, beslutningstabeller, tilstandsdiagrammer.
+          ækvivalensklasser, grænseværdier, beslutningstabeller, tilstandsdiagrammer.
         </li>
-        <li>Skriv mindst ÃƒÂ©t positivt og ÃƒÂ©t negativt testcase pr. krav.</li>
-        <li>TilfÃƒÂ¸j de tests til en sporbarhedsmatrix.</li>
+        <li>Skriv mindst ét positivt og ét negativt testcase pr. krav.</li>
+        <li>Tilføj de tests til en sporbarhedsmatrix.</li>
       </ol>
 
       <MermaidDiagram chart={traceability} />
 
-      <h3>Eksempel: login-krav Ã¢â€ â€™ testcases</h3>
+      <h3>Eksempel: login-krav → testcases</h3>
       <p>
         <strong>KRAV-01:</strong> &ldquo;En registreret bruger kan logge ind med email og
-        adgangskode. Efter 5 mislykkede forsÃƒÂ¸g lÃƒÂ¥ses kontoen i 15 minutter.&rdquo;
+        adgangskode. Efter 5 mislykkede forsøg låses kontoen i 15 minutter.&rdquo;
       </p>
       <table>
         <thead>
@@ -336,17 +336,17 @@ export default function TestplanPageDa() {
           <tr>
             <td>TC-03</td>
             <td>KRAV-01</td>
-            <td>Konto lÃƒÂ¥ses</td>
-            <td>5 Ãƒâ€” forkert, derefter korrekt</td>
+            <td>Konto låses</td>
+            <td>5 × forkert, derefter korrekt</td>
             <td>423 Locked</td>
-            <td>GrÃƒÂ¦nse</td>
+            <td>Grænse</td>
           </tr>
           <tr>
             <td>TC-04</td>
             <td>KRAV-01</td>
             <td>Ukendt email</td>
             <td>ukendt@test.dk / x</td>
-            <td>401 (samme svar som TC-02 Ã¢â‚¬â€ ingen user enumeration)</td>
+            <td>401 (samme svar som TC-02 — ingen user enumeration)</td>
             <td>Sikkerhed</td>
           </tr>
           <tr>
@@ -372,13 +372,13 @@ export default function TestplanPageDa() {
 
       <h3>Testcases som automatiseret kode</h3>
       <p>
-        Hver rÃƒÂ¦kke i tabellen kan blive til en test. BemÃƒÂ¦rk navngivning med TC-ID og
+        Hver række i tabellen kan blive til en test. Bemærk navngivning med TC-ID og
         krav-ID, som giver sporbarhed direkte i testresultaterne:
       </p>
       <CodeBlock language="csharp">{testCaseCsharp}</CodeBlock>
 
       <h2>5. Skabelon til testcases</h2>
-      <p>KopiÃƒÂ©r tabellen og udfyld den for hver testcase:</p>
+      <p>Kopiér tabellen og udfyld den for hver testcase:</p>
       <table>
         <thead>
           <tr>
@@ -400,7 +400,7 @@ export default function TestplanPageDa() {
           </tr>
           <tr>
             <td>Krav-ref.</td>
-            <td>Hvilket krav dÃƒÂ¦kkes</td>
+            <td>Hvilket krav dækkes</td>
             <td>KRAV-02</td>
           </tr>
           <tr>
@@ -409,8 +409,8 @@ export default function TestplanPageDa() {
             <td>Must</td>
           </tr>
           <tr>
-            <td>ForudsÃƒÂ¦tninger</td>
-            <td>MiljÃƒÂ¸, data, tilstand</td>
+            <td>Forudsætninger</td>
+            <td>Miljø, data, tilstand</td>
             <td>Bruger er logget ind; kurv er tom</td>
           </tr>
           <tr>
@@ -425,13 +425,13 @@ export default function TestplanPageDa() {
           </tr>
           <tr>
             <td>Forventet resultat</td>
-            <td>PrÃƒÂ¦cist og mÃƒÂ¥lbart</td>
+            <td>Præcist og målbart</td>
             <td>400, fejlkode EMPTY_CART</td>
           </tr>
           <tr>
             <td>Faktisk resultat</td>
-            <td>Udfyldes ved kÃƒÂ¸rsel</td>
-            <td>Ã¢â‚¬â€</td>
+            <td>Udfyldes ved kørsel</td>
+            <td>—</td>
           </tr>
           <tr>
             <td>Status</td>
@@ -441,49 +441,49 @@ export default function TestplanPageDa() {
           <tr>
             <td>Automatiseret?</td>
             <td>Ja/nej + sted i koden</td>
-            <td>Ja Ã¢â‚¬â€ OrdersApiTests.TC014</td>
+            <td>Ja — OrdersApiTests.TC014</td>
           </tr>
         </tbody>
       </table>
 
       <h2>6. Prioritering med risiko</h2>
       <p>
-        Du kan ikke teste alt. Giv hver feature en <strong>risikoscore = sandsynlighed Ãƒâ€”
-        konsekvens</strong> (fx 1Ã¢â‚¬â€œ5 hver) og brug mest tid pÃƒÂ¥ de hÃƒÂ¸jeste scorer.
-        Betalingsflow (sandsynlighed 3 Ãƒâ€” konsekvens 5 = 15) prioriteres over
-        &ldquo;skift profilbillede&rdquo; (2 Ãƒâ€” 1 = 2).
+        Du kan ikke teste alt. Giv hver feature en <strong>risikoscore = sandsynlighed ×
+        konsekvens</strong> (fx 1–5 hver) og brug mest tid på de højeste scorer.
+        Betalingsflow (sandsynlighed 3 × konsekvens 5 = 15) prioriteres over
+        &ldquo;skift profilbillede&rdquo; (2 × 1 = 2).
       </p>
 
       <Callout type="tip">
-        Gem testplanen i repoet som Markdown ved siden af koden. SÃƒÂ¥ versionsstyres den,
-        kan reviewes i pull requests og fÃƒÂ¸lger releasen Ã¢â‚¬â€ prÃƒÂ¦cis som koden.
+        Gem testplanen i repoet som Markdown ved siden af koden. Så versionsstyres den,
+        kan reviewes i pull requests og følger releasen — præcis som koden.
       </Callout>
 
       <h2>7. Rapportering</h2>
       <p>
-        Efter udfÃƒÂ¸relsen laves en kort testrapport: antal tests planlagt/kÃƒÂ¸rt/bestÃƒÂ¥et/
-        fejlet/blokeret, ÃƒÂ¥bne fejl pr. alvorlighed, afvigelser fra planen, og en
+        Efter udførelsen laves en kort testrapport: antal tests planlagt/kørt/bestået/
+        fejlet/blokeret, åbne fejl pr. alvorlighed, afvigelser fra planen, og en
         anbefaling (go/no-go). Det er input til{' '}
         <Link to="/test/release">release-beslutningen</Link>.
       </p>
 
-      <h2>ÃƒËœvelse</h2>
+      <h2>Øvelse</h2>
       <ol>
         <li>
-          Tag disse to krav: <em>&ldquo;Brugeren kan lÃƒÂ¦gge varer i en kurv (max 20 pr.
-          vare)&rdquo;</em> og <em>&ldquo;Brugeren kan sÃƒÂ¸ge efter varer pÃƒÂ¥ navn&rdquo;</em>.
+          Tag disse to krav: <em>&ldquo;Brugeren kan lægge varer i en kurv (max 20 pr.
+          vare)&rdquo;</em> og <em>&ldquo;Brugeren kan søge efter varer på navn&rdquo;</em>.
         </li>
-        <li>Giv dem ID&apos;er og formulÃƒÂ©r acceptkriterier som Given/When/Then.</li>
+        <li>Giv dem ID&apos;er og formulér acceptkriterier som Given/When/Then.</li>
         <li>
-          Skriv mindst 5 testcases pr. krav i skabelonen ovenfor (inkl. grÃƒÂ¦nsevÃƒÂ¦rdi 20/21
-          og tom sÃƒÂ¸gning).
+          Skriv mindst 5 testcases pr. krav i skabelonen ovenfor (inkl. grænseværdi 20/21
+          og tom søgning).
         </li>
-        <li>Tegn sporbarhedsdiagrammet (krav Ã¢â€ â€™ testcases).</li>
+        <li>Tegn sporbarhedsdiagrammet (krav → testcases).</li>
         <li>
           Skriv et kort testplan-dokument (1 side) med scope, approach, exit criteria og
           tre risici.
         </li>
-        <li>ImplementÃƒÂ©r to af testcases som xUnit-tests.</li>
+        <li>Implementér to af testcases som xUnit-tests.</li>
       </ol>
     </LessonLayout>
   )
