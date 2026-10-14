@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom'
+import AccordionList from '../../components/AccordionList'
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
+import ConceptCards from '../../components/ConceptCards'
 import LessonLayout from '../../components/LessonLayout'
 import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
 import ObjectiveBadge from '../../components/ObjectiveBadge'
+import ProcessStepper from '../../components/ProcessStepper'
+import RiskMatrix from '../../components/RiskMatrix'
+import TraceabilityBoard from '../../components/TraceabilityBoard'
+import WorkshopPanel from '../../components/WorkshopPanel'
 import { getObjectiveByPath } from '../../data/objectives'
 
 const processFlow = `
@@ -17,37 +23,6 @@ flowchart LR
   F --> G{"Exit criteria<br/>opfyldt?"}
   G -- Nej --> E
   G -- Ja --> H["Afslut / release"]
-`
-
-const traceability = `
-flowchart LR
-  R1["KRAV-01<br/>Login"] --> TC1["TC-01 gyldigt login"]
-  R1 --> TC2["TC-02 forkert kodeord"]
-  R1 --> TC3["TC-03 låst konto"]
-  R2["KRAV-02<br/>Opret ordre"] --> TC4["TC-04 gyldig ordre"]
-  R2 --> TC5["TC-05 tom kurv"]
-  R2 --> TC6["TC-06 negativ mængde"]
-`
-
-const planSkeleton = `
-# Testplan: WebShop v1.2          (efter IEEE 829 / ISO/IEC/IEEE 29119-3)
-
-1. Testplan-ID og version        TP-WEBSHOP-1.2, forfatter, dato, godkender
-2. Introduktion                  Formål, baggrund, referencer (kravspec, designdok)
-3. Testobjekter (items)          Build 1.2.0, API v1, React-frontend, PostgreSQL 16
-4. Features der testes           Login, Opret ordre, Betaling, Ordrehistorik
-5. Features der IKKE testes      Admin-rapporter (udskudt til v1.3), 3. parts betalingsside
-6. Approach (strategi)           Unit + integration automatiseret, E2E via Bruno,
-                                 eksplorativ test af betalingsflow, ZAP-baseline i CI
-7. Pass/fail-kriterier           Testcase består, når faktisk = forventet resultat
-8. Suspension / resumption       Stop ved blocker i login; genoptag efter hotfix + smoke
-9. Deliverables                  Testcases, testrapport, fejlliste, dækningsrapport
-10. Testmiljø                    Docker Compose: web, api, db; seed-data; test-SMTP
-11. Ansvar og ressourcer         QA: Anna, Dev: Bo, Product owner: Carla
-12. Tidsplan                     Sprint 14: design uge 1, udførelse uge 2, regression uge 3
-13. Risici og afhjælpning        Se risikotabel
-14. Exit criteria                Se afsnit nedenfor
-15. Godkendelser                 Underskrifter
 `
 
 const testCaseCsharp = `
@@ -135,44 +110,92 @@ export default function TestplanPageDa() {
       </ul>
 
       <h2>1. Testplan, teststrategi og testcase — begreberne</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Begreb</th>
-            <th>Niveau</th>
-            <th>Indhold</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Teststrategi</td>
-            <td>Organisation/produkt</td>
-            <td>Overordnede principper: automatiseringsgrad, værktøjer, risikotilgang</td>
-          </tr>
-          <tr>
-            <td>Testplan</td>
-            <td>Projekt/release</td>
-            <td>Scope, ressourcer, tidsplan, approach, kriterier for netop denne release</td>
-          </tr>
-          <tr>
-            <td>Testdesign/-specifikation</td>
-            <td>Feature</td>
-            <td>Hvilke teknikker og betingelser dækker featuren</td>
-          </tr>
-          <tr>
-            <td>Testcase</td>
-            <td>Enkelt scenarie</td>
-            <td>Forudsætninger, trin, input, forventet resultat</td>
-          </tr>
-          <tr>
-            <td>Testrapport</td>
-            <td>Efter udførelse</td>
-            <td>Resultater, fejl, dækning, anbefaling</td>
-          </tr>
-        </tbody>
-      </table>
+      <p>Klik på et kort for at se, hvilket niveau begrebet hører til:</p>
+      <ConceptCards
+        ariaLabel="Begrebskort for testplanlægning"
+        items={[
+          {
+            id: 'strategy',
+            title: 'Teststrategi',
+            level: 'Organisation / produkt',
+            body: 'Overordnede principper: automatiseringsgrad, værktøjer og risikotilgang på tværs af projekter.',
+          },
+          {
+            id: 'plan',
+            title: 'Testplan',
+            level: 'Projekt / release',
+            body: 'Scope, ressourcer, tidsplan, approach og kriterier for netop denne release.',
+          },
+          {
+            id: 'design',
+            title: 'Testdesign',
+            level: 'Feature',
+            body: 'Hvilke teknikker og betingelser dækker featuren — ækvivalens, grænser, beslutningstabeller.',
+          },
+          {
+            id: 'case',
+            title: 'Testcase',
+            level: 'Enkelt scenarie',
+            body: 'Forudsætninger, trin, input og forventet resultat for ét konkret scenarie.',
+          },
+          {
+            id: 'report',
+            title: 'Testrapport',
+            level: 'Efter udførelse',
+            body: 'Resultater, fejl, dækning og en anbefaling (go / no-go) til releasen.',
+          },
+        ]}
+      />
 
       <h2>2. Testprocessen</h2>
+      <p>Gå trin for trin gennem processen — planen er iterativ, ikke en engangsøvelse:</p>
+      <ProcessStepper
+        ariaLabel="Testprocessens trin"
+        steps={[
+          {
+            id: 'analyze',
+            label: 'Analysér krav',
+            detail:
+              'Gør krav testbare. Find uklarheder tidligt — et krav uden acceptkriterier bliver til gætteri i test.',
+          },
+          {
+            id: 'scope',
+            label: 'Scope & approach',
+            detail:
+              'Afgræns hvad der testes og hvad der bevidst udelades. Vælg niveauer og værktøjer til releasen.',
+          },
+          {
+            id: 'design',
+            label: 'Design testcases',
+            detail:
+              'Brug testdesignteknikker. Mindst ét positivt og ét negativt scenarie pr. must-have krav.',
+          },
+          {
+            id: 'estimate',
+            label: 'Estimér & planlæg',
+            detail:
+              'Ressourcer, tidsplan og risici. Prioritér efter sandsynlighed × konsekvens.',
+          },
+          {
+            id: 'execute',
+            label: 'Udfør tests',
+            detail:
+              'Kør automatiserede suites i CI og manuelle/eksplorative tests der, hvor risikoen er høj.',
+          },
+          {
+            id: 'report',
+            label: 'Rapportér',
+            detail:
+              'Status på tests og fejl. Afvigelser fra planen dokumenteres — ikke skjules.',
+          },
+          {
+            id: 'exit',
+            label: 'Exit criteria',
+            detail:
+              'Objektive betingelser for at stoppe. Er de ikke opfyldt, går I tilbage til udførelse.',
+          },
+        ]}
+      />
       <MermaidDiagram chart={processFlow} />
       <p>
         Planlægning er <strong>iterativ</strong>: i agile teams opdateres planen hver
@@ -183,95 +206,185 @@ export default function TestplanPageDa() {
       <h2>3. IEEE-inspireret struktur</h2>
       <p>
         IEEE 829 (afløst af ISO/IEC/IEEE 29119-3) beskriver en standardiseret indholdsfortegnelse.
-        Den giver en tjekliste, så intet vigtigt glemmes. Skabelon:
+        Åbn sektionerne som en tjekliste, så intet vigtigt glemmes:
       </p>
-      <CodeBlock language="text">{planSkeleton}</CodeBlock>
+      <AccordionList
+        ariaLabel="IEEE testplan-sektioner"
+        items={[
+          {
+            id: 'id',
+            title: 'Testplan-ID og version',
+            body: <p>TP-WEBSHOP-1.2, forfatter, dato, godkender.</p>,
+          },
+          {
+            id: 'intro',
+            title: 'Introduktion',
+            body: <p>Formål, baggrund, referencer (kravspec, designdok).</p>,
+          },
+          {
+            id: 'items',
+            title: 'Testobjekter (items)',
+            body: <p>Build 1.2.0, API v1, React-frontend, PostgreSQL 16 — konkrete versioner.</p>,
+          },
+          {
+            id: 'in',
+            title: 'Features der testes',
+            body: <p>Login, Opret ordre, Betaling, Ordrehistorik.</p>,
+          },
+          {
+            id: 'out',
+            title: 'Features der IKKE testes',
+            body: (
+              <p>
+                Admin-rapporter (udskudt til v1.3), 3. parts betalingsside. Synlig risiko er bedre
+                end skjult risiko.
+              </p>
+            ),
+          },
+          {
+            id: 'approach',
+            title: 'Approach (strategi)',
+            body: (
+              <p>
+                Unit + integration automatiseret, E2E via Bruno, eksplorativ test af betalingsflow,
+                ZAP-baseline i CI.
+              </p>
+            ),
+          },
+          {
+            id: 'passfail',
+            title: 'Pass/fail-kriterier',
+            body: <p>Testcase består, når faktisk resultat = forventet resultat.</p>,
+          },
+          {
+            id: 'suspend',
+            title: 'Suspension / resumption',
+            body: <p>Stop ved blocker i login; genoptag efter hotfix + smoke.</p>,
+          },
+          {
+            id: 'deliverables',
+            title: 'Deliverables',
+            body: <p>Testcases, testrapport, fejlliste, dækningsrapport.</p>,
+          },
+          {
+            id: 'env',
+            title: 'Testmiljø',
+            body: <p>Docker Compose: web, api, db; seed-data; test-SMTP.</p>,
+          },
+          {
+            id: 'roles',
+            title: 'Ansvar og ressourcer',
+            body: <p>QA: Anna, Dev: Bo, Product owner: Carla.</p>,
+          },
+          {
+            id: 'schedule',
+            title: 'Tidsplan',
+            body: <p>Sprint 14: design uge 1, udførelse uge 2, regression uge 3.</p>,
+          },
+          {
+            id: 'risks',
+            title: 'Risici og afhjælpning',
+            body: <p>Se risikomatrice nedenfor.</p>,
+          },
+          {
+            id: 'exit',
+            title: 'Exit criteria',
+            body: <p>Objektive betingelser — se tjeklisten i workshoppen.</p>,
+          },
+          {
+            id: 'approvals',
+            title: 'Godkendelser',
+            body: <p>Underskrifter / formel accept fra interessenter.</p>,
+          },
+        ]}
+      />
 
-      <h3>Scope (afgrænsning)</h3>
+      <div className="info-tiles">
+        <article className="info-tile">
+          <h3>Scope</h3>
+          <p>
+            Både det der <strong>er med</strong>, og det der <strong>bevidst er udeladt</strong>.
+            &ldquo;Ikke testet: 3. parts betalingsside&rdquo; gør risikoen synlig.
+          </p>
+        </article>
+        <article className="info-tile">
+          <h3>Test items</h3>
+          <p>
+            Build-nummer, commit-hash, containerimage-tag. Uden versionsangivelse kan planen ikke
+            gentages.
+          </p>
+        </article>
+        <article className="info-tile">
+          <h3>Approach</h3>
+          <p>
+            Forretningslogik med unit (xUnit), API med integration (
+            <Link to="/test/integration">WebApplicationFactory</Link>), kritiske flows med E2E
+            (Bruno). Se også <Link to="/test/metodikker">metodikker</Link>.
+          </p>
+        </article>
+        <article className="info-tile">
+          <h3>Exit criteria</h3>
+          <p>
+            100 % must-have kørt, ≥ 95 % bestået, ingen kritiske fejl, grøn regression i CI, p95 &lt;
+            500 ms ved 100 brugere.
+          </p>
+        </article>
+      </div>
+
+      <h2>Risikomatrice</h2>
       <p>
-        Scope er både det, der <strong>er med</strong>, og det, der <strong>bevidst er
-        udeladt</strong>. At skrive &ldquo;ikke testet: 3. parts betalingsside&rdquo; er
-        en vigtig kommunikation til interessenterne — det gør risikoen synlig i stedet for
-        skjult.
+        Du kan ikke teste alt. Giv hver risiko en score = sandsynlighed × konsekvens (1–5) og brug
+        mest tid på de højeste scorer. Klik på en chip i matricen:
       </p>
-
-      <h3>Test items</h3>
+      <RiskMatrix
+        ariaLabel="Testrisici i sandsynlighed × konsekvens-matrice"
+        likelihoodLabel="Sandsynlighed"
+        impactLabel="Konsekvens"
+        emptyLabel="Vælg en risiko i matricen"
+        scoreLabel="Risikoscore"
+        mitigationLabel="Afhjælpning"
+        risks={[
+          {
+            id: 'env',
+            title: 'Testmiljø ikke klar',
+            likelihood: 3,
+            impact: 5,
+            mitigation: 'Docker Compose-miljø i repo; automatisk opsætning.',
+          },
+          {
+            id: 'reqs',
+            title: 'Krav ændres midt i sprint',
+            likelihood: 5,
+            impact: 3,
+            mitigation: 'Korte planer; regressionssuite; change control.',
+          },
+          {
+            id: 'people',
+            title: 'Nøglepersoner syge',
+            likelihood: 2,
+            impact: 5,
+            mitigation: 'Dokumentér testcases; parprogrammering.',
+          },
+          {
+            id: 'flaky',
+            title: 'Flaky E2E skjuler fejl',
+            likelihood: 3,
+            impact: 3,
+            mitigation: 'Karantæne-regler, fast testdata, retry-politik.',
+          },
+          {
+            id: 'api',
+            title: 'Ekstern API nede',
+            likelihood: 3,
+            impact: 3,
+            mitigation: 'Mock/stub (WireMock) og kontrakttests.',
+          },
+        ]}
+      />
       <p>
-        Konkrete versioner: build-nummer, commit-hash, containerimage-tag. En testplan
-        uden versionsangivelse kan ikke gentages.
+        Eksempel: betalingsflow (sandsynlighed 3 × konsekvens 5 = 15) prioriteres over &ldquo;skift
+        profilbillede&rdquo; (2 × 1 = 2).
       </p>
-
-      <h3>Approach</h3>
-      <p>
-        Beskriv testniveauer, teknikker og værktøjer: &ldquo;Forretningslogik testes med
-        unit tests (xUnit), API&apos;et med integrationstests
-        (WebApplicationFactory), kritiske flows med E2E (Bruno), betalingsflow med
-        eksplorativ test.&rdquo; Link til siderne{' '}
-        <Link to="/test/metodikker">Testmetodikker</Link> og{' '}
-        <Link to="/test/integration">Integrationstest</Link>.
-      </p>
-
-      <h3>Testcases</h3>
-      <p>
-        Selve testcases kan ligge i et værktøj (Jira/Xray, TestRail, Notion) eller —
-        bedst for automatiserede tests — som kode i repoet, med testnavne der refererer
-        til krav-ID&apos;er.
-      </p>
-
-      <h3>Exit criteria (afslutningskriterier)</h3>
-      <p>Objektive betingelser for, at testfasen kan afsluttes. Eksempler:</p>
-      <ul>
-        <li>100 % af must-have testcases er udført, og ≥ 95 % består.</li>
-        <li>Ingen åbne fejl af alvorlighed <em>kritisk</em> eller <em>høj</em>.</li>
-        <li>Alle regressionstests er grønne i CI på release-commit.</li>
-        <li>Kodedækning for forretningslogik ≥ 80 % (som signal, ikke mål — se{' '}
-          <Link to="/test/release">Release</Link>).</li>
-        <li>Performance: p95 &lt; 500 ms ved 100 samtidige brugere.</li>
-      </ul>
-
-      <h3>Risici</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Risiko</th>
-            <th>Sandsynlighed</th>
-            <th>Konsekvens</th>
-            <th>Afhjælpning</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Testmiljø ikke klar til tiden</td>
-            <td>Middel</td>
-            <td>Høj</td>
-            <td>Docker Compose-miljø i repo; automatisk opsætning</td>
-          </tr>
-          <tr>
-            <td>Krav ændres midt i sprint</td>
-            <td>Høj</td>
-            <td>Middel</td>
-            <td>Korte planer; regressionssuite; kravændringer under change control</td>
-          </tr>
-          <tr>
-            <td>Nøglepersoner syge</td>
-            <td>Lav</td>
-            <td>Høj</td>
-            <td>Dokumentér testcases; parprogrammering</td>
-          </tr>
-          <tr>
-            <td>Flaky E2E-tests skjuler rigtige fejl</td>
-            <td>Middel</td>
-            <td>Middel</td>
-            <td>Karantæne-regler, fast testdata, retry-politik</td>
-          </tr>
-          <tr>
-            <td>Ekstern API ikke tilgængelig</td>
-            <td>Middel</td>
-            <td>Middel</td>
-            <td>Mock/stub (fx WireMock) og kontrakttests</td>
-          </tr>
-        </tbody>
-      </table>
 
       <h2>4. Fra funktionelle krav til testcases</h2>
       <p>
@@ -298,7 +411,37 @@ export default function TestplanPageDa() {
         <li>Tilføj de tests til en sporbarhedsmatrix.</li>
       </ol>
 
-      <MermaidDiagram chart={traceability} />
+      <h3>Sporbarhedstavle</h3>
+      <p>Klik på et krav for at se, hvilke testcases der dækker det:</p>
+      <TraceabilityBoard
+        ariaLabel="Sporbarhed mellem krav og testcases"
+        requirementsLabel="Krav"
+        testCasesLabel="Testcases"
+        hintLabel="Vælg et krav til venstre — tilknyttede testcases lyser op til højre."
+        requirements={[
+          {
+            id: 'KRAV-01',
+            label: 'Login',
+            testCaseIds: ['TC-01', 'TC-02', 'TC-03', 'TC-04', 'TC-05', 'TC-06'],
+          },
+          {
+            id: 'KRAV-02',
+            label: 'Opret ordre',
+            testCaseIds: ['TC-04b', 'TC-05b', 'TC-06b'],
+          },
+        ]}
+        testCases={[
+          { id: 'TC-01', label: 'Gyldigt login', type: 'Positiv' },
+          { id: 'TC-02', label: 'Forkert kodeord', type: 'Negativ' },
+          { id: 'TC-03', label: 'Konto låses', type: 'Grænse' },
+          { id: 'TC-04', label: 'Ukendt email', type: 'Sikkerhed' },
+          { id: 'TC-05', label: 'Tomme felter', type: 'Negativ' },
+          { id: 'TC-06', label: 'SQL-injection', type: 'Sikkerhed' },
+          { id: 'TC-04b', label: 'Gyldig ordre', type: 'Positiv' },
+          { id: 'TC-05b', label: 'Tom kurv', type: 'Negativ' },
+          { id: 'TC-06b', label: 'Negativ mængde', type: 'Grænse' },
+        ]}
+      />
 
       <h3>Eksempel: login-krav → testcases</h3>
       <p>
@@ -369,6 +512,78 @@ export default function TestplanPageDa() {
           </tr>
         </tbody>
       </table>
+
+      <WorkshopPanel
+        storageKey="softwaretest-workshop-testplan-da"
+        requirementId="KRAV-01"
+        requirementText="En registreret bruger kan logge ind med email og adgangskode. Efter 5 mislykkede forsøg låses kontoen i 15 minutter."
+        labels={{
+          title: 'Workshop: byg dækning for login',
+          lead: 'Vælg scenarier — se testcases og sporbarhed opstå. Markér exit criteria, når I er enige.',
+          pickScenarios: 'Vælg scenarier at dække',
+          selected: 'Valgt',
+          coverage: 'Dækning',
+          of: 'af',
+          testCases: 'Dine testcases',
+          checklistTitle: 'Exit criteria-checklist',
+          reset: 'Nulstil',
+          input: 'Input',
+          expected: 'Forventet',
+          type: 'Type',
+        }}
+        scenarios={[
+          {
+            id: 'valid',
+            title: 'Gyldigt login',
+            type: 'Positiv',
+            input: 'anna@test.dk / Hemmelig123!',
+            expected: '200 + token',
+            tcId: 'TC-01',
+          },
+          {
+            id: 'wrong',
+            title: 'Forkert kodeord',
+            type: 'Negativ',
+            input: 'anna@test.dk / forkert',
+            expected: '401, ingen token',
+            tcId: 'TC-02',
+          },
+          {
+            id: 'lock',
+            title: 'Konto låses',
+            type: 'Grænse',
+            input: '5 × forkert, derefter korrekt',
+            expected: '423 Locked',
+            tcId: 'TC-03',
+          },
+          {
+            id: 'sqli',
+            title: 'SQL-injection',
+            type: 'Sikkerhed',
+            input: "' OR 1=1 --",
+            expected: '401/400, ingen DB-fejl',
+            tcId: 'TC-06',
+          },
+        ]}
+        checklist={[
+          {
+            id: 'must',
+            label: '100 % af must-have testcases er udført, og ≥ 95 % består',
+          },
+          {
+            id: 'sev',
+            label: 'Ingen åbne fejl af alvorlighed kritisk eller høj',
+          },
+          {
+            id: 'ci',
+            label: 'Alle regressionstests er grønne i CI på release-commit',
+          },
+          {
+            id: 'perf',
+            label: 'Performance: p95 < 500 ms ved 100 samtidige brugere',
+          },
+        ]}
+      />
 
       <h3>Testcases som automatiseret kode</h3>
       <p>
@@ -446,20 +661,12 @@ export default function TestplanPageDa() {
         </tbody>
       </table>
 
-      <h2>6. Prioritering med risiko</h2>
-      <p>
-        Du kan ikke teste alt. Giv hver feature en <strong>risikoscore = sandsynlighed ×
-        konsekvens</strong> (fx 1–5 hver) og brug mest tid på de højeste scorer.
-        Betalingsflow (sandsynlighed 3 × konsekvens 5 = 15) prioriteres over
-        &ldquo;skift profilbillede&rdquo; (2 × 1 = 2).
-      </p>
-
       <Callout type="tip">
         Gem testplanen i repoet som Markdown ved siden af koden. Så versionsstyres den,
         kan reviewes i pull requests og følger releasen — præcis som koden.
       </Callout>
 
-      <h2>7. Rapportering</h2>
+      <h2>6. Rapportering</h2>
       <p>
         Efter udførelsen laves en kort testrapport: antal tests planlagt/kørt/bestået/
         fejlet/blokeret, åbne fejl pr. alvorlighed, afvigelser fra planen, og en

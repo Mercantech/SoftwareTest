@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom'
+import AccordionList from '../../components/AccordionList'
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
+import ConceptCards from '../../components/ConceptCards'
 import LessonLayout from '../../components/LessonLayout'
 import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
 import ObjectiveBadge from '../../components/ObjectiveBadge'
+import ProcessStepper from '../../components/ProcessStepper'
+import RiskMatrix from '../../components/RiskMatrix'
+import TraceabilityBoard from '../../components/TraceabilityBoard'
+import WorkshopPanel from '../../components/WorkshopPanel'
 import { getObjectiveByPath } from '../../data/objectives'
 
 const processFlow = `
@@ -17,37 +23,6 @@ flowchart LR
   F --> G{"Exit criteria<br/>met?"}
   G -- No --> E
   G -- Yes --> H["Finish / release"]
-`
-
-const traceability = `
-flowchart LR
-  R1["REQ-01<br/>Login"] --> TC1["TC-01 valid login"]
-  R1 --> TC2["TC-02 wrong password"]
-  R1 --> TC3["TC-03 locked account"]
-  R2["REQ-02<br/>Create order"] --> TC4["TC-04 valid order"]
-  R2 --> TC5["TC-05 empty cart"]
-  R2 --> TC6["TC-06 negative quantity"]
-`
-
-const planSkeleton = `
-# Test plan: WebShop v1.2         (after IEEE 829 / ISO/IEC/IEEE 29119-3)
-
-1. Test plan ID and version      TP-WEBSHOP-1.2, author, date, approver
-2. Introduction                  Purpose, background, references (requirements spec, design doc)
-3. Test items                    Build 1.2.0, API v1, React frontend, PostgreSQL 16
-4. Features to be tested         Login, Create order, Payment, Order history
-5. Features NOT to be tested     Admin reports (postponed to v1.3), 3rd-party payment page
-6. Approach (strategy)           Unit + integration automated, E2E via Bruno,
-                                 exploratory testing of payment flow, ZAP baseline in CI
-7. Pass/fail criteria            A test case passes when actual = expected result
-8. Suspension / resumption       Stop on a blocker in login; resume after hotfix + smoke
-9. Deliverables                  Test cases, test report, defect list, coverage report
-10. Test environment             Docker Compose: web, api, db; seed data; test SMTP
-11. Responsibilities/resources   QA: Anna, Dev: Bo, Product owner: Carla
-12. Schedule                     Sprint 14: design week 1, execution week 2, regression week 3
-13. Risks and mitigation         See risk table
-14. Exit criteria                See section below
-15. Approvals                    Signatures
 `
 
 const testCaseCsharp = `
@@ -80,7 +55,7 @@ public class LoginTests : IClassFixture<WebApplicationFactory<Program>>
         Assert.Equal(HttpStatusCode.Unauthorized, resp.StatusCode);
     }
 
-    // TC-03 (REQ-01): account is locked after 5 failed attempts
+    // TC-03 (REQ-01): account locks after 5 failed attempts
     [Fact]
     public async Task TC03_FiveFailedAttempts_LocksAccount()
     {
@@ -135,44 +110,92 @@ export default function TestplanPageEn() {
       </ul>
 
       <h2>1. Test plan, test strategy and test case — the concepts</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Concept</th>
-            <th>Level</th>
-            <th>Content</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Test strategy</td>
-            <td>Organization/product</td>
-            <td>Overall principles: degree of automation, tools, risk approach</td>
-          </tr>
-          <tr>
-            <td>Test plan</td>
-            <td>Project/release</td>
-            <td>Scope, resources, schedule, approach, criteria for this particular release</td>
-          </tr>
-          <tr>
-            <td>Test design/specification</td>
-            <td>Feature</td>
-            <td>Which techniques and conditions cover the feature</td>
-          </tr>
-          <tr>
-            <td>Test case</td>
-            <td>Single scenario</td>
-            <td>Preconditions, steps, input, expected result</td>
-          </tr>
-          <tr>
-            <td>Test report</td>
-            <td>After execution</td>
-            <td>Results, defects, coverage, recommendation</td>
-          </tr>
-        </tbody>
-      </table>
+      <p>Click a card to see which level the concept belongs to:</p>
+      <ConceptCards
+        ariaLabel="Concept cards for test planning"
+        items={[
+          {
+            id: 'strategy',
+            title: 'Test strategy',
+            level: 'Organization / product',
+            body: 'Overall principles: degree of automation, tools and risk approach across projects.',
+          },
+          {
+            id: 'plan',
+            title: 'Test plan',
+            level: 'Project / release',
+            body: 'Scope, resources, schedule, approach and criteria for this particular release.',
+          },
+          {
+            id: 'design',
+            title: 'Test design',
+            level: 'Feature',
+            body: 'Which techniques and conditions cover the feature — equivalence, boundaries, decision tables.',
+          },
+          {
+            id: 'case',
+            title: 'Test case',
+            level: 'Single scenario',
+            body: 'Preconditions, steps, input and expected result for one concrete scenario.',
+          },
+          {
+            id: 'report',
+            title: 'Test report',
+            level: 'After execution',
+            body: 'Results, defects, coverage and a recommendation (go / no-go) for the release.',
+          },
+        ]}
+      />
 
       <h2>2. The test process</h2>
+      <p>Walk the process step by step — planning is iterative, not a one-off:</p>
+      <ProcessStepper
+        ariaLabel="Steps in the test process"
+        steps={[
+          {
+            id: 'analyze',
+            label: 'Analyze requirements',
+            detail:
+              'Make requirements testable. Find ambiguity early — a requirement without acceptance criteria becomes guesswork in testing.',
+          },
+          {
+            id: 'scope',
+            label: 'Scope & approach',
+            detail:
+              'Define what is tested and what is deliberately excluded. Choose levels and tools for the release.',
+          },
+          {
+            id: 'design',
+            label: 'Design test cases',
+            detail:
+              'Apply test design techniques. At least one positive and one negative scenario per must-have requirement.',
+          },
+          {
+            id: 'estimate',
+            label: 'Estimate & plan',
+            detail:
+              'Resources, schedule and risks. Prioritize by likelihood × impact.',
+          },
+          {
+            id: 'execute',
+            label: 'Execute tests',
+            detail:
+              'Run automated suites in CI and manual/exploratory tests where risk is high.',
+          },
+          {
+            id: 'report',
+            label: 'Report',
+            detail:
+              'Status on tests and defects. Deviations from the plan are documented — not hidden.',
+          },
+          {
+            id: 'exit',
+            label: 'Exit criteria',
+            detail:
+              'Objective conditions for stopping. If they are not met, you go back to execution.',
+          },
+        ]}
+      />
       <MermaidDiagram chart={processFlow} />
       <p>
         Planning is <strong>iterative</strong>: in agile teams the plan is updated every sprint, but
@@ -182,93 +205,186 @@ export default function TestplanPageEn() {
 
       <h2>3. IEEE-inspired structure</h2>
       <p>
-        IEEE 829 (superseded by ISO/IEC/IEEE 29119-3) describes a standardized table of contents. It
-        gives you a checklist so nothing important is forgotten. Template:
+        IEEE 829 (superseded by ISO/IEC/IEEE 29119-3) describes a standardized table of contents.
+        Open the sections as a checklist so nothing important is forgotten:
       </p>
-      <CodeBlock language="text">{planSkeleton}</CodeBlock>
+      <AccordionList
+        ariaLabel="IEEE test plan sections"
+        items={[
+          {
+            id: 'id',
+            title: 'Test plan ID and version',
+            body: <p>TP-WEBSHOP-1.2, author, date, approver.</p>,
+          },
+          {
+            id: 'intro',
+            title: 'Introduction',
+            body: <p>Purpose, background, references (requirements spec, design doc).</p>,
+          },
+          {
+            id: 'items',
+            title: 'Test items',
+            body: <p>Build 1.2.0, API v1, React frontend, PostgreSQL 16 — concrete versions.</p>,
+          },
+          {
+            id: 'in',
+            title: 'Features to be tested',
+            body: <p>Login, Create order, Payment, Order history.</p>,
+          },
+          {
+            id: 'out',
+            title: 'Features NOT to be tested',
+            body: (
+              <p>
+                Admin reports (postponed to v1.3), 3rd-party payment page. Visible risk is better
+                than hidden risk.
+              </p>
+            ),
+          },
+          {
+            id: 'approach',
+            title: 'Approach (strategy)',
+            body: (
+              <p>
+                Unit + integration automated, E2E via Bruno, exploratory testing of the payment
+                flow, ZAP baseline in CI.
+              </p>
+            ),
+          },
+          {
+            id: 'passfail',
+            title: 'Pass/fail criteria',
+            body: <p>A test case passes when the actual result equals the expected result.</p>,
+          },
+          {
+            id: 'suspend',
+            title: 'Suspension / resumption',
+            body: <p>Stop on a blocker in login; resume after hotfix + smoke.</p>,
+          },
+          {
+            id: 'deliverables',
+            title: 'Deliverables',
+            body: <p>Test cases, test report, defect list, coverage report.</p>,
+          },
+          {
+            id: 'env',
+            title: 'Test environment',
+            body: <p>Docker Compose: web, api, db; seed data; test SMTP.</p>,
+          },
+          {
+            id: 'roles',
+            title: 'Responsibilities / resources',
+            body: <p>QA: Anna, Dev: Bo, Product owner: Carla.</p>,
+          },
+          {
+            id: 'schedule',
+            title: 'Schedule',
+            body: <p>Sprint 14: design week 1, execution week 2, regression week 3.</p>,
+          },
+          {
+            id: 'risks',
+            title: 'Risks and mitigation',
+            body: <p>See the risk matrix below.</p>,
+          },
+          {
+            id: 'exit',
+            title: 'Exit criteria',
+            body: <p>Objective conditions — see the checklist in the workshop.</p>,
+          },
+          {
+            id: 'approvals',
+            title: 'Approvals',
+            body: <p>Signatures / formal acceptance from stakeholders.</p>,
+          },
+        ]}
+      />
 
-      <h3>Scope (delimitation)</h3>
+      <div className="info-tiles">
+        <article className="info-tile">
+          <h3>Scope</h3>
+          <p>
+            Both what is <strong>included</strong> and what is <strong>deliberately excluded</strong>.
+            &ldquo;Not tested: 3rd-party payment page&rdquo; makes the risk visible.
+          </p>
+        </article>
+        <article className="info-tile">
+          <h3>Test items</h3>
+          <p>
+            Build number, commit hash, container image tag. Without version information the plan
+            cannot be repeated.
+          </p>
+        </article>
+        <article className="info-tile">
+          <h3>Approach</h3>
+          <p>
+            Business logic with unit tests (xUnit), API with integration (
+            <Link to="/test/integration">WebApplicationFactory</Link>), critical flows with E2E
+            (Bruno). See also <Link to="/test/metodikker">methodologies</Link>.
+          </p>
+        </article>
+        <article className="info-tile">
+          <h3>Exit criteria</h3>
+          <p>
+            100% must-have executed, ≥ 95% pass, no critical defects, green regression in CI, p95
+            &lt; 500 ms at 100 users.
+          </p>
+        </article>
+      </div>
+
+      <h2>Risk matrix</h2>
       <p>
-        Scope is both what is <strong>included</strong> and what is <strong>deliberately
-        excluded</strong>. Writing &ldquo;not tested: 3rd-party payment page&rdquo; is important
-        communication to stakeholders — it makes the risk visible instead of hidden.
+        You cannot test everything. Give each risk a score = likelihood × impact (1–5) and spend
+        the most time on the highest scores. Click a chip in the matrix:
       </p>
-
-      <h3>Test items</h3>
+      <RiskMatrix
+        ariaLabel="Test risks in a likelihood × impact matrix"
+        likelihoodLabel="Likelihood"
+        impactLabel="Impact"
+        emptyLabel="Select a risk in the matrix"
+        scoreLabel="Risk score"
+        mitigationLabel="Mitigation"
+        risks={[
+          {
+            id: 'env',
+            title: 'Env not ready on time',
+            likelihood: 3,
+            impact: 5,
+            mitigation: 'Docker Compose environment in the repo; automatic setup.',
+          },
+          {
+            id: 'reqs',
+            title: 'Requirements change mid-sprint',
+            likelihood: 5,
+            impact: 3,
+            mitigation: 'Short plans; regression suite; change control.',
+          },
+          {
+            id: 'people',
+            title: 'Key people are sick',
+            likelihood: 2,
+            impact: 5,
+            mitigation: 'Document test cases; pair programming.',
+          },
+          {
+            id: 'flaky',
+            title: 'Flaky E2E hide defects',
+            likelihood: 3,
+            impact: 3,
+            mitigation: 'Quarantine rules, fixed test data, retry policy.',
+          },
+          {
+            id: 'api',
+            title: 'External API down',
+            likelihood: 3,
+            impact: 3,
+            mitigation: 'Mock/stub (WireMock) and contract tests.',
+          },
+        ]}
+      />
       <p>
-        Concrete versions: build number, commit hash, container image tag. A test plan without
-        version information cannot be repeated.
+        Example: the payment flow (likelihood 3 × impact 5 = 15) is prioritized over &ldquo;change
+        profile picture&rdquo; (2 × 1 = 2).
       </p>
-
-      <h3>Approach</h3>
-      <p>
-        Describe test levels, techniques and tools: &ldquo;Business logic is tested with unit tests
-        (xUnit), the API with integration tests (WebApplicationFactory), critical flows with E2E
-        (Bruno), and the payment flow with exploratory testing.&rdquo; Link to the pages{' '}
-        <Link to="/test/metodikker">Testing methodologies</Link> and{' '}
-        <Link to="/test/integration">Integration testing</Link>.
-      </p>
-
-      <h3>Test cases</h3>
-      <p>
-        The test cases themselves can live in a tool (Jira/Xray, TestRail, Notion) or — best for
-        automated tests — as code in the repo, with test names that refer to requirement IDs.
-      </p>
-
-      <h3>Exit criteria</h3>
-      <p>Objective conditions for the test phase to be completed. Examples:</p>
-      <ul>
-        <li>100% of must-have test cases are executed, and ≥ 95% pass.</li>
-        <li>No open defects of severity <em>critical</em> or <em>high</em>.</li>
-        <li>All regression tests are green in CI on the release commit.</li>
-        <li>Code coverage for business logic ≥ 80% (as a signal, not a goal — see{' '}
-          <Link to="/test/release">Release</Link>).</li>
-        <li>Performance: p95 &lt; 500 ms at 100 concurrent users.</li>
-      </ul>
-
-      <h3>Risks</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Risk</th>
-            <th>Likelihood</th>
-            <th>Impact</th>
-            <th>Mitigation</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Test environment not ready on time</td>
-            <td>Medium</td>
-            <td>High</td>
-            <td>Docker Compose environment in the repo; automatic setup</td>
-          </tr>
-          <tr>
-            <td>Requirements change mid-sprint</td>
-            <td>High</td>
-            <td>Medium</td>
-            <td>Short plans; regression suite; requirement changes under change control</td>
-          </tr>
-          <tr>
-            <td>Key people are sick</td>
-            <td>Low</td>
-            <td>High</td>
-            <td>Document test cases; pair programming</td>
-          </tr>
-          <tr>
-            <td>Flaky E2E tests hide real defects</td>
-            <td>Medium</td>
-            <td>Medium</td>
-            <td>Quarantine rules, fixed test data, retry policy</td>
-          </tr>
-          <tr>
-            <td>External API unavailable</td>
-            <td>Medium</td>
-            <td>Medium</td>
-            <td>Mock/stub (e.g. WireMock) and contract tests</td>
-          </tr>
-        </tbody>
-      </table>
 
       <h2>4. From functional requirements to test cases</h2>
       <p>
@@ -295,7 +411,37 @@ export default function TestplanPageEn() {
         <li>Add those tests to a traceability matrix.</li>
       </ol>
 
-      <MermaidDiagram chart={traceability} />
+      <h3>Traceability board</h3>
+      <p>Click a requirement to see which test cases cover it:</p>
+      <TraceabilityBoard
+        ariaLabel="Traceability between requirements and test cases"
+        requirementsLabel="Requirements"
+        testCasesLabel="Test cases"
+        hintLabel="Select a requirement on the left — linked test cases light up on the right."
+        requirements={[
+          {
+            id: 'REQ-01',
+            label: 'Login',
+            testCaseIds: ['TC-01', 'TC-02', 'TC-03', 'TC-04', 'TC-05', 'TC-06'],
+          },
+          {
+            id: 'REQ-02',
+            label: 'Create order',
+            testCaseIds: ['TC-04b', 'TC-05b', 'TC-06b'],
+          },
+        ]}
+        testCases={[
+          { id: 'TC-01', label: 'Valid login', type: 'Positive' },
+          { id: 'TC-02', label: 'Wrong password', type: 'Negative' },
+          { id: 'TC-03', label: 'Account locked', type: 'Boundary' },
+          { id: 'TC-04', label: 'Unknown email', type: 'Security' },
+          { id: 'TC-05', label: 'Empty fields', type: 'Negative' },
+          { id: 'TC-06', label: 'SQL injection', type: 'Security' },
+          { id: 'TC-04b', label: 'Valid order', type: 'Positive' },
+          { id: 'TC-05b', label: 'Empty cart', type: 'Negative' },
+          { id: 'TC-06b', label: 'Negative quantity', type: 'Boundary' },
+        ]}
+      />
 
       <h3>Example: login requirement → test cases</h3>
       <p>
@@ -366,6 +512,78 @@ export default function TestplanPageEn() {
           </tr>
         </tbody>
       </table>
+
+      <WorkshopPanel
+        storageKey="softwaretest-workshop-testplan-en"
+        requirementId="REQ-01"
+        requirementText="A registered user can log in with email and password. After 5 failed attempts the account is locked for 15 minutes."
+        labels={{
+          title: 'Workshop: build coverage for login',
+          lead: 'Pick scenarios — watch test cases and traceability appear. Tick exit criteria when you agree.',
+          pickScenarios: 'Pick scenarios to cover',
+          selected: 'Selected',
+          coverage: 'Coverage',
+          of: 'of',
+          testCases: 'Your test cases',
+          checklistTitle: 'Exit criteria checklist',
+          reset: 'Reset',
+          input: 'Input',
+          expected: 'Expected',
+          type: 'Type',
+        }}
+        scenarios={[
+          {
+            id: 'valid',
+            title: 'Valid login',
+            type: 'Positive',
+            input: 'anna@test.dk / Secret123!',
+            expected: '200 + token',
+            tcId: 'TC-01',
+          },
+          {
+            id: 'wrong',
+            title: 'Wrong password',
+            type: 'Negative',
+            input: 'anna@test.dk / wrong',
+            expected: '401, no token',
+            tcId: 'TC-02',
+          },
+          {
+            id: 'lock',
+            title: 'Account locked',
+            type: 'Boundary',
+            input: '5 × wrong, then correct',
+            expected: '423 Locked',
+            tcId: 'TC-03',
+          },
+          {
+            id: 'sqli',
+            title: 'SQL injection',
+            type: 'Security',
+            input: "' OR 1=1 --",
+            expected: '401/400, no DB error',
+            tcId: 'TC-06',
+          },
+        ]}
+        checklist={[
+          {
+            id: 'must',
+            label: '100% of must-have test cases are executed, and ≥ 95% pass',
+          },
+          {
+            id: 'sev',
+            label: 'No open defects of severity critical or high',
+          },
+          {
+            id: 'ci',
+            label: 'All regression tests are green in CI on the release commit',
+          },
+          {
+            id: 'perf',
+            label: 'Performance: p95 < 500 ms at 100 concurrent users',
+          },
+        ]}
+      />
 
       <h3>Test cases as automated code</h3>
       <p>
@@ -443,21 +661,13 @@ export default function TestplanPageEn() {
         </tbody>
       </table>
 
-      <h2>6. Prioritizing with risk</h2>
-      <p>
-        You cannot test everything. Give each feature a <strong>risk score = likelihood ×
-        impact</strong> (e.g. 1–5 each) and spend the most time on the highest scores. The payment
-        flow (likelihood 3 × impact 5 = 15) is prioritized over &ldquo;change profile picture&rdquo;
-        (2 × 1 = 2).
-      </p>
-
       <Callout type="tip">
         Keep the test plan in the repo as Markdown next to the code. That way it is version
         controlled, can be reviewed in pull requests and follows the release — exactly like the
         code.
       </Callout>
 
-      <h2>7. Reporting</h2>
+      <h2>6. Reporting</h2>
       <p>
         After execution, a short test report is produced: number of tests planned/run/passed/
         failed/blocked, open defects per severity, deviations from the plan, and a recommendation
