@@ -4,6 +4,7 @@ import CodeBlock from '../../components/CodeBlock'
 import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
+import Split from '../../components/Split'
 
 const pyramid = `
 flowchart TB
@@ -214,19 +215,26 @@ export default function OversigtPageDa() {
       </ul>
 
       <h2>4. Testpyramiden</h2>
-      <Figure
-        src="/images/commons/testing-pyramid.png"
-        alt="Testpyramide med mange unit-tests i bunden og få end-to-end-tests i toppen"
-        caption="Testpyramiden: flest unit-tests, færre integrationstests, få E2E-tests"
-        sourceUrl="https://commons.wikimedia.org/wiki/File:Testing_Pyramid.png"
-        sourceLabel="Wikimedia Commons"
-      />
-      <p>
-        Mike Cohns testpyramide er en tommelfingerregel for <em>fordelingen</em> af
-        automatiserede tests. Jo højere op, jo mere realistisk — men også jo langsommere,
-        mere skrøbelig og dyrere at vedligeholde.
-      </p>
-      <MermaidDiagram chart={pyramid} />
+      <Split
+        mediaFirst
+        media={
+          <Figure
+            src="/images/commons/testing-pyramid.png"
+            alt="Testpyramide med mange unit-tests i bunden og få end-to-end-tests i toppen"
+            caption="Testpyramiden: flest unit-tests, færre integrationstests, få E2E-tests"
+            sourceUrl="https://commons.wikimedia.org/wiki/File:Testing_Pyramid.png"
+            sourceLabel="Wikimedia Commons"
+            size="sm"
+          />
+        }
+      >
+        <p>
+          Mike Cohns testpyramide er en tommelfingerregel for <em>fordelingen</em> af
+          automatiserede tests. Jo højere op, jo mere realistisk — men også jo langsommere,
+          mere skrøbelig og dyrere at vedligeholde.
+        </p>
+        <MermaidDiagram chart={pyramid} />
+      </Split>
 
       <table>
         <thead>

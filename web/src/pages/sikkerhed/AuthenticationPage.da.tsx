@@ -3,6 +3,7 @@ import CodeBlock from '../../components/CodeBlock'
 import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
+import Split from '../../components/Split'
 
 const aaaChart = `
 flowchart LR
@@ -400,31 +401,37 @@ export default function AuthenticationPageDa() {
       </table>
 
       <h2>OAuth 2.0 – authorization code + PKCE</h2>
-      <Figure
-        src="/images/commons/oauth-pkce.svg"
-        alt="OAuth 2.0 authorization code flow med PKCE mellem klient, auth-server og API"
-        caption="Authorization code + PKCE: klienten beviser ejerskab af code_verifier"
-        sourceUrl="https://commons.wikimedia.org/wiki/File:Mediawiki_oauth_2_flow_with_pkce.svg"
-        sourceLabel="Wikimedia Commons"
-      />
-      <p>
-        <strong>OAuth 2.0</strong> er en protokol til delegeret adgang; <strong>OpenID Connect (OIDC)</strong> bygger
-        identitet (login) ovenpå. Princippet: din app håndterer <em>aldrig</em> brugerens adgangskode – brugeren logger ind
-        hos auth-serveren, og din app får et token tilbage.
-      </p>
-      <p>
-        <strong>Authorization Code Flow</strong> er det anbefalede flow. For offentlige klienter (SPA'er og mobil-apps, der
-        ikke kan holde en secret hemmelig) udvides det med <strong>PKCE</strong> (Proof Key for Code Exchange, udtales "pixy"):
-      </p>
-      <ul>
-        <li>Klienten genererer en tilfældig <code>code_verifier</code> og sender kun dens hash (<code>code_challenge</code>, S256) i starten.</li>
-        <li>Når <code>code</code> byttes til tokens, sendes den originale <code>code_verifier</code>. Auth-serveren sammenligner.</li>
-        <li>En angriber, der opsnapper koden undervejs, mangler verifier'en og kan ikke bruge koden.</li>
-      </ul>
-      <Callout type="info">
-        <strong>Fravalgt:</strong> <em>implicit flow</em> (tokens i URL'en – forældet) og <em>resource owner password
-        credentials</em> (appen modtager adgangskoden – bryder hele ideen). Brug ikke disse.
-      </Callout>
+      <Split
+        media={
+          <Figure
+            src="/images/commons/oauth-pkce.svg"
+            alt="OAuth 2.0 authorization code flow med PKCE mellem klient, auth-server og API"
+            caption="Authorization code + PKCE: klienten beviser ejerskab af code_verifier"
+            sourceUrl="https://commons.wikimedia.org/wiki/File:Mediawiki_oauth_2_flow_with_pkce.svg"
+            sourceLabel="Wikimedia Commons"
+            size="sm"
+          />
+        }
+      >
+        <p>
+          <strong>OAuth 2.0</strong> er en protokol til delegeret adgang; <strong>OpenID Connect (OIDC)</strong> bygger
+          identitet (login) ovenpå. Princippet: din app håndterer <em>aldrig</em> brugerens adgangskode – brugeren logger ind
+          hos auth-serveren, og din app får et token tilbage.
+        </p>
+        <p>
+          <strong>Authorization Code Flow</strong> er det anbefalede flow. For offentlige klienter (SPA'er og mobil-apps, der
+          ikke kan holde en secret hemmelig) udvides det med <strong>PKCE</strong> (Proof Key for Code Exchange, udtales &ldquo;pixy&rdquo;):
+        </p>
+        <ul>
+          <li>Klienten genererer en tilfældig <code>code_verifier</code> og sender kun dens hash (<code>code_challenge</code>, S256) i starten.</li>
+          <li>Når <code>code</code> byttes til tokens, sendes den originale <code>code_verifier</code>. Auth-serveren sammenligner.</li>
+          <li>En angriber, der opsnapper koden undervejs, mangler verifier&apos;en og kan ikke bruge koden.</li>
+        </ul>
+        <Callout type="info">
+          <strong>Fravalgt:</strong> <em>implicit flow</em> (tokens i URL&apos;en – forældet) og <em>resource owner password
+          credentials</em> (appen modtager adgangskoden – bryder hele ideen). Brug ikke disse.
+        </Callout>
+      </Split>
 
       <h2>Eksempel: Mercantec Auth</h2>
       <p>

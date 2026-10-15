@@ -3,6 +3,7 @@ import CodeBlock from '../../components/CodeBlock'
 import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
+import Split from '../../components/Split'
 
 const hashVsEncrypt = `
 flowchart LR
@@ -172,26 +173,33 @@ export default function HashingPageEn() {
       </Callout>
 
       <h2>What is a hash function?</h2>
-      <Figure
-        src="/images/commons/crypto-hash.svg"
-        alt="Cryptographic hash function: small input changes produce very different digests"
-        caption="Avalanche effect: nearly identical input → completely different hashes"
-        sourceUrl="https://commons.wikimedia.org/wiki/File:Cryptographic_Hash_Function.svg"
-        sourceLabel="Wikimedia Commons"
-      />
-      <p>
-        A <strong>hash function</strong> takes data of arbitrary size and computes a <em>fixed-length</em> "fingerprint"
-        (digest). If even a single bit of the input changes, the output changes completely (the <em>avalanche effect</em>).
-      </p>
-      <CodeBlock language="text">{`SHA-256("hej")  = 1ab8e5...f2c9   (64 hex characters = 256 bits)
+      <Split
+        mediaFirst
+        media={
+          <Figure
+            src="/images/commons/crypto-hash.svg"
+            alt="Cryptographic hash function: small input changes produce very different digests"
+            caption="Avalanche effect: nearly identical input → completely different hashes"
+            sourceUrl="https://commons.wikimedia.org/wiki/File:Cryptographic_Hash_Function.svg"
+            sourceLabel="Wikimedia Commons"
+            size="sm"
+          />
+        }
+      >
+        <p>
+          A <strong>hash function</strong> takes data of arbitrary size and computes a <em>fixed-length</em> &ldquo;fingerprint&rdquo;
+          (digest). If even a single bit of the input changes, the output changes completely (the <em>avalanche effect</em>).
+        </p>
+        <CodeBlock language="text">{`SHA-256("hej")  = 1ab8e5...f2c9   (64 hex characters = 256 bits)
 SHA-256("hej.") = 7d0c41...a1e3   (completely different)`}</CodeBlock>
-      <p>Cryptographic hash functions must have these properties:</p>
-      <ul>
-        <li><strong>Determinism</strong> – the same input always gives the same hash.</li>
-        <li><strong>One-way (preimage resistance)</strong> – you cannot compute from the hash back to the input.</li>
-        <li><strong>Collision resistance</strong> – it must be practically impossible to find two different inputs with the same hash.</li>
-        <li><strong>Avalanche</strong> – small changes give large differences.</li>
-      </ul>
+        <p>Cryptographic hash functions must have these properties:</p>
+        <ul>
+          <li><strong>Determinism</strong> – the same input always gives the same hash.</li>
+          <li><strong>One-way (preimage resistance)</strong> – you cannot compute from the hash back to the input.</li>
+          <li><strong>Collision resistance</strong> – it must be practically impossible to find two different inputs with the same hash.</li>
+          <li><strong>Avalanche</strong> – small changes give large differences.</li>
+        </ul>
+      </Split>
 
       <h2>Hashing is not encryption</h2>
       <MermaidDiagram chart={hashVsEncrypt} />

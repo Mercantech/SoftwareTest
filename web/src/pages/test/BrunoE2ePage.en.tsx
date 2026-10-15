@@ -1,8 +1,9 @@
-import LessonLayout from '../../components/LessonLayout'
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
-import MermaidDiagram from '../../components/MermaidDiagram'
 import Figure from '../../components/Figure'
+import LessonLayout from '../../components/LessonLayout'
+import MermaidDiagram from '../../components/MermaidDiagram'
+import Split from '../../components/Split'
 
 const pyramidChart = `
 flowchart TB
@@ -59,32 +60,38 @@ export default function BrunoE2ePageEn() {
   return (
     <LessonLayout module="test">
       <h1>API testing and E2E with Bruno</h1>
-<Figure
-        src="/images/bruno.png"
-        alt="Bruno API client"
-        caption="Bruno – an open source API client where requests are ordinary files in your repo."
-      />
 
       <h2>Learning objectives</h2>
-      <p>After the lesson (Day 28) you should be able to:</p>
-      <ul>
-        <li>
-          Place <strong>E2E and API tests</strong> in the test pyramid and explain the difference
-          between the three layers: unit, integration and E2E.
-        </li>
-        <li>
-          Build a <strong>scripted E2E test in Bruno</strong> with several requests, variables and
-          assertions that together reflect a real user flow.
-        </li>
-        <li>
-          Explain how Bruno tests are run in <strong>GitHub Actions</strong> against an API started
-          with Docker Compose.
-        </li>
-        <li>
-          Identify and justify the <strong>weakness of testing against a deployed API</strong>{' '}
-          instead of the PR code.
-        </li>
-      </ul>
+      <Split
+        media={
+          <Figure
+            src="/images/bruno.png"
+            alt="Bruno API client"
+            caption="Bruno – an open source API client where requests are ordinary files in your repo."
+            size="sm"
+          />
+        }
+      >
+        <p>After the lesson (Day 28) you should be able to:</p>
+        <ul>
+          <li>
+            Place <strong>E2E and API tests</strong> in the test pyramid and explain the difference
+            between the three layers: unit, integration and E2E.
+          </li>
+          <li>
+            Build a <strong>scripted E2E test in Bruno</strong> with several requests, variables and
+            assertions that together reflect a real user flow.
+          </li>
+          <li>
+            Explain how Bruno tests are run in <strong>GitHub Actions</strong> against an API started
+            with Docker Compose.
+          </li>
+          <li>
+            Identify and justify the <strong>weakness of testing against a deployed API</strong>{' '}
+            instead of the PR code.
+          </li>
+        </ul>
+      </Split>
 
       <h2>The three layers: unit, integration and E2E</h2>
       <p>

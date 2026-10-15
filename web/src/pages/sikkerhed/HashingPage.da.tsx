@@ -3,6 +3,7 @@ import CodeBlock from '../../components/CodeBlock'
 import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
+import Split from '../../components/Split'
 
 const hashVsEncrypt = `
 flowchart LR
@@ -172,26 +173,34 @@ export default function HashingPageDa() {
       </Callout>
 
       <h2>Hvad er en hashfunktion?</h2>
-      <Figure
-        src="/images/commons/crypto-hash.svg"
-        alt="Kryptografisk hashfunktion: små ændringer i input giver helt forskellige digests"
-        caption="Avalanche-effekten: næsten ens input → helt forskellige hashes"
-        sourceUrl="https://commons.wikimedia.org/wiki/File:Cryptographic_Hash_Function.svg"
-        sourceLabel="Wikimedia Commons"
-      />
-      <p>
-        En <strong>hashfunktion</strong> tager data af vilkårlig størrelse og beregner en <em>fast længde</em> "fingeraftryk"
-        (digest). Ændres blot ét bit i input, ændrer outputtet sig fuldstændigt (<em>avalanche-effekt</em>).
-      </p>
-      <CodeBlock language="text">{`SHA-256("hej")  = 1ab8e5...f2c9   (64 hex-tegn = 256 bit)
+      <Split
+        mediaFirst
+        media={
+          <Figure
+            src="/images/commons/crypto-hash.svg"
+            alt="Kryptografisk hashfunktion: små ændringer i input giver helt forskellige digests"
+            caption="Avalanche-effekten: næsten ens input → helt forskellige hashes"
+            sourceUrl="https://commons.wikimedia.org/wiki/File:Cryptographic_Hash_Function.svg"
+            sourceLabel="Wikimedia Commons"
+            size="sm"
+          />
+        }
+      >
+        <p>
+          En <strong>hashfunktion</strong> tager data af vilkårlig størrelse og beregner en <em>fast længde</em>{' '}
+          &ldquo;fingeraftryk&rdquo; (digest). Ændres blot ét bit i input, ændrer outputtet sig fuldstændigt (
+          <em>avalanche-effekt</em>).
+        </p>
+        <CodeBlock language="text">{`SHA-256("hej")  = 1ab8e5...f2c9   (64 hex-tegn = 256 bit)
 SHA-256("hej.") = 7d0c41...a1e3   (helt anderledes)`}</CodeBlock>
-      <p>Kryptografiske hashfunktioner skal have disse egenskaber:</p>
-      <ul>
-        <li><strong>Determinisme</strong> – samme input giver altid samme hash.</li>
-        <li><strong>Envejs (preimage resistance)</strong> – man kan ikke regne fra hash tilbage til input.</li>
-        <li><strong>Kollisionsmodstand</strong> – det skal være praktisk umuligt at finde to forskellige input med samme hash.</li>
-        <li><strong>Avalanche</strong> – små ændringer giver store forskelle.</li>
-      </ul>
+        <p>Kryptografiske hashfunktioner skal have disse egenskaber:</p>
+        <ul>
+          <li><strong>Determinisme</strong> – samme input giver altid samme hash.</li>
+          <li><strong>Envejs (preimage resistance)</strong> – man kan ikke regne fra hash tilbage til input.</li>
+          <li><strong>Kollisionsmodstand</strong> – det skal være praktisk umuligt at finde to forskellige input med samme hash.</li>
+          <li><strong>Avalanche</strong> – små ændringer giver store forskelle.</li>
+        </ul>
+      </Split>
 
       <h2>Hashing er ikke kryptering</h2>
       <MermaidDiagram chart={hashVsEncrypt} />

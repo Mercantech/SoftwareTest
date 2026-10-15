@@ -7,14 +7,27 @@ type FigureProps = {
   /** Link to original source (e.g. Wikimedia Commons file page) */
   sourceUrl?: string
   sourceLabel?: string
+  /** Visual size — default md keeps lesson images from dominating the page */
+  size?: 'sm' | 'md' | 'lg'
+  className?: string
 }
 
-export default function Figure({ src, alt, caption, sourceUrl, sourceLabel }: FigureProps) {
+export default function Figure({
+  src,
+  alt,
+  caption,
+  sourceUrl,
+  sourceLabel,
+  size = 'md',
+  className,
+}: FigureProps) {
   const [failed, setFailed] = useState(false)
   if (failed) return null
 
+  const classes = ['figure', `figure--${size}`, className].filter(Boolean).join(' ')
+
   return (
-    <figure className="figure">
+    <figure className={classes}>
       <img src={src} alt={alt} loading="lazy" onError={() => setFailed(true)} />
       {caption || sourceUrl ? (
         <figcaption>

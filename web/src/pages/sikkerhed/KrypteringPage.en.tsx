@@ -3,6 +3,7 @@ import CodeBlock from '../../components/CodeBlock'
 import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
+import Split from '../../components/Split'
 
 const handshakeChart = `
 sequenceDiagram
@@ -225,31 +226,37 @@ export default function KrypteringPageEn() {
       <CodeBlock language="csharp">{aesExample}</CodeBlock>
 
       <h2>Asymmetric encryption</h2>
-      <Figure
-        src="/images/commons/public-key-encryption.svg"
-        alt="Asymmetric encryption: Alice encrypts with Bob's public key; only Bob can decrypt with his private key"
-        caption="Public key for encryption – private key for decryption"
-        sourceUrl="https://commons.wikimedia.org/wiki/File:Public_key_encryption.svg"
-        sourceLabel="Wikimedia Commons (public domain)"
-      />
-      <p>
-        Here there is a <strong>key pair</strong>: a <em>public</em> key that anyone may have, and a{' '}
-        <em>private</em> key that only the owner knows. This solves the distribution problem, but it is slow
-        and is therefore used for small tasks:
-      </p>
-      <ul>
-        <li>
-          <strong>Encrypting to a recipient</strong>: the sender encrypts with the recipient's public key – only the private key can open it.
-        </li>
-        <li>
-          <strong>Digital signature</strong>: the owner signs with their private key – anyone can verify with the public key.
-          This is how JWTs (RS256) and certificates work.
-        </li>
-        <li>
-          <strong>Key agreement</strong> (Diffie-Hellman / ECDHE): two parties derive a shared secret over an open channel.
-        </li>
-      </ul>
-      <p>Well-known algorithms: RSA (min. 2048 bit, preferably 3072), elliptic curves (ECDSA, Ed25519, X25519).</p>
+      <Split
+        media={
+          <Figure
+            src="/images/commons/public-key-encryption.svg"
+            alt="Asymmetric encryption: Alice encrypts with Bob's public key; only Bob can decrypt with his private key"
+            caption="Public key for encryption – private key for decryption"
+            sourceUrl="https://commons.wikimedia.org/wiki/File:Public_key_encryption.svg"
+            sourceLabel="Wikimedia Commons (public domain)"
+            size="sm"
+          />
+        }
+      >
+        <p>
+          Here there is a <strong>key pair</strong>: a <em>public</em> key that anyone may have, and a{' '}
+          <em>private</em> key that only the owner knows. This solves the distribution problem, but it is slow
+          and is therefore used for small tasks:
+        </p>
+        <ul>
+          <li>
+            <strong>Encrypting to a recipient</strong>: the sender encrypts with the recipient&apos;s public key – only the private key can open it.
+          </li>
+          <li>
+            <strong>Digital signature</strong>: the owner signs with their private key – anyone can verify with the public key.
+            This is how JWTs (RS256) and certificates work.
+          </li>
+          <li>
+            <strong>Key agreement</strong> (Diffie-Hellman / ECDHE): two parties derive a shared secret over an open channel.
+          </li>
+        </ul>
+        <p>Well-known algorithms: RSA (min. 2048 bit, preferably 3072), elliptic curves (ECDSA, Ed25519, X25519).</p>
+      </Split>
       <CodeBlock language="csharp">{rsaExample}</CodeBlock>
 
       <table>

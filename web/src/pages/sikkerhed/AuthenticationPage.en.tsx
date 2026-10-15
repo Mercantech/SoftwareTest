@@ -3,6 +3,7 @@ import CodeBlock from '../../components/CodeBlock'
 import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
+import Split from '../../components/Split'
 
 const aaaChart = `
 flowchart LR
@@ -400,31 +401,37 @@ export default function AuthenticationPageEn() {
       </table>
 
       <h2>OAuth 2.0 – authorization code + PKCE</h2>
-      <Figure
-        src="/images/commons/oauth-pkce.svg"
-        alt="OAuth 2.0 authorization code flow with PKCE between client, auth server and API"
-        caption="Authorization code + PKCE: the client proves ownership of the code_verifier"
-        sourceUrl="https://commons.wikimedia.org/wiki/File:Mediawiki_oauth_2_flow_with_pkce.svg"
-        sourceLabel="Wikimedia Commons"
-      />
-      <p>
-        <strong>OAuth 2.0</strong> is a protocol for delegated access; <strong>OpenID Connect (OIDC)</strong> builds
-        identity (login) on top of it. The principle: your app <em>never</em> handles the user's password – the user signs in
-        at the auth server, and your app gets a token back.
-      </p>
-      <p>
-        The <strong>Authorization Code Flow</strong> is the recommended flow. For public clients (SPAs and mobile apps that
-        cannot keep a secret secret) it is extended with <strong>PKCE</strong> (Proof Key for Code Exchange, pronounced "pixy"):
-      </p>
-      <ul>
-        <li>The client generates a random <code>code_verifier</code> and at the start only sends its hash (<code>code_challenge</code>, S256).</li>
-        <li>When the <code>code</code> is exchanged for tokens, the original <code>code_verifier</code> is sent. The auth server compares them.</li>
-        <li>An attacker who intercepts the code on the way lacks the verifier and cannot use the code.</li>
-      </ul>
-      <Callout type="info">
-        <strong>Ruled out:</strong> the <em>implicit flow</em> (tokens in the URL – deprecated) and <em>resource owner password
-        credentials</em> (the app receives the password – breaks the whole idea). Do not use these.
-      </Callout>
+      <Split
+        media={
+          <Figure
+            src="/images/commons/oauth-pkce.svg"
+            alt="OAuth 2.0 authorization code flow with PKCE between client, auth server and API"
+            caption="Authorization code + PKCE: the client proves ownership of the code_verifier"
+            sourceUrl="https://commons.wikimedia.org/wiki/File:Mediawiki_oauth_2_flow_with_pkce.svg"
+            sourceLabel="Wikimedia Commons"
+            size="sm"
+          />
+        }
+      >
+        <p>
+          <strong>OAuth 2.0</strong> is a protocol for delegated access; <strong>OpenID Connect (OIDC)</strong> builds
+          identity (login) on top of it. The principle: your app <em>never</em> handles the user&apos;s password – the user signs in
+          at the auth server, and your app gets a token back.
+        </p>
+        <p>
+          The <strong>Authorization Code Flow</strong> is the recommended flow. For public clients (SPAs and mobile apps that
+          cannot keep a secret secret) it is extended with <strong>PKCE</strong> (Proof Key for Code Exchange, pronounced &ldquo;pixy&rdquo;):
+        </p>
+        <ul>
+          <li>The client generates a random <code>code_verifier</code> and at the start only sends its hash (<code>code_challenge</code>, S256).</li>
+          <li>When the <code>code</code> is exchanged for tokens, the original <code>code_verifier</code> is sent. The auth server compares them.</li>
+          <li>An attacker who intercepts the code on the way lacks the verifier and cannot use the code.</li>
+        </ul>
+        <Callout type="info">
+          <strong>Ruled out:</strong> the <em>implicit flow</em> (tokens in the URL – deprecated) and <em>resource owner password
+          credentials</em> (the app receives the password – breaks the whole idea). Do not use these.
+        </Callout>
+      </Split>
 
       <h2>Example: Mercantec Auth</h2>
       <p>

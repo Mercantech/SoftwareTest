@@ -4,6 +4,7 @@ import CodeBlock from '../../components/CodeBlock'
 import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
+import Split from '../../components/Split'
 
 const pyramid = `
 flowchart TB
@@ -210,19 +211,26 @@ export default function OversigtPageEn() {
       </ul>
 
       <h2>4. The test pyramid</h2>
-      <Figure
-        src="/images/commons/testing-pyramid.png"
-        alt="Test pyramid with many unit tests at the base and few end-to-end tests at the top"
-        caption="The test pyramid: many unit tests, fewer integration tests, few E2E tests"
-        sourceUrl="https://commons.wikimedia.org/wiki/File:Testing_Pyramid.png"
-        sourceLabel="Wikimedia Commons"
-      />
-      <p>
-        Mike Cohn's test pyramid is a rule of thumb for the <em>distribution</em> of automated
-        tests. The higher up, the more realistic — but also the slower, more brittle and more
-        expensive to maintain.
-      </p>
-      <MermaidDiagram chart={pyramid} />
+      <Split
+        mediaFirst
+        media={
+          <Figure
+            src="/images/commons/testing-pyramid.png"
+            alt="Test pyramid with many unit tests at the base and few end-to-end tests at the top"
+            caption="The test pyramid: many unit tests, fewer integration tests, few E2E tests"
+            sourceUrl="https://commons.wikimedia.org/wiki/File:Testing_Pyramid.png"
+            sourceLabel="Wikimedia Commons"
+            size="sm"
+          />
+        }
+      >
+        <p>
+          Mike Cohn&apos;s test pyramid is a rule of thumb for the <em>distribution</em> of automated
+          tests. The higher up, the more realistic — but also the slower, more brittle and more
+          expensive to maintain.
+        </p>
+        <MermaidDiagram chart={pyramid} />
+      </Split>
 
       <table>
         <thead>

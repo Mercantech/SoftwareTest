@@ -3,6 +3,7 @@ import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import MermaidDiagram from '../../components/MermaidDiagram'
 import Figure from '../../components/Figure'
+import Split from '../../components/Split'
 
 const strategyChart = `
 flowchart LR
@@ -35,31 +36,37 @@ export default function UnitPageEn() {
   return (
     <LessonLayout module="test">
       <h1>Unit testing</h1>
-<Figure
-        src="/images/unit-book.png"
-        alt="Cover of Unit Testing Principles, Practices, and Patterns"
-        caption="Vladimir Khorikov: Unit Testing Principles, Practices, and Patterns"
-      />
 
       <h2>Learning objectives</h2>
-      <p>
-        After this lesson (Day 26) you should be able to do three things. They are deliberately
-        phrased as actions – you should be able to <em>do</em> them, not just recognize them:
-      </p>
-      <ul>
-        <li>
-          Explain <strong>what a unit test is</strong> and why it differs from integration and E2E
-          tests (isolation, speed, responsibility).
-        </li>
-        <li>
-          Write a unit test following <strong>Arrange – Act – Assert</strong> in NUnit and use{' '}
-          <strong>Moq</strong> to replace dependencies behind interfaces.
-        </li>
-        <li>
-          Assess code written by others: Is it testable? Which tests are missing? Can you write them
-          without changing the production code more than absolutely necessary?
-        </li>
-      </ul>
+      <Split
+        media={
+          <Figure
+            src="/images/unit-book.png"
+            alt="Cover of Unit Testing Principles, Practices, and Patterns"
+            caption="Vladimir Khorikov: Unit Testing Principles, Practices, and Patterns"
+            size="sm"
+          />
+        }
+      >
+        <p>
+          After this lesson (Day 26) you should be able to do three things. They are deliberately
+          phrased as actions – you should be able to <em>do</em> them, not just recognize them:
+        </p>
+        <ul>
+          <li>
+            Explain <strong>what a unit test is</strong> and why it differs from integration and E2E
+            tests (isolation, speed, responsibility).
+          </li>
+          <li>
+            Write a unit test following <strong>Arrange – Act – Assert</strong> in NUnit and use{' '}
+            <strong>Moq</strong> to replace dependencies behind interfaces.
+          </li>
+          <li>
+            Assess code written by others: Is it testable? Which tests are missing? Can you write them
+            without changing the production code more than absolutely necessary?
+          </li>
+        </ul>
+      </Split>
 
       <h2>The book behind the lesson</h2>
       <p>
@@ -97,17 +104,21 @@ export default function UnitPageEn() {
         code with clear interfaces. Integration tests (the lesson on integration) and end-to-end
         tests (the lesson on Bruno and E2E) come later in the course and build on top.
       </p>
-      <Figure
-        src="/images/test-strategy.png"
-        alt="Overview of test strategy: unit, integration and E2E"
-        caption="Test strategy: many fast tests at the bottom, few realistic tests at the top."
-      />
+      <div className="duo">
+        <Figure
+          src="/images/test-strategy.png"
+          alt="Overview of test strategy: unit, integration and E2E"
+          caption="Test strategy: many fast tests at the bottom, few realistic tests at the top."
+          size="sm"
+        />
+        <Figure
+          src="/images/test-pyramid-coverage.png"
+          alt="Test pyramid with coverage"
+          caption="The pyramid tells you about quantity. Coverage only tells you which lines were executed – not whether they were tested well."
+          size="sm"
+        />
+      </div>
       <MermaidDiagram chart={strategyChart} />
-      <Figure
-        src="/images/test-pyramid-coverage.png"
-        alt="Test pyramid with coverage"
-        caption="The pyramid tells you about quantity. Code coverage only tells you which lines were executed – not whether they were tested well."
-      />
       <Callout type="warn">
         High <strong>code coverage</strong> is not the same as good tests. A test without asserts
         can give 100% coverage and no protection. Use coverage to find <em>blind spots</em> – not as
@@ -368,19 +379,26 @@ public class UserRegistrationServiceTests
       </table>
 
       <h2>Principles: isolation, speed and Dependency Injection</h2>
-      <Figure
-        src="/images/isolation.png"
-        alt="Illustration of isolation in unit tests"
-        caption="One test, one behavior – no shared state between tests."
-      />
-      <h3>Isolation</h3>
-      <p>
-        Each test must be able to run <strong>alone, in any order and in parallel</strong> and give
-        the same result. That means: no shared static state, no shared database, no dependency on
-        another test having run first. Use <code>[SetUp]</code> to build fresh objects for every
-        test, so no test inherits a mess from another. If you break isolation, you get the worst
-        tests: the ones that only fail sometimes (<em>flaky tests</em>).
-      </p>
+      <Split
+        mediaFirst
+        media={
+          <Figure
+            src="/images/isolation.png"
+            alt="Illustration of isolation in unit tests"
+            caption="One test, one behavior – no shared state between tests."
+            size="sm"
+          />
+        }
+      >
+        <h3>Isolation</h3>
+        <p>
+          Each test must be able to run <strong>alone, in any order and in parallel</strong> and give
+          the same result. That means: no shared static state, no shared database, no dependency on
+          another test having run first. Use <code>[SetUp]</code> to build fresh objects for every
+          test, so no test inherits a mess from another. If you break isolation, you get the worst
+          tests: the ones that only fail sometimes (<em>flaky tests</em>).
+        </p>
+      </Split>
       <h3>Speed</h3>
       <p>
         A unit test should take <strong>milliseconds</strong>. Hundreds of tests should be able to
@@ -403,21 +421,27 @@ public class UserRegistrationServiceTests
       </Callout>
 
       <h2>Why do tests feel slow at first?</h2>
-      <Figure
-        src="/images/tests-save-time.png"
-        alt="Graph of how tests save time in the long run"
-        caption="Tests cost time today and save time tomorrow."
-      />
-      <MermaidDiagram chart={slowEarlyChart} />
-      <p>
-        The figure shows two paths. <strong>With tests</strong> you spend extra time at the start: you
-        have to learn the tools, write test code alongside production code and think about design so
-        the code becomes testable. It <em>feels</em> slow because you compare it with "just writing
-        the code". <strong>Without tests</strong> you are fast in the first few days – but every new
-        change requires manually retesting everything that could be affected. As the system grows,
-        the manual retesting grows faster than your code, and you end up avoiding touching anything
-        for fear of breaking it.
-      </p>
+      <Split
+        media={
+          <Figure
+            src="/images/tests-save-time.png"
+            alt="Graph of how tests save time in the long run"
+            caption="Tests cost time today and save time tomorrow."
+            size="sm"
+          />
+        }
+      >
+        <MermaidDiagram chart={slowEarlyChart} />
+        <p>
+          The figure shows two paths. <strong>With tests</strong> you spend extra time at the start: you
+          have to learn the tools, write test code alongside production code and think about design so
+          the code becomes testable. It <em>feels</em> slow because you compare it with &ldquo;just writing
+          the code&rdquo;. <strong>Without tests</strong> you are fast in the first few days – but every new
+          change requires manually retesting everything that could be affected. As the system grows,
+          the manual retesting grows faster than your code, and you end up avoiding touching anything
+          for fear of breaking it.
+        </p>
+      </Split>
       <p>
         The break-even point typically comes after weeks, not days. Tests are an <em>investment with
         interest</em>: expensive today, cheap afterwards. That is exactly why it is a challenge to
@@ -426,12 +450,19 @@ public class UserRegistrationServiceTests
       </p>
 
       <h2>TDD: red – green – refactor</h2>
-      <Figure
-        src="/images/tdd.png"
-        alt="TDD cycle: red, green, refactor"
-        caption="Test-Driven Development in three small steps."
-      />
-      <MermaidDiagram chart={tddChart} />
+      <Split
+        mediaFirst
+        media={
+          <Figure
+            src="/images/tdd.png"
+            alt="TDD cycle: red, green, refactor"
+            caption="Test-Driven Development in three small steps."
+            size="sm"
+          />
+        }
+      >
+        <MermaidDiagram chart={tddChart} />
+      </Split>
       <p>
         <strong>Test-Driven Development</strong> reverses the order: you write the test first. In{' '}
         <strong>Red</strong> you write a test for behavior that does not exist yet and watch it fail

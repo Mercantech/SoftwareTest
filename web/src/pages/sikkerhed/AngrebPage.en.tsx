@@ -3,6 +3,7 @@ import CodeBlock from '../../components/CodeBlock'
 import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
+import Split from '../../components/Split'
 
 const rootCause = `
 flowchart LR
@@ -186,20 +187,26 @@ export default function AngrebPageEn() {
       </p>
 
       <h2>SQL injection</h2>
-      <Figure
-        src="/images/commons/sql-injection.png"
-        alt="Illustration of SQL injection where user input changes the query structure"
-        caption="SQL injection: input becomes part of the SQL structure"
-        sourceUrl="https://commons.wikimedia.org/wiki/File:Hackform.png"
-        sourceLabel="Wikimedia Commons"
-      />
-      <h3>What is it – and what can it cost?</h3>
-      <p>
-        SQL injection (CWE-89) occurs when an SQL query is built by concatenating text from the user with SQL. An attacker can then
-        change the meaning of the query and potentially read, modify or delete data, bypass login or, at worst, gain access to the
-        database server. It is one of the most destructive and at the same time most <em>preventable</em> vulnerabilities – and it falls under{' '}
-        <strong>A03: Injection</strong> in the OWASP Top 10.
-      </p>
+      <Split
+        media={
+          <Figure
+            src="/images/commons/sql-injection.png"
+            alt="Illustration of SQL injection where user input changes the query structure"
+            caption="SQL injection: input becomes part of the SQL structure"
+            sourceUrl="https://commons.wikimedia.org/wiki/File:Hackform.png"
+            sourceLabel="Wikimedia Commons"
+            size="sm"
+          />
+        }
+      >
+        <h3>What is it – and what can it cost?</h3>
+        <p>
+          SQL injection (CWE-89) occurs when an SQL query is built by concatenating text from the user with SQL. An attacker can then
+          change the meaning of the query and potentially read, modify or delete data, bypass login or, at worst, gain access to the
+          database server. It is one of the most destructive and at the same time most <em>preventable</em> vulnerabilities – and it falls under{' '}
+          <strong>A03: Injection</strong> in the OWASP Top 10.
+        </p>
+      </Split>
 
       <h3>The pattern to avoid</h3>
       <CodeBlock language="csharp">{badSql}</CodeBlock>
@@ -253,20 +260,27 @@ export default function AngrebPageEn() {
       <CodeBlock language="csharp">{errorHandling}</CodeBlock>
 
       <h2>XSS – Cross-Site Scripting</h2>
-      <Figure
-        src="/images/commons/xss-attack.png"
-        alt="Sequence diagram of a cross-site scripting attack"
-        caption="XSS: the attacker's script runs in the victim's browser in the app's context"
-        sourceUrl="https://commons.wikimedia.org/wiki/File:Cross-site_scripting_attack_sequence_diagram_-_en.png"
-        sourceLabel="Wikimedia Commons (CC BY-SA)"
-      />
-      <h3>What is it?</h3>
-      <p>
-        XSS (CWE-79) occurs when an application displays untrusted content in a web page <em>without correct encoding</em>, so the browser
-        interprets it as part of the page (HTML/JavaScript) rather than as plain text. The script then runs in the visitor's browser with
-        the page's privileges: it can, for example, read data on the page, perform actions on the user's behalf or try to get hold of tokens.
-      </p>
-      <p>There are three main types:</p>
+      <Split
+        mediaFirst
+        media={
+          <Figure
+            src="/images/commons/xss-attack.png"
+            alt="Sequence diagram of a cross-site scripting attack"
+            caption="XSS: the attacker's script runs in the victim's browser in the app's context"
+            sourceUrl="https://commons.wikimedia.org/wiki/File:Cross-site_scripting_attack_sequence_diagram_-_en.png"
+            sourceLabel="Wikimedia Commons (CC BY-SA)"
+            size="sm"
+          />
+        }
+      >
+        <h3>What is it?</h3>
+        <p>
+          XSS (CWE-79) occurs when an application displays untrusted content in a web page <em>without correct encoding</em>, so the browser
+          interprets it as part of the page (HTML/JavaScript) rather than as plain text. The script then runs in the visitor&apos;s browser with
+          the page&apos;s privileges: it can, for example, read data on the page, perform actions on the user&apos;s behalf or try to get hold of tokens.
+        </p>
+        <p>There are three main types:</p>
+      </Split>
       <table>
         <thead>
           <tr><th>Type</th><th>Short explanation</th></tr>

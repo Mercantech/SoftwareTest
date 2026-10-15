@@ -1,8 +1,9 @@
-import LessonLayout from '../../components/LessonLayout'
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
-import MermaidDiagram from '../../components/MermaidDiagram'
 import Figure from '../../components/Figure'
+import LessonLayout from '../../components/LessonLayout'
+import MermaidDiagram from '../../components/MermaidDiagram'
+import Split from '../../components/Split'
 
 const pyramidChart = `
 flowchart TB
@@ -59,32 +60,38 @@ export default function BrunoE2ePageDa() {
   return (
     <LessonLayout module="test">
       <h1>API-test og E2E med Bruno</h1>
-<Figure
-        src="/images/bruno.png"
-        alt="Bruno API-klient"
-        caption="Bruno – en open source API-klient, hvor requests er almindelige filer i dit repo."
-      />
 
       <h2>Læringsmål</h2>
-      <p>Efter lektionen (Dag 28) skal du kunne:</p>
-      <ul>
-        <li>
-          Placere <strong>E2E- og API-tests</strong> i testpyramiden og forklare forskellen på de
-          tre lag: unit, integration og E2E.
-        </li>
-        <li>
-          Opbygge en <strong>scriptet E2E-test i Bruno</strong> med flere requests, variabler og
-          assertions, der tilsammen afspejler et rigtigt brugerflow.
-        </li>
-        <li>
-          Forklare, hvordan Bruno-tests køres i <strong>GitHub Actions</strong> mod en API startet
-          med Docker Compose.
-        </li>
-        <li>
-          Identificere og begrunde <strong>svagheden ved at teste mod et deployet API</strong>
-          i stedet for PR-koden.
-        </li>
-      </ul>
+      <Split
+        media={
+          <Figure
+            src="/images/bruno.png"
+            alt="Bruno API-klient"
+            caption="Bruno – en open source API-klient, hvor requests er almindelige filer i dit repo."
+            size="sm"
+          />
+        }
+      >
+        <p>Efter lektionen (Dag 28) skal du kunne:</p>
+        <ul>
+          <li>
+            Placere <strong>E2E- og API-tests</strong> i testpyramiden og forklare forskellen på de
+            tre lag: unit, integration og E2E.
+          </li>
+          <li>
+            Opbygge en <strong>scriptet E2E-test i Bruno</strong> med flere requests, variabler og
+            assertions, der tilsammen afspejler et rigtigt brugerflow.
+          </li>
+          <li>
+            Forklare, hvordan Bruno-tests køres i <strong>GitHub Actions</strong> mod en API startet
+            med Docker Compose.
+          </li>
+          <li>
+            Identificere og begrunde <strong>svagheden ved at teste mod et deployet API</strong>
+            i stedet for PR-koden.
+          </li>
+        </ul>
+      </Split>
 
       <h2>De tre lag: unit, integration og E2E</h2>
       <p>

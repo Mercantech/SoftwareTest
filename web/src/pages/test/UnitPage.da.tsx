@@ -3,6 +3,7 @@ import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import MermaidDiagram from '../../components/MermaidDiagram'
 import Figure from '../../components/Figure'
+import Split from '../../components/Split'
 
 const strategyChart = `
 flowchart LR
@@ -35,31 +36,37 @@ export default function UnitPageDa() {
   return (
     <LessonLayout module="test">
       <h1>Unit testing</h1>
-<Figure
-        src="/images/unit-book.png"
-        alt="Forside på Unit Testing Principles, Practices, and Patterns"
-        caption="Vladimir Khorikov: Unit Testing Principles, Practices, and Patterns"
-      />
 
       <h2>Læringsmål</h2>
-      <p>
-        Efter denne lektion (Dag 26) skal du kunne tre ting. De er bevidst formuleret som handlinger –
-        du skal kunne <em>gøre</em> dem, ikke bare genkende dem:
-      </p>
-      <ul>
-        <li>
-          Forklare, <strong>hvad en unit-test er</strong>, og hvorfor den adskiller sig fra
-          integrations- og E2E-tests (isolation, hastighed, ansvar).
-        </li>
-        <li>
-          Skrive en unit-test efter <strong>Arrange – Act – Assert</strong> i NUnit og bruge{' '}
-          <strong>Moq</strong> til at erstatte afhængigheder bag interfaces.
-        </li>
-        <li>
-          Vurdere kode skrevet af andre: Er den testbar? Hvilke tests mangler? Kan du skrive dem
-          uden at ændre produktionskoden mere end højst nødvendigt?
-        </li>
-      </ul>
+      <Split
+        media={
+          <Figure
+            src="/images/unit-book.png"
+            alt="Forside på Unit Testing Principles, Practices, and Patterns"
+            caption="Vladimir Khorikov: Unit Testing Principles, Practices, and Patterns"
+            size="sm"
+          />
+        }
+      >
+        <p>
+          Efter denne lektion (Dag 26) skal du kunne tre ting. De er bevidst formuleret som handlinger –
+          du skal kunne <em>gøre</em> dem, ikke bare genkende dem:
+        </p>
+        <ul>
+          <li>
+            Forklare, <strong>hvad en unit-test er</strong>, og hvorfor den adskiller sig fra
+            integrations- og E2E-tests (isolation, hastighed, ansvar).
+          </li>
+          <li>
+            Skrive en unit-test efter <strong>Arrange – Act – Assert</strong> i NUnit og bruge{' '}
+            <strong>Moq</strong> til at erstatte afhængigheder bag interfaces.
+          </li>
+          <li>
+            Vurdere kode skrevet af andre: Er den testbar? Hvilke tests mangler? Kan du skrive dem
+            uden at ændre produktionskoden mere end højst nødvendigt?
+          </li>
+        </ul>
+      </Split>
 
       <h2>Bogen bag lektionen</h2>
       <p>
@@ -97,17 +104,21 @@ export default function UnitPageDa() {
         grænseflader. Integrationstests (lektionen om integration) og end-to-end-tests (lektionen
         om Bruno og E2E) kommer senere i forløbet og bygger ovenpå.
       </p>
-      <Figure
-        src="/images/test-strategy.png"
-        alt="Oversigt over teststrategi: unit, integration og E2E"
-        caption="Teststrategi: mange hurtige tests i bunden, få realistiske tests i toppen."
-      />
+      <div className="duo">
+        <Figure
+          src="/images/test-strategy.png"
+          alt="Oversigt over teststrategi: unit, integration og E2E"
+          caption="Teststrategi: mange hurtige tests i bunden, få realistiske tests i toppen."
+          size="sm"
+        />
+        <Figure
+          src="/images/test-pyramid-coverage.png"
+          alt="Testpyramide med dækningsgrad"
+          caption="Pyramiden fortæller om mængde. Dækningsgrad fortæller kun, hvilke linjer der blev kørt – ikke om de blev testet godt."
+          size="sm"
+        />
+      </div>
       <MermaidDiagram chart={strategyChart} />
-      <Figure
-        src="/images/test-pyramid-coverage.png"
-        alt="Testpyramide med dækningsgrad"
-        caption="Pyramiden fortæller om mængde. Dækningsgrad (code coverage) fortæller kun, hvilke linjer der blev kørt – ikke om de blev testet godt."
-      />
       <Callout type="warn">
         Høj <strong>code coverage</strong> er ikke det samme som gode tests. En test uden asserts
         kan give 100 % coverage og ingen beskyttelse. Brug coverage til at finde <em>blinde
@@ -368,19 +379,26 @@ public class UserRegistrationServiceTests
       </table>
 
       <h2>Principper: isolation, hastighed og Dependency Injection</h2>
-      <Figure
-        src="/images/isolation.png"
-        alt="Illustration af isolation i unit-tests"
-        caption="Én test, én adfærd – ingen delt tilstand mellem tests."
-      />
-      <h3>Isolation</h3>
-      <p>
-        Hver test skal kunne køre <strong>alene, i vilkårlig rækkefølge og parallelt</strong> og give
-        samme resultat. Det betyder: ingen delt statisk tilstand, ingen fælles database, ingen
-        afhængighed af, at en anden test har kørt først. Brug <code>[SetUp]</code> til at bygge friske
-        objekter til hver test, så ingen tests arver rod fra hinanden. Bryder du isolationen, får
-        du de værste tests: dem, der kun fejler nogle gange (<em>flaky tests</em>).
-      </p>
+      <Split
+        mediaFirst
+        media={
+          <Figure
+            src="/images/isolation.png"
+            alt="Illustration af isolation i unit-tests"
+            caption="Én test, én adfærd – ingen delt tilstand mellem tests."
+            size="sm"
+          />
+        }
+      >
+        <h3>Isolation</h3>
+        <p>
+          Hver test skal kunne køre <strong>alene, i vilkårlig rækkefølge og parallelt</strong> og give
+          samme resultat. Det betyder: ingen delt statisk tilstand, ingen fælles database, ingen
+          afhængighed af, at en anden test har kørt først. Brug <code>[SetUp]</code> til at bygge friske
+          objekter til hver test, så ingen tests arver rod fra hinanden. Bryder du isolationen, får
+          du de værste tests: dem, der kun fejler nogle gange (<em>flaky tests</em>).
+        </p>
+      </Split>
       <h3>Hastighed</h3>
       <p>
         En unit-test bør tage <strong>millisekunder</strong>. Hundredvis af tests skal kunne
@@ -402,21 +420,27 @@ public class UserRegistrationServiceTests
       </Callout>
 
       <h2>Hvorfor føles tests langsomme i starten?</h2>
-      <Figure
-        src="/images/tests-save-time.png"
-        alt="Graf over hvordan tests sparer tid på sigt"
-        caption="Tests koster tid i dag og sparer tid i morgen."
-      />
-      <MermaidDiagram chart={slowEarlyChart} />
-      <p>
-        Figuren viser to forløb. <strong>Med tests</strong> bruger du ekstra tid i begyndelsen: du
-        skal lære værktøjerne, skrive testkode ved siden af produktionskode og tænke over design,
-        så koden bliver testbar. Det <em>føles</em> langsomt, fordi du sammenligner med at "bare
-        skrive koden". <strong>Uden tests</strong> er du hurtig i de første dage – men hver ny
-        ændring kræver manuel gentest af alt, der kunne være påvirket. Efterhånden som
-        systemet vokser, vokser den manuelle gentest hurtigere end din kode, og du ender med at
-        undgå at røre ved noget af frygt for at ødelægge det.
-      </p>
+      <Split
+        media={
+          <Figure
+            src="/images/tests-save-time.png"
+            alt="Graf over hvordan tests sparer tid på sigt"
+            caption="Tests koster tid i dag og sparer tid i morgen."
+            size="sm"
+          />
+        }
+      >
+        <MermaidDiagram chart={slowEarlyChart} />
+        <p>
+          Figuren viser to forløb. <strong>Med tests</strong> bruger du ekstra tid i begyndelsen: du
+          skal lære værktøjerne, skrive testkode ved siden af produktionskode og tænke over design,
+          så koden bliver testbar. Det <em>føles</em> langsomt, fordi du sammenligner med at &ldquo;bare
+          skrive koden&rdquo;. <strong>Uden tests</strong> er du hurtig i de første dage – men hver ny
+          ændring kræver manuel gentest af alt, der kunne være påvirket. Efterhånden som
+          systemet vokser, vokser den manuelle gentest hurtigere end din kode, og du ender med at
+          undgå at røre ved noget af frygt for at ødelægge det.
+        </p>
+      </Split>
       <p>
         Skæringspunktet kommer typisk efter uger, ikke dage. Tests er en <em>investering med
         forrentning</em>: dyr i dag, billig bagefter. Netop derfor er det en udfordring at holde
@@ -425,12 +449,19 @@ public class UserRegistrationServiceTests
       </p>
 
       <h2>TDD: red – green – refactor</h2>
-      <Figure
-        src="/images/tdd.png"
-        alt="TDD-cyklus: red, green, refactor"
-        caption="Test-Driven Development i tre små skridt."
-      />
-      <MermaidDiagram chart={tddChart} />
+      <Split
+        mediaFirst
+        media={
+          <Figure
+            src="/images/tdd.png"
+            alt="TDD-cyklus: red, green, refactor"
+            caption="Test-Driven Development i tre små skridt."
+            size="sm"
+          />
+        }
+      >
+        <MermaidDiagram chart={tddChart} />
+      </Split>
       <p>
         <strong>Test-Driven Development</strong> vender rækkefølgen om: du skriver testen først. I{' '}
         <strong>Red</strong> skriver du en test for adfærd, der ikke findes endnu, og ser den fejle

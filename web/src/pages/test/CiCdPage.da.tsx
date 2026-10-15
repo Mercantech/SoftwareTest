@@ -106,18 +106,22 @@ export default function CiCdPageDa() {
   return (
     <LessonLayout module="test">
       <h1>CI/CD – automatiserede tests i udviklingscyklussen</h1>
-      <Figure
-        src="/images/commons/devops-infinity.svg"
-        alt="DevOps-toolchain: plan, kode, build, test, release, deploy, operate, monitor"
-        caption="DevOps-loopet: tests er en fast del af vejen fra kode til drift"
-        sourceUrl="https://commons.wikimedia.org/wiki/File:Devops-toolchain.svg"
-        sourceLabel="Wikimedia Commons"
-      />
-      <Figure
-        src="/images/cicd.png"
-        alt="CI/CD-pipeline fra commit til produktion"
-        caption="Fra commit til produktion – automatiseret og med tests som kvalitetsporte."
-      />
+      <div className="duo">
+        <Figure
+          src="/images/commons/devops-infinity.svg"
+          alt="DevOps-toolchain: plan, kode, build, test, release, deploy, operate, monitor"
+          caption="DevOps-loopet: tests er en fast del af vejen fra kode til drift"
+          sourceUrl="https://commons.wikimedia.org/wiki/File:Devops-toolchain.svg"
+          sourceLabel="Wikimedia Commons"
+          size="sm"
+        />
+        <Figure
+          src="/images/cicd.png"
+          alt="CI/CD-pipeline fra commit til produktion"
+          caption="Fra commit til produktion – automatiseret og med tests som kvalitetsporte."
+          size="sm"
+        />
+      </div>
 
       <h2>Læringsmål</h2>
       <p>Efter lektionen (Dag 29) skal du kunne:</p>

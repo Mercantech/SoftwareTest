@@ -3,6 +3,7 @@ import CodeBlock from '../../components/CodeBlock'
 import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
+import Split from '../../components/Split'
 
 const rootCause = `
 flowchart LR
@@ -186,20 +187,26 @@ export default function AngrebPageDa() {
       </p>
 
       <h2>SQL injection</h2>
-      <Figure
-        src="/images/commons/sql-injection.png"
-        alt="Illustration af SQL injection hvor brugerinput ændrer forespørgslens struktur"
-        caption="SQL injection: input bliver til en del af SQL-strukturen"
-        sourceUrl="https://commons.wikimedia.org/wiki/File:Hackform.png"
-        sourceLabel="Wikimedia Commons"
-      />
-      <h3>Hvad er det – og hvad kan det koste?</h3>
-      <p>
-        SQL injection (CWE-89) opstår, når en SQL-forespørgsel bygges ved at sætte tekst fra brugeren sammen med SQL. En angriber kan så
-        ændre forespørgslens betydning og potentielt læse, ændre eller slette data, omgå login eller i værste fald få adgang til
-        databaseserveren. Det er en af de mest ødelæggende og samtidig mest <em>forebyggelige</em> sårbarheder – og står under{' '}
-        <strong>A03: Injection</strong> i OWASP Top 10.
-      </p>
+      <Split
+        media={
+          <Figure
+            src="/images/commons/sql-injection.png"
+            alt="Illustration af SQL injection hvor brugerinput ændrer forespørgslens struktur"
+            caption="SQL injection: input bliver til en del af SQL-strukturen"
+            sourceUrl="https://commons.wikimedia.org/wiki/File:Hackform.png"
+            sourceLabel="Wikimedia Commons"
+            size="sm"
+          />
+        }
+      >
+        <h3>Hvad er det – og hvad kan det koste?</h3>
+        <p>
+          SQL injection (CWE-89) opstår, når en SQL-forespørgsel bygges ved at sætte tekst fra brugeren sammen med SQL. En angriber kan så
+          ændre forespørgslens betydning og potentielt læse, ændre eller slette data, omgå login eller i værste fald få adgang til
+          databaseserveren. Det er en af de mest ødelæggende og samtidig mest <em>forebyggelige</em> sårbarheder – og står under{' '}
+          <strong>A03: Injection</strong> i OWASP Top 10.
+        </p>
+      </Split>
 
       <h3>Mønsteret man skal undgå</h3>
       <CodeBlock language="csharp">{badSql}</CodeBlock>
@@ -253,20 +260,27 @@ export default function AngrebPageDa() {
       <CodeBlock language="csharp">{errorHandling}</CodeBlock>
 
       <h2>XSS – Cross-Site Scripting</h2>
-      <Figure
-        src="/images/commons/xss-attack.png"
-        alt="Sekvensdiagram for et cross-site scripting-angreb"
-        caption="XSS: angriberens script kører i offerets browser i appens kontekst"
-        sourceUrl="https://commons.wikimedia.org/wiki/File:Cross-site_scripting_attack_sequence_diagram_-_en.png"
-        sourceLabel="Wikimedia Commons (CC BY-SA)"
-      />
-      <h3>Hvad er det?</h3>
-      <p>
-        XSS (CWE-79) opstår, når en applikation viser utroværdigt indhold i en webside <em>uden korrekt encoding</em>, så browseren
-        tolker det som en del af siden (HTML/JavaScript) frem for som ren tekst. Scriptet kører så i den besøgendes browser med
-        sidens rettigheder: det kan fx læse data på siden, udføre handlinger på brugerens vegne eller forsøge at få fat i tokens.
-      </p>
-      <p>Der findes tre hovedtyper:</p>
+      <Split
+        mediaFirst
+        media={
+          <Figure
+            src="/images/commons/xss-attack.png"
+            alt="Sekvensdiagram for et cross-site scripting-angreb"
+            caption="XSS: angriberens script kører i offerets browser i appens kontekst"
+            sourceUrl="https://commons.wikimedia.org/wiki/File:Cross-site_scripting_attack_sequence_diagram_-_en.png"
+            sourceLabel="Wikimedia Commons (CC BY-SA)"
+            size="sm"
+          />
+        }
+      >
+        <h3>Hvad er det?</h3>
+        <p>
+          XSS (CWE-79) opstår, når en applikation viser utroværdigt indhold i en webside <em>uden korrekt encoding</em>, så browseren
+          tolker det som en del af siden (HTML/JavaScript) frem for som ren tekst. Scriptet kører så i den besøgendes browser med
+          sidens rettigheder: det kan fx læse data på siden, udføre handlinger på brugerens vegne eller forsøge at få fat i tokens.
+        </p>
+        <p>Der findes tre hovedtyper:</p>
+      </Split>
       <table>
         <thead>
           <tr><th>Type</th><th>Kort forklaring</th></tr>
