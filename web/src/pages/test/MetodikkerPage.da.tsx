@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom'
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath } from '../../data/objectives'
 
 const overview = `
 flowchart TB
@@ -119,26 +116,11 @@ public async Task Bug1234_OrdreMedRabatKode_BeregnerKorrektTotal() { /* ... */ }
 `
 
 export default function MetodikkerPageDa() {
-  const objective = getObjectiveByPath('/test/metodikker')
 
   return (
     <LessonLayout module="test">
-      <header>
-        {objective ? (
-          <p>
-            <ObjectiveBadge level={objective.level} /> <strong>Målpind {objective.id}</strong>
-          </p>
-        ) : null}
-        {objective ? (
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        ) : null}
-      </header>
 
-      <h1>Testmetodikker</h1>
+<h1>Testmetodikker</h1>
 
       <p>
         En <strong>testmetodik</strong> er en systematisk måde at finde, designe og

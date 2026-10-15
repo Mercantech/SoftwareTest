@@ -3,9 +3,6 @@ import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import MermaidDiagram from '../../components/MermaidDiagram'
 import Figure from '../../components/Figure'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import LinkTrio from '../../components/LinkTrio'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const ciCdChart = `
 flowchart LR
@@ -105,35 +102,11 @@ jobs:
         run: docker compose down -v`
 
 export default function CiCdPageEn() {
-  const objective = getObjectiveByPath('/test/ci-cd')
 
   return (
     <LessonLayout module="test">
       <h1>CI/CD – automated tests in the development cycle</h1>
-      {objective ? (
-        <p>
-          <ObjectiveBadge level={objective.level} /> {objectiveTitle(objective, 'en')}
-        </p>
-      ) : (
-        <p>
-          <ObjectiveBadge level="H4" /> The apprentice can integrate automated tests into the
-          software development cycle.
-        </p>
-      )}
-      {objective ? (
-        <LinkTrio
-          sitePath={objective.sitePath}
-          notionUrl={objective.notionUrl}
-          repoUrl={objective.repoUrl}
-        />
-      ) : (
-        <LinkTrio
-          notionUrl="https://app.notion.com/p/308dab5ca23780cb9582f7857e1288af"
-          repoUrl="https://github.com/Mercantech/h4-mags"
-        />
-      )}
-
-      <Figure
+<Figure
         src="/images/cicd.png"
         alt="CI/CD pipeline from commit to production"
         caption="From commit to production – automated and with tests as quality gates."

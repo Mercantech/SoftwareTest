@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom'
 import Callout from '../../components/Callout'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import { NOTION_FAG } from '../../data/objectives'
 
 const rolesChart = `
 flowchart TB
@@ -59,13 +57,7 @@ export default function GdprPageDa() {
         <em>Tværgående emne:</em> Persondata og samtykke hører med, når I bygger webapps – også når der ikke står
         &ldquo;GDPR&rdquo; i målpindene.
       </p>
-      <LinkTrio
-        sitePath="/sikkerhed/gdpr"
-        notionUrl={NOTION_FAG}
-        repoUrl="https://github.com/Mercantech/SoftwareTest"
-      />
-
-      <Callout type="info">
+<Callout type="info">
         Denne lektion er <strong>undervisning</strong>, ikke juridisk rådgivning. Ved tvivl om jeres konkrete løsning:
         spørg underviser, virksomhedens DPO eller Datatilsynet. Officiel vejledning:{' '}
         <a href="https://www.datatilsynet.dk/" target="_blank" rel="noreferrer">

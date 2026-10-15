@@ -1,10 +1,7 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const vulnLifecycle = `
 flowchart LR
@@ -78,28 +75,12 @@ npm audit
 npm outdated`
 
 export default function StandarderPageDa() {
-  const objective = getObjectiveByPath('/sikkerhed/standarder')
 
   return (
     <LessonLayout module="sikkerhed">
       <h1>
-        Sikkerhedsstandarder og kendte sårbarheder{' '}
-        {objective ? <ObjectiveBadge level={objective.level} /> : null}
-      </h1>
-      {objective ? (
-        <>
-          <p>
-            <em>Målpind #{objective.id}:</em> {objectiveTitle(objective, 'da')}
-          </p>
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        </>
-      ) : null}
-
-      <h2>Hvorfor standarder?</h2>
+        Sikkerhedsstandarder og kendte sårbarheder{' '}</h1>
+<h2>Hvorfor standarder?</h2>
       <p>
         Sikkerhed er et felt, hvor man ikke skal opfinde alting selv. Andre har allerede systematiseret, hvilke fejl der
         oftest rammer webapplikationer, og hvordan man undgår dem. Målet med denne lektion er, at du kan{' '}

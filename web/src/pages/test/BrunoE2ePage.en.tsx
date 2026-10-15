@@ -3,9 +3,6 @@ import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import MermaidDiagram from '../../components/MermaidDiagram'
 import Figure from '../../components/Figure'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import LinkTrio from '../../components/LinkTrio'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const pyramidChart = `
 flowchart TB
@@ -58,35 +55,11 @@ flowchart LR
 `
 
 export default function BrunoE2ePageEn() {
-  const objective = getObjectiveByPath('/test/bruno-e2e')
 
   return (
     <LessonLayout module="test">
       <h1>API testing and E2E with Bruno</h1>
-      {objective ? (
-        <p>
-          <ObjectiveBadge level={objective.level} /> {objectiveTitle(objective, 'en')}
-        </p>
-      ) : (
-        <p>
-          <ObjectiveBadge level="H3" /> The apprentice can run a scripted test on an app or web
-          platform.
-        </p>
-      )}
-      {objective ? (
-        <LinkTrio
-          sitePath={objective.sitePath}
-          notionUrl={objective.notionUrl}
-          repoUrl={objective.repoUrl}
-        />
-      ) : (
-        <LinkTrio
-          notionUrl="https://app.notion.com/p/308dab5ca23780cb9582f7857e1288af"
-          repoUrl="https://github.com/Mercantech/h4-mags"
-        />
-      )}
-
-      <Figure
+<Figure
         src="/images/bruno.png"
         alt="Bruno API client"
         caption="Bruno – an open source API client where requests are ordinary files in your repo."

@@ -1,10 +1,7 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const rootCause = `
 flowchart LR
@@ -163,28 +160,12 @@ app.UseExceptionHandler(errorApp =>
 });`
 
 export default function AngrebPageDa() {
-  const objective = getObjectiveByPath('/sikkerhed/angreb')
 
   return (
     <LessonLayout module="sikkerhed">
       <h1>
-        Angreb og forsvar: SQL injection og XSS{' '}
-        {objective ? <ObjectiveBadge level={objective.level} /> : null}
-      </h1>
-      {objective ? (
-        <>
-          <p>
-            <em>Målpind #{objective.id}:</em> {objectiveTitle(objective, 'da')}
-          </p>
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        </>
-      ) : null}
-
-      <Callout type="info">
+        Angreb og forsvar: SQL injection og XSS{' '}</h1>
+<Callout type="info">
         <strong>Fokus i denne lektion er forsvar.</strong> Vi forklarer <em>hvordan sårbarhederne opstår på konceptniveau</em>, og
         hvordan du bygger din egen applikation, så de ikke kan opstå. Vi viser ikke færdige angrebsstrenge eller trin-for-trin-fremgangsmåder.
         Test kun på systemer, du selv ejer eller eksplicit har tilladelse til at teste (se lektionen om tools).

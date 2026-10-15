@@ -1,10 +1,7 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const rootCause = `
 flowchart LR
@@ -163,28 +160,12 @@ app.UseExceptionHandler(errorApp =>
 });`
 
 export default function AngrebPageEn() {
-  const objective = getObjectiveByPath('/sikkerhed/angreb')
 
   return (
     <LessonLayout module="sikkerhed">
       <h1>
-        Attacks and defence: SQL injection and XSS{' '}
-        {objective ? <ObjectiveBadge level={objective.level} /> : null}
-      </h1>
-      {objective ? (
-        <>
-          <p>
-            <em>Learning objective #{objective.id}:</em> {objectiveTitle(objective, 'en')}
-          </p>
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        </>
-      ) : null}
-
-      <Callout type="info">
+        Attacks and defence: SQL injection and XSS{' '}</h1>
+<Callout type="info">
         <strong>The focus of this lesson is defence.</strong> We explain <em>how the vulnerabilities arise at a conceptual level</em>, and
         how to build your own application so that they cannot occur. We do not show ready-made attack strings or step-by-step procedures.
         Only test on systems you own yourself or have explicit permission to test (see the lesson on tools).

@@ -1,10 +1,7 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const hashVsEncrypt = `
 flowchart LR
@@ -160,27 +157,12 @@ Get-FileHash .\\installer.zip -Algorithm SHA256
 sha256sum installer.zip`
 
 export default function HashingPageDa() {
-  const objective = getObjectiveByPath('/sikkerhed/hashing')
 
   return (
     <LessonLayout module="sikkerhed">
       <h1>
-        Hashing {objective ? <ObjectiveBadge level={objective.level} /> : null}
-      </h1>
-      {objective ? (
-        <>
-          <p>
-            <em>Målpind #{objective.id}:</em> {objectiveTitle(objective, 'da')}
-          </p>
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        </>
-      ) : null}
-
-      <Callout type="danger">
+        Hashing</h1>
+<Callout type="danger">
         <strong>Vigtig advarsel om MD5.</strong> Målpinden nævner MD5 som eksempel, og I vil møde det i gamle systemer,
         tutorials og databaser. Men <strong>MD5 er kryptografisk knækket og må ikke bruges til sikkerhed</strong> – hverken til
         adgangskoder, signaturer eller integritetskontrol mod en aktiv modstander. Vi gennemgår MD5 for at forstå

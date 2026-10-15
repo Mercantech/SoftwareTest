@@ -1,10 +1,7 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const vulnLifecycle = `
 flowchart LR
@@ -78,28 +75,12 @@ npm audit
 npm outdated`
 
 export default function StandarderPageEn() {
-  const objective = getObjectiveByPath('/sikkerhed/standarder')
 
   return (
     <LessonLayout module="sikkerhed">
       <h1>
-        Security standards and known vulnerabilities{' '}
-        {objective ? <ObjectiveBadge level={objective.level} /> : null}
-      </h1>
-      {objective ? (
-        <>
-          <p>
-            <em>Learning objective #{objective.id}:</em> {objectiveTitle(objective, 'en')}
-          </p>
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        </>
-      ) : null}
-
-      <h2>Why standards?</h2>
+        Security standards and known vulnerabilities{' '}</h1>
+<h2>Why standards?</h2>
       <p>
         Security is a field where you should not invent everything yourself. Others have already systematised which
         mistakes most often hit web applications and how to avoid them. The goal of this lesson is that you can{' '}

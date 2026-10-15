@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom'
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath } from '../../data/objectives'
 
 const pyramid = `
 flowchart TB
@@ -67,26 +64,11 @@ public class PrisberegnerTests
 `
 
 export default function OversigtPageDa() {
-  const objective = getObjectiveByPath('/test/oversigt')
 
   return (
     <LessonLayout module="test">
-      <header>
-        {objective ? (
-          <p>
-            <ObjectiveBadge level={objective.level} /> <strong>Målpind {objective.id}</strong>
-          </p>
-        ) : null}
-        {objective ? (
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        ) : null}
-      </header>
 
-      <h1>Test — oversigt: fejltest, funktionstest og websikkerhed</h1>
+<h1>Test — oversigt: fejltest, funktionstest og websikkerhed</h1>
 
       <p>
         Denne side er <strong>landkortet</strong> for hele test-modulet. Den giver dig

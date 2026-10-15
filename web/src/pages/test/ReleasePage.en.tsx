@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom'
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const decisionFlow = `
 flowchart TD
@@ -159,27 +156,11 @@ public async Task FlakyEksempel_Bedre()
 `
 
 export default function ReleasePageEn() {
-  const objective = getObjectiveByPath('/test/release')
 
   return (
     <LessonLayout module="test">
-      <header>
-        {objective ? (
-          <p>
-            <ObjectiveBadge level={objective.level} />{' '}
-            <strong>Objective {objective.id}:</strong> {objectiveTitle(objective, 'en')}
-          </p>
-        ) : null}
-        {objective ? (
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        ) : null}
-      </header>
 
-      <h1>Release: when is it tested enough?</h1>
+<h1>Release: when is it tested enough?</h1>
 
       <p>
         The hardest question in testing is not &ldquo;how do we test?&rdquo; but{' '}

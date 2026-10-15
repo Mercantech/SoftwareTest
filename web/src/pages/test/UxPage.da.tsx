@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom'
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const uxVsUi = `
 flowchart LR
@@ -146,27 +143,11 @@ Score 0-100.  Gennemsnit ca. 68.  > 80 = fremragende.  < 50 = alvorlige probleme
 `
 
 export default function UxPageDa() {
-  const objective = getObjectiveByPath('/test/ux')
 
   return (
     <LessonLayout module="test">
-      <header>
-        {objective ? (
-          <p>
-            <ObjectiveBadge level={objective.level} /> <strong>Målpind {objective.id}:</strong>{' '}
-            {objectiveTitle(objective, 'da')}
-          </p>
-        ) : null}
-        {objective ? (
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        ) : null}
-      </header>
 
-      <h1>UX-test: kundeoplevelsen</h1>
+<h1>UX-test: kundeoplevelsen</h1>
 
       <p>
         Et system kan bestå alle funktionstests, have fremragende performance og

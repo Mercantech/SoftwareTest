@@ -1,10 +1,7 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const handshakeChart = `
 sequenceDiagram
@@ -172,27 +169,12 @@ openssl s_client -connect app.example.dk:443 -servername app.example.dk </dev/nu
 openssl x509 -in fullchain.pem -noout -enddate`
 
 export default function KrypteringPageEn() {
-  const objective = getObjectiveByPath('/sikkerhed/kryptering')
 
   return (
     <LessonLayout module="sikkerhed">
       <h1>
-        Encryption, SSL and TLS {objective ? <ObjectiveBadge level={objective.level} /> : null}
-      </h1>
-      {objective ? (
-        <>
-          <p>
-            <em>Learning objective #{objective.id}:</em> {objectiveTitle(objective, 'en')}
-          </p>
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        </>
-      ) : null}
-
-      <h2>Why encryption?</h2>
+        Encryption, SSL and TLS</h1>
+<h2>Why encryption?</h2>
       <p>
         Data in a web application travels through many hops: the user's browser, Wi-Fi, the internet provider,
         load balancer, API, database and backups. Without encryption, anyone who can see the traffic or get hold of

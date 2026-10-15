@@ -1,10 +1,7 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const handshakeChart = `
 sequenceDiagram
@@ -172,27 +169,12 @@ openssl s_client -connect app.example.dk:443 -servername app.example.dk </dev/nu
 openssl x509 -in fullchain.pem -noout -enddate`
 
 export default function KrypteringPageDa() {
-  const objective = getObjectiveByPath('/sikkerhed/kryptering')
 
   return (
     <LessonLayout module="sikkerhed">
       <h1>
-        Kryptering, SSL og TLS {objective ? <ObjectiveBadge level={objective.level} /> : null}
-      </h1>
-      {objective ? (
-        <>
-          <p>
-            <em>Målpind #{objective.id}:</em> {objectiveTitle(objective, 'da')}
-          </p>
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        </>
-      ) : null}
-
-      <h2>Hvorfor kryptering?</h2>
+        Kryptering, SSL og TLS</h1>
+<h2>Hvorfor kryptering?</h2>
       <p>
         Data på en webapplikation bevæger sig gennem mange led: brugerens browser, Wi-Fi, internetudbyder,
         load balancer, API, database og backup. Uden kryptering kan alle, der kan se trafikken eller

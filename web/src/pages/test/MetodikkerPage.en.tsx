@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom'
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath } from '../../data/objectives'
 
 const overview = `
 flowchart TB
@@ -119,26 +116,11 @@ public async Task Bug1234_OrderWithDiscountCode_CalculatesCorrectTotal() { /* ..
 `
 
 export default function MetodikkerPageEn() {
-  const objective = getObjectiveByPath('/test/metodikker')
 
   return (
     <LessonLayout module="test">
-      <header>
-        {objective ? (
-          <p>
-            <ObjectiveBadge level={objective.level} /> <strong>Objective {objective.id}</strong>
-          </p>
-        ) : null}
-        {objective ? (
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        ) : null}
-      </header>
 
-      <h1>Testing methodologies</h1>
+<h1>Testing methodologies</h1>
 
       <p>
         A <strong>testing methodology</strong> is a systematic way of finding, designing and running

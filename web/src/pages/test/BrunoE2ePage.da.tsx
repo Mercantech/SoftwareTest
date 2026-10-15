@@ -3,10 +3,6 @@ import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import MermaidDiagram from '../../components/MermaidDiagram'
 import Figure from '../../components/Figure'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import LinkTrio from '../../components/LinkTrio'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
-import { useLanguage } from '../../i18n/LanguageContext'
 
 const pyramidChart = `
 flowchart TB
@@ -59,36 +55,11 @@ flowchart LR
 `
 
 export default function BrunoE2ePageDa() {
-  const { lang } = useLanguage()
-  const objective = getObjectiveByPath('/test/bruno-e2e')
 
   return (
     <LessonLayout module="test">
       <h1>API-test og E2E med Bruno</h1>
-      {objective ? (
-        <p>
-          <ObjectiveBadge level={objective.level} /> {objectiveTitle(objective, lang)}
-        </p>
-      ) : (
-        <p>
-          <ObjectiveBadge level="H3" /> Lærlingen kan gennemføre en scriptet test på en app- eller
-          webplatform.
-        </p>
-      )}
-      {objective ? (
-        <LinkTrio
-          sitePath={objective.sitePath}
-          notionUrl={objective.notionUrl}
-          repoUrl={objective.repoUrl}
-        />
-      ) : (
-        <LinkTrio
-          notionUrl="https://app.notion.com/p/308dab5ca23780cb9582f7857e1288af"
-          repoUrl="https://github.com/Mercantech/h4-mags"
-        />
-      )}
-
-      <Figure
+<Figure
         src="/images/bruno.png"
         alt="Bruno API-klient"
         caption="Bruno – en open source API-klient, hvor requests er almindelige filer i dit repo."

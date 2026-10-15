@@ -3,10 +3,6 @@ import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import MermaidDiagram from '../../components/MermaidDiagram'
 import Figure from '../../components/Figure'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import LinkTrio from '../../components/LinkTrio'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
-import { useLanguage } from '../../i18n/LanguageContext'
 
 const ciCdChart = `
 flowchart LR
@@ -106,36 +102,11 @@ jobs:
         run: docker compose down -v`
 
 export default function CiCdPageDa() {
-  const { lang } = useLanguage()
-  const objective = getObjectiveByPath('/test/ci-cd')
 
   return (
     <LessonLayout module="test">
       <h1>CI/CD – automatiserede tests i udviklingscyklussen</h1>
-      {objective ? (
-        <p>
-          <ObjectiveBadge level={objective.level} /> {objectiveTitle(objective, lang)}
-        </p>
-      ) : (
-        <p>
-          <ObjectiveBadge level="H4" /> Lærlingen kan integrere automatiserede tests i software
-          udviklingscyklussen.
-        </p>
-      )}
-      {objective ? (
-        <LinkTrio
-          sitePath={objective.sitePath}
-          notionUrl={objective.notionUrl}
-          repoUrl={objective.repoUrl}
-        />
-      ) : (
-        <LinkTrio
-          notionUrl="https://app.notion.com/p/308dab5ca23780cb9582f7857e1288af"
-          repoUrl="https://github.com/Mercantech/h4-mags"
-        />
-      )}
-
-      <Figure
+<Figure
         src="/images/cicd.png"
         alt="CI/CD-pipeline fra commit til produktion"
         caption="Fra commit til produktion – automatiseret og med tests som kvalitetsporte."

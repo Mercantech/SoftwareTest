@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom'
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const uxVsUi = `
 flowchart LR
@@ -146,27 +143,11 @@ Score 0-100.  Average approx. 68.  > 80 = excellent.  < 50 = serious problems.
 `
 
 export default function UxPageEn() {
-  const objective = getObjectiveByPath('/test/ux')
 
   return (
     <LessonLayout module="test">
-      <header>
-        {objective ? (
-          <p>
-            <ObjectiveBadge level={objective.level} />{' '}
-            <strong>Objective {objective.id}:</strong> {objectiveTitle(objective, 'en')}
-          </p>
-        ) : null}
-        {objective ? (
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        ) : null}
-      </header>
 
-      <h1>UX testing: the customer experience</h1>
+<h1>UX testing: the customer experience</h1>
 
       <p>
         A system can pass all functional tests, have excellent performance and still{' '}

@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom'
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const k6Output = `
      checks.........................: 97.82% ✓ 58680     ✗ 1308
@@ -153,27 +150,11 @@ logger.LogInformation("GetAll tog {Ms} ms og returnerede {Count} rækker",
 `
 
 export default function PerformancePageDa() {
-  const objective = getObjectiveByPath('/test/performance')
 
   return (
     <LessonLayout module="test">
-      <header>
-        {objective ? (
-          <p>
-            <ObjectiveBadge level={objective.level} /> <strong>Målpind {objective.id}:</strong>{' '}
-            {objectiveTitle(objective, 'da')}
-          </p>
-        ) : null}
-        {objective ? (
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        ) : null}
-      </header>
 
-      <h1>Performance: aflæs tabeller og find flaskehalse</h1>
+<h1>Performance: aflæs tabeller og find flaskehalse</h1>
 
       <p>
         En tryktest producerer tal. Værdien opstår først, når du kan <strong>aflæse</strong>{' '}

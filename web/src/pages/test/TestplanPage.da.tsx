@@ -3,7 +3,6 @@ import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import ConceptStack from '../../components/ConceptStack'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
 import ObjectiveSectionMap from '../../components/ObjectiveSectionMap'
 import PlanSectionGrid from '../../components/PlanSectionGrid'
@@ -75,17 +74,8 @@ export default function TestplanPageDa() {
 
   return (
     <LessonLayout module="test">
-      <header>
-        {objective ? (
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        ) : null}
-      </header>
 
-      <h1>Testplan til funktionelle krav</h1>
+<h1>Testplan til funktionelle krav</h1>
 
       <p>
         En testplan er det dokument, der besvarer spørgsmålene: <em>Hvad skal testes?

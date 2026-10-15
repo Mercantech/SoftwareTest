@@ -20,10 +20,9 @@ const ui = {
     homeCtaTest: 'Start med test',
     hubTitle: 'Målpinde',
     hubLead:
-      'Alle 15 målpinde for faget softwaretest og sikkerhed (16484). Brug linkene til at hoppe mellem site, Notion og eksempel-repo.',
+      'Målpinde for faget softwaretest og sikkerhed (16484). Klik dig videre til den tilhørende lektion.',
     hubColId: '#',
     hubColObjective: 'Målpinde',
-    hubColLinks: 'Links',
     moduleTest: 'Test',
     moduleSecurity: 'Sikkerhed',
     tocAria: 'Indholdsfortegnelse',
@@ -60,10 +59,9 @@ const ui = {
     homeCtaTest: 'Start with testing',
     hubTitle: 'Learning objectives',
     hubLead:
-      'All 15 learning objectives for software testing and security (16484). Use the links to jump between the site, Notion and example repos.',
+      'Learning objectives for software testing and security (16484). Click through to the matching lesson.',
     hubColId: '#',
     hubColObjective: 'Objective',
-    hubColLinks: 'Links',
     moduleTest: 'Testing',
     moduleSecurity: 'Security',
     tocAria: 'Table of contents',

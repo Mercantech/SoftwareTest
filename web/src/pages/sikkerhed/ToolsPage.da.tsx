@@ -1,10 +1,7 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const toolMap = `
 flowchart LR
@@ -128,27 +125,12 @@ public class SecurityHeadersTests : IClassFixture<WebApplicationFactory<Program>
 }`
 
 export default function ToolsPageDa() {
-  const objective = getObjectiveByPath('/sikkerhed/tools')
 
   return (
     <LessonLayout module="sikkerhed">
       <h1>
-        Security tools {objective ? <ObjectiveBadge level={objective.level} /> : null}
-      </h1>
-      {objective ? (
-        <>
-          <p>
-            <em>Målpind #{objective.id}:</em> {objectiveTitle(objective, 'da')}
-          </p>
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        </>
-      ) : null}
-
-      <Callout type="danger">
+        Security tools</h1>
+<Callout type="danger">
         <strong>Etik og lovgivning kommer først.</strong> Brug kun sikkerhedsværktøjer mod software og servere, som{' '}
         <strong>du selv ejer</strong>, eller hvor du har <strong>skriftlig tilladelse</strong> fra ejeren. At scanne fremmede
         systemer kan være ulovligt (i Danmark fx straffelovens §263 om uberettiget adgang) og kan skade tredjeparter eller

@@ -1,10 +1,7 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const hashVsEncrypt = `
 flowchart LR
@@ -160,27 +157,12 @@ Get-FileHash .\\installer.zip -Algorithm SHA256
 sha256sum installer.zip`
 
 export default function HashingPageEn() {
-  const objective = getObjectiveByPath('/sikkerhed/hashing')
 
   return (
     <LessonLayout module="sikkerhed">
       <h1>
-        Hashing {objective ? <ObjectiveBadge level={objective.level} /> : null}
-      </h1>
-      {objective ? (
-        <>
-          <p>
-            <em>Learning objective #{objective.id}:</em> {objectiveTitle(objective, 'en')}
-          </p>
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        </>
-      ) : null}
-
-      <Callout type="danger">
+        Hashing</h1>
+<Callout type="danger">
         <strong>Important warning about MD5.</strong> The learning objective mentions MD5 as an example, and you will meet it in old systems,
         tutorials and databases. But <strong>MD5 is cryptographically broken and must not be used for security</strong> – not for
         passwords, signatures or integrity checks against an active adversary. We cover MD5 to understand

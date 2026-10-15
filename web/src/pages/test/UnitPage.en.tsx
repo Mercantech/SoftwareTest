@@ -3,9 +3,6 @@ import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import MermaidDiagram from '../../components/MermaidDiagram'
 import Figure from '../../components/Figure'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import LinkTrio from '../../components/LinkTrio'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const strategyChart = `
 flowchart LR
@@ -34,35 +31,11 @@ flowchart LR
 `
 
 export default function UnitPageEn() {
-  const objective = getObjectiveByPath('/test/unit')
 
   return (
     <LessonLayout module="test">
       <h1>Unit testing</h1>
-      {objective ? (
-        <p>
-          <ObjectiveBadge level={objective.level} /> {objectiveTitle(objective, 'en')}
-        </p>
-      ) : (
-        <p>
-          <ObjectiveBadge level="H3" /> The apprentice can apply various relevant testing
-          methodologies and run automated tests on code.
-        </p>
-      )}
-      {objective ? (
-        <LinkTrio
-          sitePath={objective.sitePath}
-          notionUrl={objective.notionUrl}
-          repoUrl={objective.repoUrl}
-        />
-      ) : (
-        <LinkTrio
-          notionUrl="https://app.notion.com/p/308dab5ca23780cb9582f7857e1288af"
-          repoUrl="https://github.com/Mercantech/h4-mags"
-        />
-      )}
-
-      <Figure
+<Figure
         src="/images/unit-book.png"
         alt="Cover of Unit Testing Principles, Practices, and Patterns"
         caption="Vladimir Khorikov: Unit Testing Principles, Practices, and Patterns"

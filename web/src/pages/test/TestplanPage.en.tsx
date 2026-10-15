@@ -3,7 +3,6 @@ import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import ConceptStack from '../../components/ConceptStack'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
 import ObjectiveSectionMap from '../../components/ObjectiveSectionMap'
 import PlanSectionGrid from '../../components/PlanSectionGrid'
@@ -75,17 +74,8 @@ export default function TestplanPageEn() {
 
   return (
     <LessonLayout module="test">
-      <header>
-        {objective ? (
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        ) : null}
-      </header>
 
-      <h1>Test plan for functional requirements</h1>
+<h1>Test plan for functional requirements</h1>
 
       <p>
         A test plan is the document that answers the questions: <em>What is to be tested? How? By

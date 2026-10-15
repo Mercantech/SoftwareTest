@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom'
 import Callout from '../../components/Callout'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import { NOTION_FAG } from '../../data/objectives'
 
 const rolesChart = `
 flowchart TB
@@ -59,13 +57,7 @@ export default function GdprPageEn() {
         <em>Cross-cutting topic:</em> Personal data and consent matter when you build web apps – even when GDPR is not
         listed as a separate learning objective.
       </p>
-      <LinkTrio
-        sitePath="/sikkerhed/gdpr"
-        notionUrl={NOTION_FAG}
-        repoUrl="https://github.com/Mercantech/SoftwareTest"
-      />
-
-      <Callout type="info">
+<Callout type="info">
         This lesson is <strong>teaching material</strong>, not legal advice. For a concrete product: ask your teacher,
         the organisation&apos;s DPO, or the supervisory authority. Official Danish guidance:{' '}
         <a href="https://www.datatilsynet.dk/" target="_blank" rel="noreferrer">

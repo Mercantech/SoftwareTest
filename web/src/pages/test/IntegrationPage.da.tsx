@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom'
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const scope = `
 flowchart LR
@@ -317,27 +314,11 @@ integration-tests:
 `
 
 export default function IntegrationPageDa() {
-  const objective = getObjectiveByPath('/test/integration')
 
   return (
     <LessonLayout module="test">
-      <header>
-        {objective ? (
-          <p>
-            <ObjectiveBadge level={objective.level} /> <strong>Målpind {objective.id}:</strong>{' '}
-            {objectiveTitle(objective, 'da')}
-          </p>
-        ) : null}
-        {objective ? (
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        ) : null}
-      </header>
 
-      <h1>Integrationstest i .NET</h1>
+<h1>Integrationstest i .NET</h1>
 
       <p>
         Unit tests viser, at de enkelte dele virker hver for sig. Integrationstests viser,

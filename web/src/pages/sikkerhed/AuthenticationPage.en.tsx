@@ -1,10 +1,7 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const aaaChart = `
 flowchart LR
@@ -280,27 +277,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });`
 
 export default function AuthenticationPageEn() {
-  const objective = getObjectiveByPath('/sikkerhed/authentication')
 
   return (
     <LessonLayout module="sikkerhed">
       <h1>
-        Authentication {objective ? <ObjectiveBadge level={objective.level} /> : null}
-      </h1>
-      {objective ? (
-        <>
-          <p>
-            <em>Learning objective #{objective.id}:</em> {objectiveTitle(objective, 'en')}
-          </p>
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        </>
-      ) : null}
-
-      <h2>Identification, authentication and authorization</h2>
+        Authentication</h1>
+<h2>Identification, authentication and authorization</h2>
       <p>
         The three terms are often mixed up – but they answer three different questions:
       </p>

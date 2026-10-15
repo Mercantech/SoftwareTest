@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import LinkTrio from '../components/LinkTrio'
 import ObjectiveBadge from '../components/ObjectiveBadge'
 import { objectiveTitle, objectives } from '../data/objectives'
 import { useLanguage } from '../i18n/LanguageContext'
@@ -20,7 +19,6 @@ export default function Hub() {
             <tr>
               <th scope="col">{t(lang, 'hubColId')}</th>
               <th scope="col">{t(lang, 'hubColObjective')}</th>
-              <th scope="col">{t(lang, 'hubColLinks')}</th>
             </tr>
           </thead>
           <tbody>
@@ -32,13 +30,6 @@ export default function Hub() {
                     <ObjectiveBadge level={obj.level} />{' '}
                     <Link to={obj.sitePath}>{objectiveTitle(obj, lang)}</Link>
                   </div>
-                </td>
-                <td>
-                  <LinkTrio
-                    sitePath={obj.sitePath}
-                    notionUrl={obj.notionUrl}
-                    repoUrl={obj.repoUrl}
-                  />
                 </td>
               </tr>
             ))}

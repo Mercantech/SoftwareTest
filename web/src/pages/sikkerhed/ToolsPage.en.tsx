@@ -1,10 +1,7 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath, objectiveTitle } from '../../data/objectives'
 
 const toolMap = `
 flowchart LR
@@ -128,27 +125,12 @@ public class SecurityHeadersTests : IClassFixture<WebApplicationFactory<Program>
 }`
 
 export default function ToolsPageEn() {
-  const objective = getObjectiveByPath('/sikkerhed/tools')
 
   return (
     <LessonLayout module="sikkerhed">
       <h1>
-        Security tools {objective ? <ObjectiveBadge level={objective.level} /> : null}
-      </h1>
-      {objective ? (
-        <>
-          <p>
-            <em>Learning objective #{objective.id}:</em> {objectiveTitle(objective, 'en')}
-          </p>
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        </>
-      ) : null}
-
-      <Callout type="danger">
+        Security tools</h1>
+<Callout type="danger">
         <strong>Ethics and the law come first.</strong> Only use security tools against software and servers that{' '}
         <strong>you own yourself</strong>, or where you have <strong>written permission</strong> from the owner. Scanning other
         people's systems can be illegal (in Denmark, e.g. section 263 of the Criminal Code on unauthorised access) and can harm third parties or

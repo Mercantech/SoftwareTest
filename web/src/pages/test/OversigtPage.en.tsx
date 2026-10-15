@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom'
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
 import LessonLayout from '../../components/LessonLayout'
-import LinkTrio from '../../components/LinkTrio'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import ObjectiveBadge from '../../components/ObjectiveBadge'
-import { getObjectiveByPath } from '../../data/objectives'
 
 const pyramid = `
 flowchart TB
@@ -67,26 +64,11 @@ public class PriceCalculatorTests
 `
 
 export default function OversigtPageEn() {
-  const objective = getObjectiveByPath('/test/oversigt')
 
   return (
     <LessonLayout module="test">
-      <header>
-        {objective ? (
-          <p>
-            <ObjectiveBadge level={objective.level} /> <strong>Objective {objective.id}</strong>
-          </p>
-        ) : null}
-        {objective ? (
-          <LinkTrio
-            sitePath={objective.sitePath}
-            notionUrl={objective.notionUrl}
-            repoUrl={objective.repoUrl}
-          />
-        ) : null}
-      </header>
 
-      <h1>Testing — overview: defect testing, functional testing and web security</h1>
+<h1>Testing — overview: defect testing, functional testing and web security</h1>
 
       <p>
         This page is the <strong>map</strong> of the whole testing module. It gives you an overview
