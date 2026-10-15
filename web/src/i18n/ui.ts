@@ -39,6 +39,11 @@ const ui = {
     themeToggleAria: 'Skift farvetema',
     themeLight: 'Lys',
     themeDark: 'Mørk',
+    presentOpen: 'Presenter',
+    presentExit: 'Afslut',
+    presentPrev: 'Forrige',
+    presentNext: 'Næste',
+    presentHint: 'Piletaster eller mellemrum · F fuldskærm · Esc afslut',
   },
   en: {
     logo: 'Mercantec · Test & security',
@@ -78,6 +83,11 @@ const ui = {
     themeToggleAria: 'Switch color theme',
     themeLight: 'Light',
     themeDark: 'Dark',
+    presentOpen: 'Present',
+    presentExit: 'Exit',
+    presentPrev: 'Previous',
+    presentNext: 'Next',
+    presentHint: 'Arrow keys or space · F fullscreen · Esc exit',
   },
 } as const
 

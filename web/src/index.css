@@ -403,6 +403,156 @@ pre {
 }
 
 /* ——— Lesson layout ——— */
+.lesson-main-wrap {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.lesson-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.present-mode__trigger {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ——— Presenter / slides ——— */
+.present-mode {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  background: var(--bg);
+  color: var(--text);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, var(--grid-glow), transparent),
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
+}
+
+.present-mode__chrome {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--header-bg);
+  backdrop-filter: blur(10px);
+}
+
+.present-mode__title {
+  margin: 0;
+  flex: 1 1 12rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.present-mode__progress {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.present-mode__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.present-mode__stage {
+  min-height: 0;
+  overflow: auto;
+  padding: 1.5rem 1.5rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.present-mode__slide {
+  width: min(56rem, 100%);
+  margin: 0 auto;
+  animation: present-slide-in 0.28s ease;
+}
+
+.present-mode__slide > :first-child {
+  margin-top: 0;
+}
+
+.present-mode__slide h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.present-mode__slide h2 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  margin-top: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.present-mode__slide .figure img,
+.present-mode__slide .mermaid-diagram svg {
+  max-height: min(52vh, 28rem);
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.present-mode__hint {
+  margin: 0;
+  padding: 0.35rem 1.25rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.present-mode__dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 1rem 1rem;
+}
+
+.present-mode__dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  background: var(--border);
+  cursor: pointer;
+}
+
+.present-mode__dot--active {
+  background: var(--accent);
+  transform: scale(1.25);
+}
+
+@keyframes present-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.6rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .lesson-shell {
   display: grid;
   grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);

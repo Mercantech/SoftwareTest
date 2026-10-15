@@ -1,8 +1,9 @@
-import type { ReactNode } from 'react'
+import { useRef, type ReactNode } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { getModuleNav, type LessonModule } from '../data/lessons'
 import { useLanguage } from '../i18n/LanguageContext'
 import { t } from '../i18n/ui'
+import PresentMode from './PresentMode'
 
 type LessonLayoutProps = {
   module: LessonModule
@@ -14,6 +15,7 @@ export default function LessonLayout({ module, children, toc }: LessonLayoutProp
   const { pathname } = useLocation()
   const { lang } = useLanguage()
   const nav = getModuleNav(module)
+  const contentRef = useRef<HTMLElement>(null)
 
   return (
     <div className={toc ? 'lesson-shell lesson-shell--with-toc' : 'lesson-shell'}>
@@ -34,7 +36,14 @@ export default function LessonLayout({ module, children, toc }: LessonLayoutProp
           ))}
         </ul>
       </aside>
-      <article className="lesson-main lesson prose">{children}</article>
+      <div className="lesson-main-wrap">
+        <div className="lesson-toolbar">
+          <PresentMode contentRef={contentRef} />
+        </div>
+        <article ref={contentRef} className="lesson-main lesson prose">
+          {children}
+        </article>
+      </div>
       {toc ? (
         <aside className="lesson-toc" aria-label={t(lang, 'tocAria')}>
           {toc}
