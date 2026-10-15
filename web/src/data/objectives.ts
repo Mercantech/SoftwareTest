@@ -86,17 +86,6 @@ export const objectives: Objective[] = [
     repoUrl: REPO_H4_MAGS,
   },
   {
-    id: 7,
-    level: 'H4',
-    title: {
-      da: 'Lærlingen kan gennemføre en tryktest, hvor performance og krav til hardware medtages.',
-      en: 'The apprentice can carry out a load test that includes performance and hardware requirements.',
-    },
-    sitePath: '/test/tryk',
-    notionUrl: NOTION_WEEK,
-    repoUrl: REPO_SITE,
-  },
-  {
     id: 8,
     level: 'H4',
     title: {

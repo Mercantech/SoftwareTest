@@ -208,8 +208,7 @@ export default function OversigtPageEn() {
       <h3>Non-functional tests</h3>
       <ul>
         <li>
-          <strong>Performance and load testing</strong> — speed and stability under load. See{' '}
-          <Link to="/test/tryk">Load testing</Link> and{' '}
+          <strong>Performance</strong> — speed and stability under load. See{' '}
           <Link to="/test/performance">Performance</Link>.
         </li>
         <li>
@@ -442,11 +441,10 @@ export default function OversigtPageEn() {
           </tr>
           <tr>
             <td>
-              <Link to="/test/tryk">Load</Link> /{' '}
               <Link to="/test/performance">Performance</Link>
             </td>
-            <td>#7–8</td>
-            <td>Load, hardware, bottlenecks</td>
+            <td>#8</td>
+            <td>Performance tables and bottlenecks</td>
           </tr>
           <tr>
             <td>

@@ -16,7 +16,6 @@ import OversigtPage from './pages/test/OversigtPage'
 import PerformancePage from './pages/test/PerformancePage'
 import ReleasePage from './pages/test/ReleasePage'
 import TestplanPage from './pages/test/TestplanPage'
-import TrykPage from './pages/test/TrykPage'
 import UnitPage from './pages/test/UnitPage'
 import UxPage from './pages/test/UxPage'
 
@@ -35,7 +34,6 @@ export default function App() {
           <Route path="test/release" element={<ReleasePage />} />
           <Route path="test/bruno-e2e" element={<BrunoE2ePage />} />
           <Route path="test/ci-cd" element={<CiCdPage />} />
-          <Route path="test/tryk" element={<TrykPage />} />
           <Route path="test/performance" element={<PerformancePage />} />
           <Route path="test/ux" element={<UxPage />} />
           <Route path="sikkerhed/kryptering" element={<KrypteringPage />} />

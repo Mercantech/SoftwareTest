@@ -43,7 +43,6 @@ export const lessonModules: LessonModuleNav[] = [
         path: '/test/bruno-e2e',
       },
       { slug: 'ci-cd', label: { da: 'CI/CD', en: 'CI/CD' }, path: '/test/ci-cd' },
-      { slug: 'tryk', label: { da: 'Tryktest', en: 'Load testing' }, path: '/test/tryk' },
       {
         slug: 'performance',
         label: { da: 'Performance', en: 'Performance' },

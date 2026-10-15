@@ -211,8 +211,7 @@ export default function OversigtPageDa() {
       <h3>Ikke-funktionelle tests</h3>
       <ul>
         <li>
-          <strong>Performance og tryktest</strong> — hastighed og stabilitet under
-          belastning. Se <Link to="/test/tryk">Tryktest</Link> og{' '}
+          <strong>Performance</strong> — hastighed og stabilitet under belastning. Se{' '}
           <Link to="/test/performance">Performance</Link>.
         </li>
         <li>
@@ -449,11 +448,10 @@ export default function OversigtPageDa() {
           </tr>
           <tr>
             <td>
-              <Link to="/test/tryk">Tryk</Link> /{' '}
               <Link to="/test/performance">Performance</Link>
             </td>
-            <td>#7–8</td>
-            <td>Belastning, hardware, flaskehalse</td>
+            <td>#8</td>
+            <td>Performancetabeller og flaskehalse</td>
           </tr>
           <tr>
             <td>

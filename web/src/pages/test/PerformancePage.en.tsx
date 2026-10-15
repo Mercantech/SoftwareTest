@@ -610,8 +610,7 @@ export default function PerformancePageEn() {
       </table>
 
       <p>
-        See <Link to="/test/tryk">Stress testing</Link> for how to set up the test, and{' '}
-        <Link to="/test/release">Release</Link> for how performance factors into the
+        See <Link to="/test/release">Release</Link> for how performance factors into the
         go/no-go decision.
       </p>
 

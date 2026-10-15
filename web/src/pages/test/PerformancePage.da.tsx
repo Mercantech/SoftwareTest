@@ -605,8 +605,7 @@ export default function PerformancePageDa() {
       </table>
 
       <p>
-        Se <Link to="/test/tryk">Tryktest</Link> for at opstille testen, og{' '}
-        <Link to="/test/release">Release</Link> for hvordan performance indgår i
+        Se <Link to="/test/release">Release</Link> for hvordan performance indgår i
         go/no-go.
       </p>
 
