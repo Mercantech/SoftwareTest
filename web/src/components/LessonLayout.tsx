@@ -1,6 +1,7 @@
 import { useRef, type ReactNode } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { getModuleNav, type LessonModule } from '../data/lessons'
+import { getObjectiveByPath } from '../data/objectives'
 import { useLanguage } from '../i18n/LanguageContext'
 import { t } from '../i18n/ui'
 import PresentMode from './PresentMode'
@@ -22,18 +23,26 @@ export default function LessonLayout({ module, children, toc }: LessonLayoutProp
       <aside className="lesson-sidebar" aria-label={t(lang, 'sidebarAria')}>
         <h2>{nav.title[lang]}</h2>
         <ul>
-          {nav.items.map((item) => (
-            <li key={item.path}>
-              <NavLink
-                to={item.path}
-                className={({ isActive }) =>
-                  isActive || pathname === item.path ? 'active' : undefined
-                }
-              >
-                {item.label[lang]}
-              </NavLink>
-            </li>
-          ))}
+          {nav.items.map((item) => {
+            const objective = getObjectiveByPath(item.path)
+            return (
+              <li key={item.path}>
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) =>
+                    isActive || pathname === item.path ? 'active' : undefined
+                  }
+                >
+                  {objective ? (
+                    <span className="lesson-sidebar__num" aria-hidden="true">
+                      #{objective.id}
+                    </span>
+                  ) : null}
+                  <span>{item.label[lang]}</span>
+                </NavLink>
+              </li>
+            )
+          })}
         </ul>
       </aside>
       <div className="lesson-main-wrap">

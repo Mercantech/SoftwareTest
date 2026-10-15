@@ -394,8 +394,9 @@ export default function OversigtPageDa() {
 
       <h2>6. Sådan er sitet organiseret</h2>
       <p>
-        Modulet følger en naturlig rækkefølge fra planlægning til drift. Hver side
-        svarer til et eller flere <Link to="/maalpinde">målpinde</Link>.
+        Sidebar, flow og målpinde følger samme rækkefølge: fra planlægning via teknik til drift og
+        ikke-funktionelle lag. Hver nummereret side svarer til et{' '}
+        <Link to="/maalpinde">målpind</Link>; unit/integration og GDPR er praktiske tillæg uden eget nummer.
       </p>
       <MermaidDiagram chart={flow} />
 
@@ -408,6 +409,13 @@ export default function OversigtPageDa() {
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td>
+              <Link to="/test/oversigt">Oversigt</Link>
+            </td>
+            <td>#1</td>
+            <td>Landkort: fejl-/funktionstest, pyramide og websikkerhed</td>
+          </tr>
           <tr>
             <td>
               <Link to="/test/testplan">Testplan</Link>
@@ -428,7 +436,7 @@ export default function OversigtPageDa() {
               <Link to="/test/integration">Integration</Link>
             </td>
             <td>—</td>
-            <td>Praktisk teknik i .NET</td>
+            <td>Praktisk teknik i .NET (understøtter #2–#6)</td>
           </tr>
           <tr>
             <td>
@@ -466,9 +474,18 @@ export default function OversigtPageDa() {
             <td>Kundeoplevelsen</td>
           </tr>
           <tr>
-            <td>Sikkerhed</td>
-            <td>#9–14 + GDPR</td>
-            <td>Kryptering, standarder, auth, hashing, angreb, tools, GDPR</td>
+            <td>
+              <Link to="/sikkerhed/kryptering">Sikkerhed</Link>
+            </td>
+            <td>#9–14</td>
+            <td>Kryptering → standarder → auth → hashing → angreb → tools</td>
+          </tr>
+          <tr>
+            <td>
+              <Link to="/sikkerhed/gdpr">GDPR</Link>
+            </td>
+            <td>—</td>
+            <td>Dataansvar, cookies og privatliv (tværgående)</td>
           </tr>
         </tbody>
       </table>

@@ -20,17 +20,17 @@ export const lessonModules: LessonModuleNav[] = [
     title: { da: 'Test', en: 'Testing' },
     items: [
       { slug: 'oversigt', label: { da: 'Oversigt', en: 'Overview' }, path: '/test/oversigt' },
-      { slug: 'unit', label: { da: 'Unit testing', en: 'Unit testing' }, path: '/test/unit' },
-      {
-        slug: 'integration',
-        label: { da: 'Integrationstest', en: 'Integration testing' },
-        path: '/test/integration',
-      },
       { slug: 'testplan', label: { da: 'Testplan', en: 'Test plan' }, path: '/test/testplan' },
       {
         slug: 'metodikker',
         label: { da: 'Testmetodikker', en: 'Test methodologies' },
         path: '/test/metodikker',
+      },
+      { slug: 'unit', label: { da: 'Unit testing', en: 'Unit testing' }, path: '/test/unit' },
+      {
+        slug: 'integration',
+        label: { da: 'Integrationstest', en: 'Integration testing' },
+        path: '/test/integration',
       },
       {
         slug: 'release',

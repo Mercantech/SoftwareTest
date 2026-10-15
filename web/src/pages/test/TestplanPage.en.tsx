@@ -99,6 +99,11 @@ export default function TestplanPageEn() {
               sectionLabel: '§3 IEEE structure',
             },
             {
+              goal: 'Define exit criteria and identify test risks',
+              sectionId: 'risici',
+              sectionLabel: 'Risk matrix',
+            },
+            {
               goal: 'Turn functional requirements into concrete, measurable test cases',
               sectionId: 'krav-til-testcases',
               sectionLabel: '§4 Requirements → cases',
@@ -107,11 +112,6 @@ export default function TestplanPageEn() {
               goal: 'Set up traceability between requirements and tests',
               sectionId: 'sporbarhed',
               sectionLabel: 'Traceability board',
-            },
-            {
-              goal: 'Define exit criteria and identify test risks',
-              sectionId: 'risici',
-              sectionLabel: 'Risk matrix',
             },
             {
               goal: 'Use a test case template and write test cases as automated tests',

@@ -618,11 +618,23 @@ pre {
 }
 
 .lesson-sidebar a {
-  display: block;
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
   padding: 0.4rem 0.5rem;
   border-radius: var(--radius-sm);
   color: var(--text-muted);
   font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.lesson-sidebar__num {
+  flex: 0 0 auto;
+  min-width: 1.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-2);
+  opacity: 0.85;
 }
 
 .lesson-sidebar a:hover,

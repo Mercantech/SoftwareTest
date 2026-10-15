@@ -387,8 +387,10 @@ export default function OversigtPageEn() {
 
       <h2>6. How the site is organized</h2>
       <p>
-        The module follows a natural order from planning to operations. Each page corresponds to
-        one or more <Link to="/maalpinde">objectives</Link>.
+        Sidebar, flow and objectives follow the same order: from planning through technique to
+        operations and non-functional layers. Each numbered page maps to an{' '}
+        <Link to="/maalpinde">objective</Link>; unit/integration and GDPR are practical add-ons
+        without their own number.
       </p>
       <MermaidDiagram chart={flow} />
 
@@ -401,6 +403,13 @@ export default function OversigtPageEn() {
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td>
+              <Link to="/test/oversigt">Overview</Link>
+            </td>
+            <td>#1</td>
+            <td>Map: defect/functional testing, pyramid and web security</td>
+          </tr>
           <tr>
             <td>
               <Link to="/test/testplan">Test plan</Link>
@@ -421,7 +430,7 @@ export default function OversigtPageEn() {
               <Link to="/test/integration">Integration</Link>
             </td>
             <td>—</td>
-            <td>Practical technique in .NET</td>
+            <td>Practical technique in .NET (supports #2–#6)</td>
           </tr>
           <tr>
             <td>
@@ -459,9 +468,18 @@ export default function OversigtPageEn() {
             <td>The customer experience</td>
           </tr>
           <tr>
-            <td>Security</td>
-            <td>#9–14 + GDPR</td>
-            <td>Encryption, standards, auth, hashing, attacks, tools, GDPR</td>
+            <td>
+              <Link to="/sikkerhed/kryptering">Security</Link>
+            </td>
+            <td>#9–14</td>
+            <td>Encryption → standards → auth → hashing → attacks → tools</td>
+          </tr>
+          <tr>
+            <td>
+              <Link to="/sikkerhed/gdpr">GDPR</Link>
+            </td>
+            <td>—</td>
+            <td>Data responsibility, cookies and privacy (cross-cutting)</td>
           </tr>
         </tbody>
       </table>

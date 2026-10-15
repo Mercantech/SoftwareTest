@@ -99,6 +99,11 @@ export default function TestplanPageDa() {
               sectionLabel: '§3 IEEE-struktur',
             },
             {
+              goal: 'Definere exit criteria og identificere testrisici',
+              sectionId: 'risici',
+              sectionLabel: 'Risikomatrice',
+            },
+            {
               goal: 'Omsætte funktionelle krav til konkrete, målbare testcases',
               sectionId: 'krav-til-testcases',
               sectionLabel: '§4 Krav → testcases',
@@ -107,11 +112,6 @@ export default function TestplanPageDa() {
               goal: 'Opstille sporbarhed mellem krav og tests',
               sectionId: 'sporbarhed',
               sectionLabel: 'Sporbarhedstavle',
-            },
-            {
-              goal: 'Definere exit criteria og identificere testrisici',
-              sectionId: 'risici',
-              sectionLabel: 'Risikomatrice',
             },
             {
               goal: 'Bruge en testcase-skabelon og skrive testcases som automatiserede tests',
