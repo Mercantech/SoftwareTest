@@ -37,6 +37,9 @@ const ui = {
     mermaidHint: 'Scroll for at zoome · træk for at flytte · Esc for at lukke',
     mermaidLoading: 'Tegner diagram…',
     mermaidError: 'Diagramfejl',
+    themeToggleAria: 'Skift farvetema',
+    themeLight: 'Lys',
+    themeDark: 'Mørk',
   },
   en: {
     logo: 'Mercantec · Test & security',
@@ -74,6 +77,9 @@ const ui = {
     mermaidHint: 'Scroll to zoom · drag to pan · Esc to close',
     mermaidLoading: 'Drawing diagram…',
     mermaidError: 'Diagram error',
+    themeToggleAria: 'Switch color theme',
+    themeLight: 'Light',
+    themeDark: 'Dark',
   },
 } as const
 

@@ -2,6 +2,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { useLanguage } from '../i18n/LanguageContext'
 import { t } from '../i18n/ui'
 import LanguageToggle from './LanguageToggle'
+import ThemeToggle from './ThemeToggle'
 
 export default function Layout() {
   const { lang } = useLanguage()
@@ -37,6 +38,7 @@ export default function Layout() {
                 ))}
               </ul>
             </nav>
+            <ThemeToggle />
             <LanguageToggle />
           </div>
         </div>

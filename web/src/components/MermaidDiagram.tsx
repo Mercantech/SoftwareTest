@@ -10,23 +10,19 @@ import {
 } from 'react'
 import { createPortal } from 'react-dom'
 import { useLanguage } from '../i18n/LanguageContext'
+import { useTheme } from '../i18n/ThemeContext'
 import { t } from '../i18n/ui'
 
 type MermaidDiagramProps = {
   chart: string
 }
 
-let mermaidInitialized = false
-
-function ensureMermaid() {
-  if (!mermaidInitialized) {
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: 'dark',
-      securityLevel: 'strict',
-    })
-    mermaidInitialized = true
-  }
+function configureMermaid(theme: 'light' | 'dark') {
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: theme === 'light' ? 'neutral' : 'dark',
+    securityLevel: 'strict',
+  })
 }
 
 const MIN_ZOOM = 0.4
@@ -35,6 +31,7 @@ const ZOOM_STEP = 0.25
 
 export default function MermaidDiagram({ chart }: MermaidDiagramProps) {
   const { lang } = useLanguage()
+  const { theme } = useTheme()
   const reactId = useId()
   const diagramId = `mermaid-${reactId.replace(/:/g, '')}`
   const [svg, setSvg] = useState<string>('')
@@ -53,10 +50,10 @@ export default function MermaidDiagram({ chart }: MermaidDiagramProps) {
 
   useEffect(() => {
     let cancelled = false
-    ensureMermaid()
+    configureMermaid(theme)
 
     mermaid
-      .render(diagramId, chart.trim())
+      .render(`${diagramId}-${theme}`, chart.trim())
       .then(({ svg: rendered }) => {
         if (!cancelled) {
           setSvg(rendered)
@@ -73,7 +70,7 @@ export default function MermaidDiagram({ chart }: MermaidDiagramProps) {
     return () => {
       cancelled = true
     }
-  }, [chart, diagramId])
+  }, [chart, diagramId, theme])
 
   const openModal = useCallback(() => {
     setZoom(1)
