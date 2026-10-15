@@ -39,6 +39,7 @@ export default function MermaidDiagram({ chart }: MermaidDiagramProps) {
   const [open, setOpen] = useState(false)
   const [zoom, setZoom] = useState(1)
   const [pan, setPan] = useState({ x: 0, y: 0 })
+  const [baseSize, setBaseSize] = useState<{ w: number; h: number } | null>(null)
   const dragRef = useRef<{
     pointerId: number
     startX: number
@@ -47,6 +48,7 @@ export default function MermaidDiagram({ chart }: MermaidDiagramProps) {
     originY: number
   } | null>(null)
   const closeBtnRef = useRef<HTMLButtonElement>(null)
+  const stageRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     let cancelled = false
@@ -75,13 +77,60 @@ export default function MermaidDiagram({ chart }: MermaidDiagramProps) {
   const openModal = useCallback(() => {
     setZoom(1)
     setPan({ x: 0, y: 0 })
+    setBaseSize(null)
     setOpen(true)
   }, [])
 
   const closeModal = useCallback(() => {
     setOpen(false)
+    setBaseSize(null)
     dragRef.current = null
   }, [])
+
+  // Fit SVG to viewport once, then zoom by resizing width/height (vector stays crisp)
+  useEffect(() => {
+    if (!open || !svg || baseSize) return
+    const frame = requestAnimationFrame(() => {
+      const stage = stageRef.current
+      const el = stage?.querySelector('svg')
+      const viewport = stage?.parentElement
+      if (!(el instanceof SVGSVGElement) || !viewport) return
+
+      el.style.maxWidth = 'none'
+      el.style.maxHeight = 'none'
+
+      const box = el.viewBox?.baseVal
+      const aspect =
+        box && box.width > 0 && box.height > 0
+          ? box.width / box.height
+          : el.getBoundingClientRect().width / Math.max(el.getBoundingClientRect().height, 1)
+
+      const maxW = viewport.clientWidth * 0.92
+      const maxH = viewport.clientHeight * 0.88
+      let w = maxW
+      let h = w / aspect
+      if (h > maxH) {
+        h = maxH
+        w = h * aspect
+      }
+      if (w > 0 && h > 0) setBaseSize({ w, h })
+    })
+    return () => cancelAnimationFrame(frame)
+  }, [open, svg, baseSize])
+
+  useEffect(() => {
+    if (!open || !baseSize) return
+    const el = stageRef.current?.querySelector('svg')
+    if (!(el instanceof SVGSVGElement)) return
+    const w = baseSize.w * zoom
+    const h = baseSize.h * zoom
+    el.setAttribute('width', String(w))
+    el.setAttribute('height', String(h))
+    el.style.width = `${w}px`
+    el.style.height = `${h}px`
+    el.style.maxWidth = 'none'
+    el.style.maxHeight = 'none'
+  }, [open, baseSize, zoom])
 
   useEffect(() => {
     if (!open) return
@@ -230,9 +279,10 @@ export default function MermaidDiagram({ chart }: MermaidDiagramProps) {
                 onPointerCancel={onPointerUp}
               >
                 <div
+                  ref={stageRef}
                   className="mermaid-modal__stage"
                   style={{
-                    transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+                    transform: `translate(${pan.x}px, ${pan.y}px)`,
                   }}
                   dangerouslySetInnerHTML={{ __html: svg }}
                 />

@@ -1683,16 +1683,17 @@ pre {
   height: 100%;
   display: grid;
   place-items: center;
-  transform-origin: center center;
-  will-change: transform;
   padding: 1.5rem;
 }
 
 .mermaid-modal__stage svg {
   max-width: none;
+  max-height: none;
   width: auto;
   height: auto;
-  max-height: min(70vh, 640px);
+  /* Keep vector text/shapes sharp when resizing (no CSS scale) */
+  shape-rendering: geometricPrecision;
+  text-rendering: geometricPrecision;
 }
 
 .mermaid-modal__hint {
