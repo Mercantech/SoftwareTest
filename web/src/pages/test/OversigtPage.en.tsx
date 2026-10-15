@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
+import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
 
@@ -209,6 +210,13 @@ export default function OversigtPageEn() {
       </ul>
 
       <h2>4. The test pyramid</h2>
+      <Figure
+        src="/images/commons/testing-pyramid.png"
+        alt="Test pyramid with many unit tests at the base and few end-to-end tests at the top"
+        caption="The test pyramid: many unit tests, fewer integration tests, few E2E tests"
+        sourceUrl="https://commons.wikimedia.org/wiki/File:Testing_Pyramid.png"
+        sourceLabel="Wikimedia Commons"
+      />
       <p>
         Mike Cohn's test pyramid is a rule of thumb for the <em>distribution</em> of automated
         tests. The higher up, the more realistic — but also the slower, more brittle and more

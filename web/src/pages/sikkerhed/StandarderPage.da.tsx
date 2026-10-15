@@ -1,5 +1,6 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
+import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
 
@@ -392,6 +393,13 @@ export default function StandarderPageDa() {
       </ul>
 
       <h2>Sikkerhed i udviklingsprocessen</h2>
+      <Figure
+        src="/images/commons/sdlc-ssdlc.png"
+        alt="Fra traditionel SDLC til sikker SDLC med stigende omkostning ved sene fundne fejl"
+        caption="Jo senere en sikkerhedsfejl findes, desto dyrere er den typisk at rette"
+        sourceUrl="https://commons.wikimedia.org/wiki/File:From_SDLC_to_SSDLC.png"
+        sourceLabel="Wikimedia Commons"
+      />
       <p>
         Sikkerhed bliver billigst, hvis den tænkes ind fra start ("shift left") – ikke klistres på til sidst. Det kaldes ofte
         SDL/DevSecOps:

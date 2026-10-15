@@ -1,5 +1,6 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
+import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
 
@@ -224,6 +225,13 @@ export default function KrypteringPageEn() {
       <CodeBlock language="csharp">{aesExample}</CodeBlock>
 
       <h2>Asymmetric encryption</h2>
+      <Figure
+        src="/images/commons/public-key-encryption.svg"
+        alt="Asymmetric encryption: Alice encrypts with Bob's public key; only Bob can decrypt with his private key"
+        caption="Public key for encryption – private key for decryption"
+        sourceUrl="https://commons.wikimedia.org/wiki/File:Public_key_encryption.svg"
+        sourceLabel="Wikimedia Commons (public domain)"
+      />
       <p>
         Here there is a <strong>key pair</strong>: a <em>public</em> key that anyone may have, and a{' '}
         <em>private</em> key that only the owner knows. This solves the distribution problem, but it is slow

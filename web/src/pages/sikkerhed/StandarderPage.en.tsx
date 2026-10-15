@@ -1,5 +1,6 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
+import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
 
@@ -392,6 +393,13 @@ export default function StandarderPageEn() {
       </ul>
 
       <h2>Security in the development process</h2>
+      <Figure
+        src="/images/commons/sdlc-ssdlc.png"
+        alt="From traditional SDLC to secure SDLC with rising cost of late defects"
+        caption="The later a security defect is found, the more expensive it usually is to fix"
+        sourceUrl="https://commons.wikimedia.org/wiki/File:From_SDLC_to_SSDLC.png"
+        sourceLabel="Wikimedia Commons"
+      />
       <p>
         Security is cheapest when it is considered from the start ("shift left") – not bolted on at the end. This is often called
         SDL/DevSecOps:

@@ -1,5 +1,6 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
+import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
 
@@ -399,6 +400,13 @@ export default function AuthenticationPageDa() {
       </table>
 
       <h2>OAuth 2.0 – authorization code + PKCE</h2>
+      <Figure
+        src="/images/commons/oauth-pkce.svg"
+        alt="OAuth 2.0 authorization code flow med PKCE mellem klient, auth-server og API"
+        caption="Authorization code + PKCE: klienten beviser ejerskab af code_verifier"
+        sourceUrl="https://commons.wikimedia.org/wiki/File:Mediawiki_oauth_2_flow_with_pkce.svg"
+        sourceLabel="Wikimedia Commons"
+      />
       <p>
         <strong>OAuth 2.0</strong> er en protokol til delegeret adgang; <strong>OpenID Connect (OIDC)</strong> bygger
         identitet (login) ovenpå. Princippet: din app håndterer <em>aldrig</em> brugerens adgangskode – brugeren logger ind

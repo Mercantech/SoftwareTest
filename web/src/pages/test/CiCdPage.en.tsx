@@ -106,7 +106,14 @@ export default function CiCdPageEn() {
   return (
     <LessonLayout module="test">
       <h1>CI/CD – automated tests in the development cycle</h1>
-<Figure
+      <Figure
+        src="/images/commons/devops-infinity.svg"
+        alt="DevOps toolchain: plan, code, build, test, release, deploy, operate, monitor"
+        caption="The DevOps loop: tests are a fixed part of the path from code to operations"
+        sourceUrl="https://commons.wikimedia.org/wiki/File:Devops-toolchain.svg"
+        sourceLabel="Wikimedia Commons"
+      />
+      <Figure
         src="/images/cicd.png"
         alt="CI/CD pipeline from commit to production"
         caption="From commit to production – automated and with tests as quality gates."

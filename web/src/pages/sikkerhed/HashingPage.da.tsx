@@ -1,5 +1,6 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
+import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
 
@@ -171,6 +172,13 @@ export default function HashingPageDa() {
       </Callout>
 
       <h2>Hvad er en hashfunktion?</h2>
+      <Figure
+        src="/images/commons/crypto-hash.svg"
+        alt="Kryptografisk hashfunktion: små ændringer i input giver helt forskellige digests"
+        caption="Avalanche-effekten: næsten ens input → helt forskellige hashes"
+        sourceUrl="https://commons.wikimedia.org/wiki/File:Cryptographic_Hash_Function.svg"
+        sourceLabel="Wikimedia Commons"
+      />
       <p>
         En <strong>hashfunktion</strong> tager data af vilkårlig størrelse og beregner en <em>fast længde</em> "fingeraftryk"
         (digest). Ændres blot ét bit i input, ændrer outputtet sig fuldstændigt (<em>avalanche-effekt</em>).

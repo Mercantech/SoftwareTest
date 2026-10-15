@@ -1,5 +1,6 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
+import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
 
@@ -224,6 +225,13 @@ export default function KrypteringPageDa() {
       <CodeBlock language="csharp">{aesExample}</CodeBlock>
 
       <h2>Asymmetrisk kryptering</h2>
+      <Figure
+        src="/images/commons/public-key-encryption.svg"
+        alt="Asymmetrisk kryptering: Alice krypterer med Bobs offentlige nøgle, kun Bob kan dekryptere med sin private nøgle"
+        caption="Offentlig nøgle til kryptering – privat nøgle til dekryptering"
+        sourceUrl="https://commons.wikimedia.org/wiki/File:Public_key_encryption.svg"
+        sourceLabel="Wikimedia Commons (public domain)"
+      />
       <p>
         Her findes et <strong>nøglepar</strong>: en <em>offentlig</em> nøgle, som alle må få, og en{' '}
         <em>privat</em> nøgle, som kun ejeren kender. Det løser distributionsproblemet, men er langsomt

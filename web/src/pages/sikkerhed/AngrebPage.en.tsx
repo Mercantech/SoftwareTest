@@ -1,5 +1,6 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
+import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
 
@@ -185,6 +186,13 @@ export default function AngrebPageEn() {
       </p>
 
       <h2>SQL injection</h2>
+      <Figure
+        src="/images/commons/sql-injection.png"
+        alt="Illustration of SQL injection where user input changes the query structure"
+        caption="SQL injection: input becomes part of the SQL structure"
+        sourceUrl="https://commons.wikimedia.org/wiki/File:Hackform.png"
+        sourceLabel="Wikimedia Commons"
+      />
       <h3>What is it – and what can it cost?</h3>
       <p>
         SQL injection (CWE-89) occurs when an SQL query is built by concatenating text from the user with SQL. An attacker can then
@@ -245,6 +253,13 @@ export default function AngrebPageEn() {
       <CodeBlock language="csharp">{errorHandling}</CodeBlock>
 
       <h2>XSS – Cross-Site Scripting</h2>
+      <Figure
+        src="/images/commons/xss-attack.png"
+        alt="Sequence diagram of a cross-site scripting attack"
+        caption="XSS: the attacker's script runs in the victim's browser in the app's context"
+        sourceUrl="https://commons.wikimedia.org/wiki/File:Cross-site_scripting_attack_sequence_diagram_-_en.png"
+        sourceLabel="Wikimedia Commons (CC BY-SA)"
+      />
       <h3>What is it?</h3>
       <p>
         XSS (CWE-79) occurs when an application displays untrusted content in a web page <em>without correct encoding</em>, so the browser

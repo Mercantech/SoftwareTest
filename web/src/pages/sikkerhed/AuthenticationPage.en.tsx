@@ -1,5 +1,6 @@
 import Callout from '../../components/Callout'
 import CodeBlock from '../../components/CodeBlock'
+import Figure from '../../components/Figure'
 import LessonLayout from '../../components/LessonLayout'
 import MermaidDiagram from '../../components/MermaidDiagram'
 
@@ -399,6 +400,13 @@ export default function AuthenticationPageEn() {
       </table>
 
       <h2>OAuth 2.0 – authorization code + PKCE</h2>
+      <Figure
+        src="/images/commons/oauth-pkce.svg"
+        alt="OAuth 2.0 authorization code flow with PKCE between client, auth server and API"
+        caption="Authorization code + PKCE: the client proves ownership of the code_verifier"
+        sourceUrl="https://commons.wikimedia.org/wiki/File:Mediawiki_oauth_2_flow_with_pkce.svg"
+        sourceLabel="Wikimedia Commons"
+      />
       <p>
         <strong>OAuth 2.0</strong> is a protocol for delegated access; <strong>OpenID Connect (OIDC)</strong> builds
         identity (login) on top of it. The principle: your app <em>never</em> handles the user's password – the user signs in

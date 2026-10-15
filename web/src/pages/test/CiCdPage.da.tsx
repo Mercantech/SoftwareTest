@@ -106,7 +106,14 @@ export default function CiCdPageDa() {
   return (
     <LessonLayout module="test">
       <h1>CI/CD – automatiserede tests i udviklingscyklussen</h1>
-<Figure
+      <Figure
+        src="/images/commons/devops-infinity.svg"
+        alt="DevOps-toolchain: plan, kode, build, test, release, deploy, operate, monitor"
+        caption="DevOps-loopet: tests er en fast del af vejen fra kode til drift"
+        sourceUrl="https://commons.wikimedia.org/wiki/File:Devops-toolchain.svg"
+        sourceLabel="Wikimedia Commons"
+      />
+      <Figure
         src="/images/cicd.png"
         alt="CI/CD-pipeline fra commit til produktion"
         caption="Fra commit til produktion – automatiseret og med tests som kvalitetsporte."
