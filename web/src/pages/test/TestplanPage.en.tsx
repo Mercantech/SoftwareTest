@@ -96,7 +96,7 @@ export default function TestplanPageEn() {
             {
               goal: 'Build a test plan following the IEEE 829 / ISO 29119 structure',
               sectionId: 'ieee',
-              sectionLabel: '§3 IEEE structure',
+              sectionLabel: 'IEEE structure',
             },
             {
               goal: 'Define exit criteria and identify test risks',
@@ -106,7 +106,7 @@ export default function TestplanPageEn() {
             {
               goal: 'Turn functional requirements into concrete, measurable test cases',
               sectionId: 'krav-til-testcases',
-              sectionLabel: '§4 Requirements → cases',
+              sectionLabel: 'Requirements → cases',
             },
             {
               goal: 'Set up traceability between requirements and tests',

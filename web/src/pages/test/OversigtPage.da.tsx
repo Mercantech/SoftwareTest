@@ -396,7 +396,7 @@ export default function OversigtPageDa() {
       <p>
         Sidebar, flow og målpinde følger samme rækkefølge: fra planlægning via teknik til drift og
         ikke-funktionelle lag. Hver nummereret side svarer til et{' '}
-        <Link to="/maalpinde">målpind</Link>; unit/integration og GDPR er praktiske tillæg uden eget nummer.
+        <Link to="/maalpinde">målpind</Link>. Unit/integration og GDPR er praktiske tillæg (— i sidebar).
       </p>
       <MermaidDiagram chart={flow} />
 

@@ -96,7 +96,7 @@ export default function TestplanPageDa() {
             {
               goal: 'Opbygge en testplan efter IEEE 829 / ISO 29119-struktur',
               sectionId: 'ieee',
-              sectionLabel: '§3 IEEE-struktur',
+              sectionLabel: 'IEEE-struktur',
             },
             {
               goal: 'Definere exit criteria og identificere testrisici',
@@ -106,7 +106,7 @@ export default function TestplanPageDa() {
             {
               goal: 'Omsætte funktionelle krav til konkrete, målbare testcases',
               sectionId: 'krav-til-testcases',
-              sectionLabel: '§4 Krav → testcases',
+              sectionLabel: 'Krav → testcases',
             },
             {
               goal: 'Opstille sporbarhed mellem krav og tests',

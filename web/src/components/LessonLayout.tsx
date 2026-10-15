@@ -33,11 +33,16 @@ export default function LessonLayout({ module, children, toc }: LessonLayoutProp
                     isActive || pathname === item.path ? 'active' : undefined
                   }
                 >
-                  {objective ? (
-                    <span className="lesson-sidebar__num" aria-hidden="true">
-                      #{objective.id}
-                    </span>
-                  ) : null}
+                  <span
+                    className={
+                      objective
+                        ? 'lesson-sidebar__num'
+                        : 'lesson-sidebar__num lesson-sidebar__num--none'
+                    }
+                    aria-hidden="true"
+                  >
+                    {objective ? `#${objective.id}` : '—'}
+                  </span>
                   <span>{item.label[lang]}</span>
                 </NavLink>
               </li>

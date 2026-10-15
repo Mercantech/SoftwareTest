@@ -630,11 +630,17 @@ pre {
 
 .lesson-sidebar__num {
   flex: 0 0 auto;
-  min-width: 1.6rem;
+  min-width: 1.75rem;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--accent-2);
   opacity: 0.85;
+  text-align: right;
+}
+
+.lesson-sidebar__num--none {
+  color: var(--text-muted);
+  opacity: 0.45;
 }
 
 .lesson-sidebar a:hover,
