@@ -443,19 +443,19 @@ export default function OversigtPageEn() {
             <td>
               <Link to="/test/performance">Performance</Link>
             </td>
-            <td>#8</td>
+            <td>#7</td>
             <td>Performance tables and bottlenecks</td>
           </tr>
           <tr>
             <td>
               <Link to="/test/ux">UX</Link>
             </td>
-            <td>#9</td>
+            <td>#8</td>
             <td>The customer experience</td>
           </tr>
           <tr>
             <td>Security</td>
-            <td>#10–15</td>
+            <td>#9–14</td>
             <td>Encryption, standards, auth, hashing, attacks, tools</td>
           </tr>
         </tbody>

@@ -86,7 +86,7 @@ export const objectives: Objective[] = [
     repoUrl: REPO_H4_MAGS,
   },
   {
-    id: 8,
+    id: 7,
     level: 'H4',
     title: {
       da: 'Lærlingen kan aflæse performancetabeller og identificere flaskehalse i et kompliceret system.',
@@ -97,7 +97,7 @@ export const objectives: Objective[] = [
     repoUrl: REPO_SITE,
   },
   {
-    id: 9,
+    id: 8,
     level: 'H4',
     title: {
       da: 'Lærlingen kan redegøre for UX-tests (User Experience), som evaluerer kundeoplevelsen.',
@@ -108,7 +108,7 @@ export const objectives: Objective[] = [
     repoUrl: REPO_SITE,
   },
   {
-    id: 10,
+    id: 9,
     level: 'H4',
     title: {
       da: 'Lærlingen har en generel viden om data-kryptering, og kan anvende krypteringsformer som f.eks. SSL i forbindelse med udvikling af webbaserede applikationer.',
@@ -119,7 +119,7 @@ export const objectives: Objective[] = [
     repoUrl: REPO_H4_MAGS,
   },
   {
-    id: 11,
+    id: 10,
     level: 'H4',
     title: {
       da: 'Lærlingen kan indhente viden omkring softwaresikkerhedsstandarder og kendte sikkerhedshuller i eksisterende software.',
@@ -130,7 +130,7 @@ export const objectives: Objective[] = [
     repoUrl: REPO_SITE,
   },
   {
-    id: 12,
+    id: 11,
     level: 'H4',
     title: {
       da: 'Lærlingen har en generel viden om authentication og kan udvikle programmer, der anvender authentication.',
@@ -141,7 +141,7 @@ export const objectives: Objective[] = [
     repoUrl: REPO_H4_MAGS,
   },
   {
-    id: 13,
+    id: 12,
     level: 'H4',
     title: {
       da: 'Lærlingen har en generel viden om Hashing-kodning, og kan anvende kodningsformer som f.eks. MD5 i forbindelse med udvikling af webbaserede applikationer.',
@@ -152,7 +152,7 @@ export const objectives: Objective[] = [
     repoUrl: REPO_H4_MAGS,
   },
   {
-    id: 14,
+    id: 13,
     level: 'H4',
     title: {
       da: 'Lærlingen har en generel viden om forskellige former for hacking angreb, som f.eks. SQL injection og XSS (Cross-Site Scripting), og kan anvende denne viden til at sikre egne udviklede webbaserede applikationer.',
@@ -163,7 +163,7 @@ export const objectives: Objective[] = [
     repoUrl: REPO_H4_MAGS,
   },
   {
-    id: 15,
+    id: 14,
     level: 'H4',
     title: {
       da: 'Lærlingen kan anvende forskellige website security tools til at teste sikkerheden på udviklet software.',

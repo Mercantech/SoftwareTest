@@ -450,19 +450,19 @@ export default function OversigtPageDa() {
             <td>
               <Link to="/test/performance">Performance</Link>
             </td>
-            <td>#8</td>
+            <td>#7</td>
             <td>Performancetabeller og flaskehalse</td>
           </tr>
           <tr>
             <td>
               <Link to="/test/ux">UX</Link>
             </td>
-            <td>#9</td>
+            <td>#8</td>
             <td>Kundeoplevelsen</td>
           </tr>
           <tr>
             <td>Sikkerhed</td>
-            <td>#10–15</td>
+            <td>#9–14</td>
             <td>Kryptering, standarder, auth, hashing, angreb, tools</td>
           </tr>
         </tbody>
