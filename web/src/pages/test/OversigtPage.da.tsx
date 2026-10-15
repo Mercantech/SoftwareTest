@@ -361,6 +361,13 @@ export default function OversigtPageDa() {
               <Link to="/sikkerhed/tools">/sikkerhed/tools</Link>
             </td>
           </tr>
+          <tr>
+            <td>GDPR og cookies</td>
+            <td>Dataansvarlig, principper, samtykke, privatlivs- og cookiepolitik</td>
+            <td>
+              <Link to="/sikkerhed/gdpr">/sikkerhed/gdpr</Link>
+            </td>
+          </tr>
         </tbody>
       </table>
 
@@ -462,8 +469,8 @@ export default function OversigtPageDa() {
           </tr>
           <tr>
             <td>Sikkerhed</td>
-            <td>#9–14</td>
-            <td>Kryptering, standarder, auth, hashing, angreb, tools</td>
+            <td>#9–14 + GDPR</td>
+            <td>Kryptering, standarder, auth, hashing, angreb, tools, GDPR</td>
           </tr>
         </tbody>
       </table>

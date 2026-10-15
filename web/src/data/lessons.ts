@@ -77,6 +77,7 @@ export const lessonModules: LessonModuleNav[] = [
         label: { da: 'Security tools', en: 'Security tools' },
         path: '/sikkerhed/tools',
       },
+      { slug: 'gdpr', label: { da: 'GDPR og cookies', en: 'GDPR and cookies' }, path: '/sikkerhed/gdpr' },
     ],
   },
 ]

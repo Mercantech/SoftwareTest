@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Hub from './pages/Hub'
 import AngrebPage from './pages/sikkerhed/AngrebPage'
 import AuthenticationPage from './pages/sikkerhed/AuthenticationPage'
+import GdprPage from './pages/sikkerhed/GdprPage'
 import HashingPage from './pages/sikkerhed/HashingPage'
 import KrypteringPage from './pages/sikkerhed/KrypteringPage'
 import StandarderPage from './pages/sikkerhed/StandarderPage'
@@ -42,6 +43,7 @@ export default function App() {
           <Route path="sikkerhed/hashing" element={<HashingPage />} />
           <Route path="sikkerhed/angreb" element={<AngrebPage />} />
           <Route path="sikkerhed/tools" element={<ToolsPage />} />
+          <Route path="sikkerhed/gdpr" element={<GdprPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

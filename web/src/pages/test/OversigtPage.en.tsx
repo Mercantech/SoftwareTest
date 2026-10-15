@@ -356,6 +356,13 @@ export default function OversigtPageEn() {
               <Link to="/sikkerhed/tools">/sikkerhed/tools</Link>
             </td>
           </tr>
+          <tr>
+            <td>GDPR and cookies</td>
+            <td>Controller, principles, consent, privacy and cookie policy</td>
+            <td>
+              <Link to="/sikkerhed/gdpr">/sikkerhed/gdpr</Link>
+            </td>
+          </tr>
         </tbody>
       </table>
 
@@ -455,8 +462,8 @@ export default function OversigtPageEn() {
           </tr>
           <tr>
             <td>Security</td>
-            <td>#9–14</td>
-            <td>Encryption, standards, auth, hashing, attacks, tools</td>
+            <td>#9–14 + GDPR</td>
+            <td>Encryption, standards, auth, hashing, attacks, tools, GDPR</td>
           </tr>
         </tbody>
       </table>
