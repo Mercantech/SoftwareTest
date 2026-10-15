@@ -109,13 +109,13 @@ export default function UnitPageDa() {
           src="/images/test-strategy.png"
           alt="Oversigt over teststrategi: unit, integration og E2E"
           caption="Teststrategi: mange hurtige tests i bunden, få realistiske tests i toppen."
-          size="sm"
+          size="lg"
         />
         <Figure
           src="/images/test-pyramid-coverage.png"
           alt="Testpyramide med dækningsgrad"
           caption="Pyramiden fortæller om mængde. Dækningsgrad fortæller kun, hvilke linjer der blev kørt – ikke om de blev testet godt."
-          size="sm"
+          size="lg"
         />
       </div>
       <MermaidDiagram chart={strategyChart} />

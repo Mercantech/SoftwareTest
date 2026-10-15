@@ -113,13 +113,13 @@ export default function CiCdPageEn() {
           caption="The DevOps loop: tests are a fixed part of the path from code to operations"
           sourceUrl="https://commons.wikimedia.org/wiki/File:Devops-toolchain.svg"
           sourceLabel="Wikimedia Commons"
-          size="sm"
+          size="lg"
         />
         <Figure
           src="/images/cicd.png"
           alt="CI/CD pipeline from commit to production"
           caption="From commit to production – automated and with tests as quality gates."
-          size="sm"
+          size="lg"
         />
       </div>
 

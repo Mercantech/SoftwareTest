@@ -1459,17 +1459,35 @@ pre {
   height: auto;
 }
 
-/* Pair of compact cards / callouts side by side */
+/* Pair of figures / callouts side by side — figures fill their column */
 .duo {
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
   margin: 1.25rem 0;
+  align-items: start;
 }
 
 @media (min-width: 720px) {
   .duo {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.duo > .figure,
+.duo > .figure.figure--sm,
+.duo > .figure.figure--md,
+.duo > .figure.figure--lg {
+  margin: 0;
+  max-width: none;
+  width: 100%;
+}
+
+.duo > .figure img,
+.duo > .figure.figure--sm img,
+.duo > .figure.figure--md img,
+.duo > .figure.figure--lg img {
+  max-height: min(26rem, 48vh);
+  width: 100%;
 }
 
 .duo > .callout {

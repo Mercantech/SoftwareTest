@@ -109,13 +109,13 @@ export default function UnitPageEn() {
           src="/images/test-strategy.png"
           alt="Overview of test strategy: unit, integration and E2E"
           caption="Test strategy: many fast tests at the bottom, few realistic tests at the top."
-          size="sm"
+          size="lg"
         />
         <Figure
           src="/images/test-pyramid-coverage.png"
           alt="Test pyramid with coverage"
           caption="The pyramid tells you about quantity. Coverage only tells you which lines were executed – not whether they were tested well."
-          size="sm"
+          size="lg"
         />
       </div>
       <MermaidDiagram chart={strategyChart} />

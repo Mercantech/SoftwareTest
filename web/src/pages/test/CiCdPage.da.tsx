@@ -113,13 +113,13 @@ export default function CiCdPageDa() {
           caption="DevOps-loopet: tests er en fast del af vejen fra kode til drift"
           sourceUrl="https://commons.wikimedia.org/wiki/File:Devops-toolchain.svg"
           sourceLabel="Wikimedia Commons"
-          size="sm"
+          size="lg"
         />
         <Figure
           src="/images/cicd.png"
           alt="CI/CD-pipeline fra commit til produktion"
           caption="Fra commit til produktion – automatiseret og med tests som kvalitetsporte."
-          size="sm"
+          size="lg"
         />
       </div>
 
