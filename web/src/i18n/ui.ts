@@ -44,6 +44,11 @@ const ui = {
     presentPrev: 'Forrige',
     presentNext: 'Næste',
     presentHint: 'Piletaster eller mellemrum · F fuldskærm · Esc afslut',
+    figureExpand: 'Åbn billede',
+    figureModalTitle: 'Billede',
+    figureFullscreen: 'Fuldskærm',
+    figureFullscreenExit: 'Afslut fuldskærm',
+    figureHint: 'Scroll for at zoome · træk for at flytte · F fuldskærm · Esc luk',
   },
   en: {
     logo: 'Mercantec · Test & security',
@@ -88,6 +93,11 @@ const ui = {
     presentPrev: 'Previous',
     presentNext: 'Next',
     presentHint: 'Arrow keys or space · F fullscreen · Esc exit',
+    figureExpand: 'Open image',
+    figureModalTitle: 'Image',
+    figureFullscreen: 'Fullscreen',
+    figureFullscreenExit: 'Exit fullscreen',
+    figureHint: 'Scroll to zoom · drag to pan · F fullscreen · Esc close',
   },
 } as const
 

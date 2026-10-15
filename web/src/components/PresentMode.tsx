@@ -8,6 +8,7 @@ import {
 import { createPortal } from 'react-dom'
 import { useLanguage } from '../i18n/LanguageContext'
 import { t } from '../i18n/ui'
+import ImageLightbox, { type LightboxImage } from './ImageLightbox'
 
 type PresentModeProps = {
   contentRef: RefObject<HTMLElement | null>
@@ -48,14 +49,40 @@ function buildSlides(root: HTMLElement): Slide[] {
   })
 }
 
+function imageFromClickTarget(target: EventTarget | null): LightboxImage | null {
+  if (!(target instanceof Element)) return null
+  const openBtn = target.closest('.figure__open')
+  const imgEl =
+    (openBtn?.querySelector('img') as HTMLImageElement | null) ??
+    (target.closest('.figure img') as HTMLImageElement | null)
+  if (!imgEl) return null
+
+  const fig = imgEl.closest('figure')
+  const captionEl = fig?.querySelector('figcaption')
+  // Prefer the first text span (caption), strip source link noise if needed
+  const captionSpan = captionEl?.querySelector('span:not(.figure__source)')
+  const caption =
+    captionSpan?.textContent?.trim() ||
+    captionEl?.childNodes[0]?.textContent?.trim() ||
+    undefined
+
+  return {
+    src: imgEl.currentSrc || imgEl.src,
+    alt: imgEl.alt || '',
+    caption: caption || undefined,
+  }
+}
+
 export default function PresentMode({ contentRef }: PresentModeProps) {
   const { lang } = useLanguage()
   const titleId = useId()
   const [open, setOpen] = useState(false)
   const [slides, setSlides] = useState<Slide[]>([])
   const [index, setIndex] = useState(0)
+  const [lightbox, setLightbox] = useState<LightboxImage | null>(null)
 
   const close = useCallback(() => {
+    setLightbox(null)
     setOpen(false)
     setIndex(0)
     if (document.fullscreenElement) {
@@ -70,6 +97,7 @@ export default function PresentMode({ contentRef }: PresentModeProps) {
     if (next.length === 0) return
     setSlides(next)
     setIndex(0)
+    setLightbox(null)
     setOpen(true)
   }, [contentRef])
 
@@ -84,6 +112,9 @@ export default function PresentMode({ contentRef }: PresentModeProps) {
     if (!open) return
 
     const onKey = (e: KeyboardEvent) => {
+      // Image lightbox owns Escape / zoom / F while open
+      if (lightbox || document.querySelector('[data-image-lightbox]')) return
+
       if (e.key === 'Escape') {
         e.preventDefault()
         close()
@@ -129,7 +160,29 @@ export default function PresentMode({ contentRef }: PresentModeProps) {
       document.body.style.overflow = prevOverflow
       window.removeEventListener('keydown', onKey)
     }
-  }, [open, close, go, slides.length])
+  }, [open, close, go, slides.length, lightbox])
+
+  // Cloned slide HTML has no React handlers — open lightbox via delegation
+  useEffect(() => {
+    if (!open) return
+    const stage = document.querySelector('.present-mode__stage')
+    if (!stage) return
+
+    const onClick = (e: Event) => {
+      const image = imageFromClickTarget(e.target)
+      if (!image) return
+      e.preventDefault()
+      e.stopPropagation()
+      setLightbox(image)
+    }
+
+    stage.addEventListener('click', onClick)
+    return () => stage.removeEventListener('click', onClick)
+  }, [open, index])
+
+  useEffect(() => {
+    setLightbox(null)
+  }, [index])
 
   const slide = slides[index]
   const atStart = index <= 0
@@ -207,6 +260,10 @@ export default function PresentMode({ contentRef }: PresentModeProps) {
             document.body,
           )
         : null}
+
+      {open && lightbox ? (
+        <ImageLightbox image={lightbox} onClose={() => setLightbox(null)} />
+      ) : null}
     </>
   )
 }
